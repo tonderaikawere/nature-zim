@@ -1,9 +1,20 @@
 from flask import Flask, render_template, request, jsonify
 import datetime
 import random
+import os
 
 app = Flask(__name__)
 app.secret_key = 'nature_zimbabwe_secret_key_2024'
+
+# Debug route for Vercel
+@app.route('/debug')
+def debug():
+    return {
+        'status': 'Flask app is running',
+        'python_version': os.sys.version,
+        'flask_version': Flask.__version__,
+        'routes': [str(rule) for rule in app.url_map.iter_rules()]
+    }
 
 # Home and Main Pages
 @app.route('/')
@@ -416,5 +427,9 @@ def favicon_ico():
 def favicon_svg():
     return app.send_static_file('favicon.svg')
 
+# For Vercel deployment
 if __name__ == '__main__':
     app.run(debug=True)
+
+# Export the app for Vercel
+application = app
