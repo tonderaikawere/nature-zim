@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Lake Kariba - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('rivers_lakes') }}">Rivers & Lakes</a></li>
+            <li class="breadcrumb-item active">Lake Kariba</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Lake Kariba</h1>
+    <p class="lead">The world's largest artificial lake by volume</p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>Lake Kariba was created in 1958-1963 by the construction of the Kariba Dam across the Zambezi River. This massive lake is shared between Zimbabwe and Zambia and has become one of the region's most important water resources and tourist destinations.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Significance</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Size:</strong> 5,580 km² surface area, 185 km³ volume</li>
+                        <li><strong>Power generation:</strong> Major hydroelectric facility</li>
+                        <li><strong>Fishing industry:</strong> Supports commercial and subsistence fishing</li>
+                        <li><strong>Tourism:</strong> Houseboats, fishing, wildlife viewing</li>
+                        <li><strong>Wildlife:</strong> Elephants, hippos, crocodiles, diverse bird life</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Created:</strong> 1958-1963</p>
+                    <p><strong>Maximum depth:</strong> 97 meters</p>
+                    <p><strong>Shoreline:</strong> 2,150 km</p>
+                    <p><strong>Islands:</strong> Many, including Chete Island</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('rivers_lakes') }}" class="btn btn-nature-outline">← Back to Rivers & Lakes</a>
+    </div>
+</div>
+{% endblock %}

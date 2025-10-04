@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Lion - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('mammals') }}">Mammals</a></li>
+            <li class="breadcrumb-item active">Lion</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">African Lion</h1>
+    <p class="lead"><em>Panthera leo</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>The African Lion, known as the "King of Beasts," is one of Zimbabwe's most iconic predators. These magnificent cats are found in national parks and conservancies, playing a crucial role as apex predators in the ecosystem.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Characteristics</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Size:</strong> Males 150-250 kg, females 120-180 kg</li>
+                        <li><strong>Mane:</strong> Males develop distinctive manes</li>
+                        <li><strong>Social structure:</strong> Live in prides of 10-15 individuals</li>
+                        <li><strong>Hunting:</strong> Primarily done by females</li>
+                        <li><strong>Territory:</strong> Prides control large territories</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Panthera leo</p>
+                    <p><strong>Family:</strong> Felidae</p>
+                    <p><strong>Status:</strong> Vulnerable</p>
+                    <p><strong>Population:</strong> ~500-700 in Zimbabwe</p>
+                    <p><strong>Main Parks:</strong> Hwange, Mana Pools</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('mammals') }}" class="btn btn-nature-outline">← Back to Mammals</a>
+    </div>
+</div>
+{% endblock %}

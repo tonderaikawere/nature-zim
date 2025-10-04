@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Zambezi River - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('rivers_lakes') }}">Rivers & Lakes</a></li>
+            <li class="breadcrumb-item active">Zambezi River</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Zambezi River</h1>
+    <p class="lead">Africa's fourth-longest river and Zimbabwe's lifeline</p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>The Zambezi River is one of Africa's great rivers, flowing 2,574 kilometers from its source in Zambia to the Indian Ocean in Mozambique. It forms Zimbabwe's entire northern border and is famous for Victoria Falls, locally known as "Mosi-oa-Tunya" (The Smoke That Thunders).</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Key Features</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Victoria Falls:</strong> 108 meters high, 1,708 meters wide</li>
+                        <li><strong>Kariba Dam:</strong> Creates Lake Kariba, world's largest artificial lake by volume</li>
+                        <li><strong>Wildlife:</strong> Supports hippos, crocodiles, and diverse fish species</li>
+                        <li><strong>Tourism:</strong> White-water rafting, fishing, scenic flights</li>
+                        <li><strong>Hydropower:</strong> Major source of electricity for the region</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Length:</strong> 2,574 km</p>
+                    <p><strong>Basin area:</strong> 1.33 million km²</p>
+                    <p><strong>Countries:</strong> 8 countries in basin</p>
+                    <p><strong>UNESCO Status:</strong> Victoria Falls World Heritage Site</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('rivers_lakes') }}" class="btn btn-nature-outline">← Back to Rivers & Lakes</a>
+    </div>
+</div>
+{% endblock %}

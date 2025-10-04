@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Chameleon - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('reptiles') }}">Reptiles</a></li>
+            <li class="breadcrumb-item active">Chameleon</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Chameleon</h1>
+    <p class="lead"><em>Various species</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>Chameleons are among Zimbabwe's most fascinating reptiles, famous for their ability to change color and their unique adaptations. These arboreal lizards have independently moving eyes, projectile tongues, and specialized feet for gripping branches.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Unique Adaptations</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Color change:</strong> For communication and temperature regulation</li>
+                        <li><strong>Eyes:</strong> Can move independently in different directions</li>
+                        <li><strong>Tongue:</strong> Projectile tongue longer than body</li>
+                        <li><strong>Feet:</strong> Specialized for gripping branches</li>
+                        <li><strong>Tail:</strong> Prehensile, acts as fifth limb</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Family:</strong> Chamaeleonidae</p>
+                    <p><strong>Species in Zimbabwe:</strong> 10+ species</p>
+                    <p><strong>Size range:</strong> 5-30 cm</p>
+                    <p><strong>Diet:</strong> Insects and small invertebrates</p>
+                    <p><strong>Habitat:</strong> Trees and shrubs</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('reptiles') }}" class="btn btn-nature-outline">← Back to Reptiles</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Ant - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('insects') }}">Insects</a></li>
+            <li class="breadcrumb-item active">Ant</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Ants</h1>
+    <p class="lead"><em>Various species</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>Ants are among the most successful insects on Earth, with complex social structures and important ecological roles. Zimbabwe hosts numerous ant species, from tiny garden ants to large driver ants.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Social Structure</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Colonies:</strong> Highly organized social groups</li>
+                        <li><strong>Castes:</strong> Queens, workers, soldiers</li>
+                        <li><strong>Communication:</strong> Chemical signals (pheromones)</li>
+                        <li><strong>Cooperation:</strong> Work together for colony success</li>
+                        <li><strong>Roles:</strong> Soil aeration, seed dispersal, pest control</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Order:</strong> Hymenoptera</p>
+                    <p><strong>Species:</strong> 100+ in Zimbabwe</p>
+                    <p><strong>Colony size:</strong> Hundreds to millions</p>
+                    <p><strong>Diet:</strong> Omnivorous</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('insects') }}" class="btn btn-nature-outline">← Back to Insects</a>
+    </div>
+</div>
+{% endblock %}

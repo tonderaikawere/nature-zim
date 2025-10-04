@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+
+{% block title %}Currency Converter - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('tools_home') }}">Tools</a></li>
+            <li class="breadcrumb-item active">Currency Converter</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-4">
+                <h1 class="text-nature-green mb-3">💱 Currency Converter</h1>
+                <p class="lead">Convert between different currencies with live exchange rates</p>
+            </div>
+
+            <div class="nature-card">
+                <div class="card-body">
+                    <!-- Converter Interface -->
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="mb-3">
+                                <label for="fromAmount" class="form-label">From:</label>
+                                <div class="input-group">
+                                    <input type="number" id="fromAmount" class="form-control" placeholder="Enter amount" step="0.01" value="1">
+                                    <select id="fromCurrency" class="form-select">
+                                        <option value="USD" selected>USD - US Dollar</option>
+                                        <option value="ZWL">ZWL - Zimbabwean Dollar</option>
+                                        <option value="EUR">EUR - Euro</option>
+                                        <option value="GBP">GBP - British Pound</option>
+                                        <option value="ZAR">ZAR - South African Rand</option>
+                                        <option value="BWP">BWP - Botswana Pula</option>
+                                        <option value="JPY">JPY - Japanese Yen</option>
+                                        <option value="CNY">CNY - Chinese Yuan</option>
+                                        <option value="AUD">AUD - Australian Dollar</option>
+                                        <option value="CAD">CAD - Canadian Dollar</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 text-center d-flex align-items-center justify-content-center">
+                            <button id="swapBtn" class="btn btn-nature-outline btn-sm">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="mb-3">
+                                <label for="toAmount" class="form-label">To:</label>
+                                <div class="input-group">
+                                    <input type="number" id="toAmount" class="form-control" placeholder="Result" readonly>
+                                    <select id="toCurrency" class="form-select">
+                                        <option value="USD">USD - US Dollar</option>
+                                        <option value="ZWL" selected>ZWL - Zimbabwean Dollar</option>
+                                        <option value="EUR">EUR - Euro</option>
+                                        <option value="GBP">GBP - British Pound</option>
+                                        <option value="ZAR">ZAR - South African Rand</option>
+                                        <option value="BWP">BWP - Botswana Pula</option>
+                                        <option value="JPY">JPY - Japanese Yen</option>
+                                        <option value="CNY">CNY - Chinese Yuan</option>
+                                        <option value="AUD">AUD - Australian Dollar</option>
+                                        <option value="CAD">CAD - Canadian Dollar</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exchange Rate Display -->
+                    <div id="exchangeRateDisplay" class="alert alert-info text-center mb-4" style="display: none;">
+                        <div id="exchangeRateText"></div>
+                        <small class="text-muted">Exchange rates are simulated for demonstration purposes</small>
+                    </div>
+
+                    <!-- Quick Conversions -->
+                    <div class="text-center mb-4">
+                        <h6 class="text-nature-brown mb-3">Popular Conversions:</h6>
+                        <div class="btn-group flex-wrap" role="group">
+                            <button class="btn btn-outline-secondary btn-sm quick-convert" data-amount="1" data-from="USD" data-to="ZAR">1 USD → ZAR</button>
+                            <button class="btn btn-outline-secondary btn-sm quick-convert" data-amount="100" data-from="USD" data-to="ZWL">100 USD → ZWL</button>
+                            <button class="btn btn-outline-secondary btn-sm quick-convert" data-amount="1" data-from="EUR" data-to="USD">1 EUR → USD</button>
+                            <button class="btn btn-outline-secondary btn-sm quick-convert" data-amount="1000" data-from="ZAR" data-to="USD">1000 ZAR → USD</button>
+                        </div>
+                    </div>
+
+                    <!-- Convert Button -->
+                    <div class="text-center">
+                        <button id="convertBtn" class="btn btn-nature">
+                            <i class="fas fa-sync-alt me-2"></i>Convert
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Currency Information -->
+            <div class="nature-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">💰 Currency Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-nature-brown">Regional Currencies</h6>
+                            <ul class="small">
+                                <li><strong>ZWL:</strong> Zimbabwean Dollar (historical)</li>
+                                <li><strong>ZAR:</strong> South African Rand</li>
+                                <li><strong>BWP:</strong> Botswana Pula</li>
+                                <li><strong>USD:</strong> Widely used in Zimbabwe</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-nature-brown">Note</h6>
+                            <ul class="small">
+                                <li>Zimbabwe currently uses multiple currencies</li>
+                                <li>USD is the primary currency in use</li>
+                                <li>Exchange rates shown are for demonstration</li>
+                                <li>Consult banks for current rates</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="text-center mt-4">
+                <a href="{{ url_for('tools_home') }}" class="btn btn-nature-outline">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Tools
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const fromAmount = document.getElementById('fromAmount');
+    const toAmount = document.getElementById('toAmount');
+    const fromCurrency = document.getElementById('fromCurrency');
+    const toCurrency = document.getElementById('toCurrency');
+    const swapBtn = document.getElementById('swapBtn');
+    const convertBtn = document.getElementById('convertBtn');
+    const exchangeRateDisplay = document.getElementById('exchangeRateDisplay');
+    const exchangeRateText = document.getElementById('exchangeRateText');
+    const quickConvertBtns = document.querySelectorAll('.quick-convert');
+    
+    // Simulated exchange rates (in a real app, these would come from an API)
+    const exchangeRates = {
+        'USD': { 'ZWL': 322.00, 'EUR': 0.85, 'GBP': 0.73, 'ZAR': 18.50, 'BWP': 13.20, 'JPY': 110.00, 'CNY': 6.45, 'AUD': 1.35, 'CAD': 1.25 },
+        'ZWL': { 'USD': 0.0031, 'EUR': 0.0026, 'GBP': 0.0023, 'ZAR': 0.057, 'BWP': 0.041 },
+        'EUR': { 'USD': 1.18, 'ZWL': 379.00, 'GBP': 0.86, 'ZAR': 21.80, 'BWP': 15.50 },
+        'GBP': { 'USD': 1.37, 'ZWL': 441.00, 'EUR': 1.16, 'ZAR': 25.30, 'BWP': 18.00 },
+        'ZAR': { 'USD': 0.054, 'ZWL': 17.40, 'EUR': 0.046, 'GBP': 0.040, 'BWP': 0.71 },
+        'BWP': { 'USD': 0.076, 'ZWL': 24.40, 'EUR': 0.065, 'GBP': 0.056, 'ZAR': 1.40 }
+    };
+    
+    function convert() {
+        const amount = parseFloat(fromAmount.value);
+        const from = fromCurrency.value;
+        const to = toCurrency.value;
+        
+        if (isNaN(amount) || amount <= 0) {
+            toAmount.value = '';
+            exchangeRateDisplay.style.display = 'none';
+            return;
+        }
+        
+        if (from === to) {
+            toAmount.value = amount.toFixed(2);
+            exchangeRateText.textContent = `1 ${from} = 1 ${to}`;
+            exchangeRateDisplay.style.display = 'block';
+            return;
+        }
+        
+        let rate = 1;
+        if (exchangeRates[from] && exchangeRates[from][to]) {
+            rate = exchangeRates[from][to];
+        } else if (exchangeRates[to] && exchangeRates[to][from]) {
+            rate = 1 / exchangeRates[to][from];
+        } else {
+            // Fallback to USD conversion
+            const toUsdRate = exchangeRates[from] ? exchangeRates[from]['USD'] : (exchangeRates['USD'][from] ? 1/exchangeRates['USD'][from] : 1);
+            const fromUsdRate = exchangeRates['USD'][to] || (exchangeRates[to] ? 1/exchangeRates[to]['USD'] : 1);
+            rate = toUsdRate * fromUsdRate;
+        }
+        
+        const result = amount * rate;
+        toAmount.value = result.toFixed(2);
+        
+        exchangeRateText.textContent = `1 ${from} = ${rate.toFixed(4)} ${to}`;
+        exchangeRateDisplay.style.display = 'block';
+    }
+    
+    function swapCurrencies() {
+        const tempCurrency = fromCurrency.value;
+        fromCurrency.value = toCurrency.value;
+        toCurrency.value = tempCurrency;
+        
+        const tempAmount = fromAmount.value;
+        fromAmount.value = toAmount.value;
+        toAmount.value = tempAmount;
+        
+        convert();
+    }
+    
+    function quickConvert(amount, from, to) {
+        fromAmount.value = amount;
+        fromCurrency.value = from;
+        toCurrency.value = to;
+        convert();
+    }
+    
+    // Event listeners
+    fromAmount.addEventListener('input', convert);
+    fromCurrency.addEventListener('change', convert);
+    toCurrency.addEventListener('change', convert);
+    convertBtn.addEventListener('click', convert);
+    swapBtn.addEventListener('click', swapCurrencies);
+    
+    // Quick conversion buttons
+    quickConvertBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const amount = btn.dataset.amount;
+            const from = btn.dataset.from;
+            const to = btn.dataset.to;
+            quickConvert(amount, from, to);
+        });
+    });
+    
+    // Initial conversion
+    convert();
+});
+</script>
+{% endblock %}

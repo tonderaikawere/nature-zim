@@ -1,0 +1,500 @@
+/* Nature Zimbabwe - Custom Styles */
+
+:root {
+    --nature-green: #2d5016;
+    --nature-light-green: #4a7c59;
+    --nature-dark-green: #1a3009;
+    --nature-brown: #8b4513;
+    --nature-light-brown: #a0522d;
+    --nature-beige: #f5f5dc;
+    --nature-gold: #daa520;
+    --nature-earth: #8b7355;
+    --nature-sky: #87ceeb;
+    --nature-water: #4682b4;
+}
+
+/* Base Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fafafa;
+}
+
+/* Custom Background Classes */
+.bg-nature-green {
+    background-color: var(--nature-green) !important;
+}
+
+.bg-nature-light-green {
+    background-color: var(--nature-light-green) !important;
+}
+
+.bg-nature-dark {
+    background-color: var(--nature-dark-green) !important;
+}
+
+.bg-nature-beige {
+    background-color: var(--nature-beige) !important;
+}
+
+.bg-nature-earth {
+    background-color: var(--nature-earth) !important;
+}
+
+/* Custom Text Colors */
+.text-nature-green {
+    color: var(--nature-green) !important;
+}
+
+.text-nature-light {
+    color: var(--nature-gold) !important;
+}
+
+.text-nature-brown {
+    color: var(--nature-brown) !important;
+}
+
+/* Header Styles */
+.navbar-brand h4 {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 0.5rem 1rem !important;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--nature-gold) !important;
+}
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.dropdown-item:hover {
+    background-color: var(--nature-light-green);
+    color: white;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--nature-green) 0%, var(--nature-light-green) 100%);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="70" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="80" r="2.5" fill="rgba(255,255,255,0.1)"/></svg>');
+    opacity: 0.3;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+/* Cards */
+.nature-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    background: white;
+}
+
+.nature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.nature-card .card-header {
+    background: linear-gradient(135deg, var(--nature-light-green), var(--nature-green));
+    color: white;
+    border: none;
+    padding: 1.25rem;
+}
+
+.nature-card .card-body {
+    padding: 1.5rem;
+}
+
+.nature-card .card-title {
+    color: var(--nature-green);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* Buttons */
+.btn-nature {
+    background: linear-gradient(135deg, var(--nature-green), var(--nature-light-green));
+    border: none;
+    color: white !important;
+    font-weight: 500;
+    padding: 0.75rem 2rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-nature:hover {
+    background: linear-gradient(135deg, var(--nature-light-green), var(--nature-green));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(45, 80, 22, 0.3);
+    color: white !important;
+}
+
+.btn-nature:focus, .btn-nature:active {
+    color: white !important;
+}
+
+a.btn-nature, a.btn-nature:visited {
+    color: white !important;
+    text-decoration: none;
+}
+
+.btn-nature-outline {
+    border: 2px solid var(--nature-green);
+    color: var(--nature-green);
+    background: transparent;
+    font-weight: 500;
+    padding: 0.75rem 2rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-nature-outline:hover {
+    background: var(--nature-green);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Feature Sections */
+.feature-section {
+    padding: 4rem 0;
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--nature-light-green), var(--nature-green));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: white;
+    font-size: 2rem;
+}
+
+.section-title {
+    color: var(--nature-green);
+    font-weight: 700;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--nature-gold);
+    border-radius: 2px;
+}
+
+/* Grid Layouts */
+.nature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+/* Games & Tools Specific */
+.game-card, .tool-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.game-card:hover, .tool-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--nature-light-green);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.game-icon, .tool-icon {
+    font-size: 3rem;
+    color: var(--nature-green);
+    margin-bottom: 1rem;
+}
+
+/* Forms */
+.form-control {
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--nature-light-green);
+    box-shadow: 0 0 0 0.2rem rgba(74, 124, 89, 0.25);
+}
+
+/* Breadcrumbs */
+.breadcrumb {
+    background: var(--nature-beige);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+}
+
+.breadcrumb-item a {
+    color: var(--nature-green);
+    text-decoration: none;
+}
+
+.breadcrumb-item.active {
+    color: var(--nature-brown);
+}
+
+/* Alert Styles */
+.alert-nature {
+    background-color: rgba(74, 124, 89, 0.1);
+    border: 1px solid var(--nature-light-green);
+    color: var(--nature-green);
+    border-radius: 8px;
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(135deg, var(--nature-green), var(--nature-light-green));
+    color: white;
+}
+
+footer h5 {
+    color: white !important;
+    font-weight: 600;
+}
+
+footer p, footer li, footer a, footer small, footer .text-light-emphasis {
+    color: white !important;
+}
+
+footer a:hover {
+    color: var(--nature-gold) !important;
+    text-decoration: underline;
+}
+
+.social-links a {
+    transition: color 0.3s ease;
+    color: white !important;
+}
+
+.social-links a:hover {
+    color: var(--nature-gold) !important;
+}
+
+/* WhatsApp Button */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: white;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 100;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.whatsapp-float:hover {
+    background-color: #128c7e;
+    color: white;
+    transform: scale(1.1);
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 24px;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .nature-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.8s ease-out;
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.slide-in-right {
+    animation: slideInRight 0.8s ease-out;
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Loading Spinner */
+.nature-spinner {
+    border: 4px solid rgba(74, 124, 89, 0.3);
+    border-top: 4px solid var(--nature-green);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Quick Access Styles */
+.quick-access-item {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.quick-access-item.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.quick-access-item.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--nature-light-green);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--nature-green);
+}
+
+/* Print Styles */
+@media print {
+    .navbar, footer, .btn, .social-links {
+        display: none !important;
+    }
+    
+    body {
+        color: black !important;
+        background: white !important;
+    }
+    
+    .nature-card {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+    }
+}

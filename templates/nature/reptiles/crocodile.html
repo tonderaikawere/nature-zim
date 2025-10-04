@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Nile Crocodile - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('reptiles') }}">Reptiles</a></li>
+            <li class="breadcrumb-item active">Nile Crocodile</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Nile Crocodile</h1>
+    <p class="lead"><em>Crocodylus niloticus</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>The Nile Crocodile is Africa's largest freshwater predator and one of Zimbabwe's most formidable reptiles. Found in the Zambezi River, Lake Kariba, and other water bodies, these ancient predators have remained virtually unchanged for millions of years.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Characteristics</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Size:</strong> Males up to 5 meters, females up to 3.5 meters</li>
+                        <li><strong>Weight:</strong> Large males can exceed 500 kg</li>
+                        <li><strong>Bite force:</strong> One of the strongest in the animal kingdom</li>
+                        <li><strong>Lifespan:</strong> 70-100 years</li>
+                        <li><strong>Habitat:</strong> Rivers, lakes, wetlands</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Crocodylus niloticus</p>
+                    <p><strong>Family:</strong> Crocodylidae</p>
+                    <p><strong>Status:</strong> Least Concern</p>
+                    <p><strong>Diet:</strong> Fish, birds, mammals</p>
+                    <p><strong>Nesting:</strong> Builds nests on riverbanks</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('reptiles') }}" class="btn btn-nature-outline">← Back to Reptiles</a>
+    </div>
+</div>
+{% endblock %}

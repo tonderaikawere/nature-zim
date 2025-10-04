@@ -1,0 +1,383 @@
+{% extends "base.html" %}
+
+{% block title %}Dice Roller - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('tools_home') }}">Tools</a></li>
+            <li class="breadcrumb-item active">Dice Roller</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-4">
+                <h1 class="text-nature-green mb-3">🎲 Dice Roller</h1>
+                <p class="lead">Roll virtual dice for games, decisions, and fun!</p>
+            </div>
+
+            <div class="nature-card">
+                <div class="card-body">
+                    <!-- Dice Configuration -->
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <label for="numDice" class="form-label">Number of Dice:</label>
+                            <select id="numDice" class="form-select">
+                                <option value="1" selected>1 Die</option>
+                                <option value="2">2 Dice</option>
+                                <option value="3">3 Dice</option>
+                                <option value="4">4 Dice</option>
+                                <option value="5">5 Dice</option>
+                                <option value="6">6 Dice</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="diceType" class="form-label">Dice Type:</label>
+                            <select id="diceType" class="form-select">
+                                <option value="4">D4 (4-sided)</option>
+                                <option value="6" selected>D6 (6-sided)</option>
+                                <option value="8">D8 (8-sided)</option>
+                                <option value="10">D10 (10-sided)</option>
+                                <option value="12">D12 (12-sided)</option>
+                                <option value="20">D20 (20-sided)</option>
+                                <option value="100">D100 (100-sided)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-end">
+                            <button id="rollBtn" class="btn btn-nature btn-lg w-100">
+                                <i class="fas fa-dice me-2"></i>Roll Dice
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dice Display Area -->
+                    <div id="diceArea" class="text-center mb-4" style="min-height: 150px;">
+                        <div id="diceContainer" class="d-flex justify-content-center align-items-center flex-wrap gap-3">
+                            <!-- Dice will be displayed here -->
+                        </div>
+                    </div>
+
+                    <!-- Results Display -->
+                    <div id="resultsArea" class="text-center mb-4" style="display: none;">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="result-card">
+                                    <div class="h4 text-nature-green" id="totalResult">0</div>
+                                    <small class="text-muted">Total</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="result-card">
+                                    <div class="h4 text-nature-green" id="averageResult">0</div>
+                                    <small class="text-muted">Average</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="result-card">
+                                    <div class="h4 text-nature-green" id="rollCount">0</div>
+                                    <small class="text-muted">Rolls</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Roll Buttons -->
+                    <div class="text-center mb-4">
+                        <h6 class="text-nature-brown mb-3">Quick Rolls:</h6>
+                        <div class="btn-group flex-wrap" role="group">
+                            <button class="btn btn-outline-secondary btn-sm quick-roll" data-num="1" data-type="6">1d6</button>
+                            <button class="btn btn-outline-secondary btn-sm quick-roll" data-num="2" data-type="6">2d6</button>
+                            <button class="btn btn-outline-secondary btn-sm quick-roll" data-num="1" data-type="20">1d20</button>
+                            <button class="btn btn-outline-secondary btn-sm quick-roll" data-num="3" data-type="6">3d6</button>
+                            <button class="btn btn-outline-secondary btn-sm quick-roll" data-num="1" data-type="100">1d100</button>
+                        </div>
+                    </div>
+
+                    <!-- Roll History -->
+                    <div id="historySection" style="display: none;">
+                        <h6 class="text-nature-brown mb-3">Recent Rolls:</h6>
+                        <div id="rollHistory" class="small">
+                            <!-- History will be populated here -->
+                        </div>
+                        <div class="text-center mt-3">
+                            <button id="clearHistoryBtn" class="btn btn-outline-secondary btn-sm">
+                                <i class="fas fa-trash me-2"></i>Clear History
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dice Information -->
+            <div class="nature-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">🎯 Dice Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-nature-brown">Common Dice Types</h6>
+                            <ul class="small">
+                                <li><strong>D6:</strong> Standard cube dice (1-6)</li>
+                                <li><strong>D20:</strong> Popular in role-playing games</li>
+                                <li><strong>D4:</strong> Tetrahedral dice (1-4)</li>
+                                <li><strong>D100:</strong> Percentile dice (1-100)</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-nature-brown">Uses</h6>
+                            <ul class="small">
+                                <li>Board games and tabletop gaming</li>
+                                <li>Random decision making</li>
+                                <li>Educational probability exercises</li>
+                                <li>Role-playing game mechanics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="text-center mt-4">
+                <a href="{{ url_for('tools_home') }}" class="btn btn-nature-outline">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Tools
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.dice {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    border: 2px solid var(--nature-green);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--nature-green);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    animation: rollAnimation 0.6s ease-in-out;
+}
+
+.dice.rolling {
+    animation: rollAnimation 0.6s ease-in-out infinite;
+}
+
+@keyframes rollAnimation {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(90deg) scale(1.1); }
+    50% { transform: rotate(180deg) scale(1); }
+    75% { transform: rotate(270deg) scale(1.1); }
+}
+
+.result-card {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.history-item {
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    background: var(--nature-beige);
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.history-item:nth-child(even) {
+    background: #f8f9fa;
+}
+
+@media (max-width: 768px) {
+    .dice {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const numDice = document.getElementById('numDice');
+    const diceType = document.getElementById('diceType');
+    const rollBtn = document.getElementById('rollBtn');
+    const diceContainer = document.getElementById('diceContainer');
+    const resultsArea = document.getElementById('resultsArea');
+    const totalResult = document.getElementById('totalResult');
+    const averageResult = document.getElementById('averageResult');
+    const rollCount = document.getElementById('rollCount');
+    const historySection = document.getElementById('historySection');
+    const rollHistory = document.getElementById('rollHistory');
+    const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+    const quickRollBtns = document.querySelectorAll('.quick-roll');
+    
+    let rollCounter = 0;
+    let history = [];
+    
+    // Dice face symbols for different dice types
+    const diceFaces = {
+        4: ['1', '2', '3', '4'],
+        6: ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'],
+        8: ['1', '2', '3', '4', '5', '6', '7', '8'],
+        10: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+        12: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+        20: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'],
+        100: Array.from({length: 100}, (_, i) => (i + 1).toString())
+    };
+    
+    function rollDice() {
+        const num = parseInt(numDice.value);
+        const sides = parseInt(diceType.value);
+        
+        // Clear previous dice
+        diceContainer.innerHTML = '';
+        
+        // Create dice elements
+        const diceElements = [];
+        for (let i = 0; i < num; i++) {
+            const die = document.createElement('div');
+            die.className = 'dice rolling';
+            die.textContent = '?';
+            diceContainer.appendChild(die);
+            diceElements.push(die);
+        }
+        
+        // Animate rolling
+        setTimeout(() => {
+            const results = [];
+            let total = 0;
+            
+            diceElements.forEach((die, index) => {
+                const result = Math.floor(Math.random() * sides) + 1;
+                results.push(result);
+                total += result;
+                
+                // Update die display
+                die.classList.remove('rolling');
+                if (sides === 6 && result <= 6) {
+                    die.textContent = diceFaces[6][result - 1];
+                } else {
+                    die.textContent = result;
+                }
+            });
+            
+            // Update results
+            updateResults(results, total, num, sides);
+            
+            // Add to history
+            addToHistory(num, sides, results, total);
+            
+        }, 600);
+    }
+    
+    function updateResults(results, total, num, sides) {
+        const average = (total / num).toFixed(1);
+        rollCounter++;
+        
+        totalResult.textContent = total;
+        averageResult.textContent = average;
+        rollCount.textContent = rollCounter;
+        
+        resultsArea.style.display = 'block';
+    }
+    
+    function addToHistory(num, sides, results, total) {
+        const timestamp = new Date().toLocaleTimeString();
+        const historyItem = {
+            num,
+            sides,
+            results,
+            total,
+            timestamp
+        };
+        
+        history.unshift(historyItem);
+        
+        // Keep only last 10 rolls
+        if (history.length > 10) {
+            history = history.slice(0, 10);
+        }
+        
+        updateHistoryDisplay();
+    }
+    
+    function updateHistoryDisplay() {
+        if (history.length === 0) {
+            historySection.style.display = 'none';
+            return;
+        }
+        
+        historySection.style.display = 'block';
+        rollHistory.innerHTML = '';
+        
+        history.forEach((item, index) => {
+            const historyDiv = document.createElement('div');
+            historyDiv.className = 'history-item';
+            
+            const rollInfo = `${item.num}d${item.sides}: [${item.results.join(', ')}]`;
+            const totalInfo = `Total: ${item.total}`;
+            
+            historyDiv.innerHTML = `
+                <span>${rollInfo}</span>
+                <span class="text-muted">${totalInfo} • ${item.timestamp}</span>
+            `;
+            
+            rollHistory.appendChild(historyDiv);
+        });
+    }
+    
+    function clearHistory() {
+        history = [];
+        rollCounter = 0;
+        updateHistoryDisplay();
+        resultsArea.style.display = 'none';
+        diceContainer.innerHTML = '<div class="text-muted">Click "Roll Dice" to start!</div>';
+    }
+    
+    function quickRoll(num, sides) {
+        numDice.value = num;
+        diceType.value = sides;
+        rollDice();
+    }
+    
+    // Event listeners
+    rollBtn.addEventListener('click', rollDice);
+    clearHistoryBtn.addEventListener('click', clearHistory);
+    
+    // Quick roll buttons
+    quickRollBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const num = btn.dataset.num;
+            const sides = btn.dataset.type;
+            quickRoll(num, sides);
+        });
+    });
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        if (e.code === 'Space') {
+            e.preventDefault();
+            rollDice();
+        } else if (e.key === 'Escape') {
+            clearHistory();
+        }
+    });
+    
+    // Initialize display
+    diceContainer.innerHTML = '<div class="text-muted">Click "Roll Dice" to start!</div>';
+});
+</script>
+{% endblock %}

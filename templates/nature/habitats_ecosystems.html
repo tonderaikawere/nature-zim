@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block title %}Habitats & Ecosystems - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active">Habitats & Ecosystems</li>
+        </ol>
+    </nav>
+
+    <div class="text-center mb-5">
+        <h1 class="text-nature-green mb-4">Habitats & Ecosystems of Zimbabwe</h1>
+        <p class="lead">Explore Zimbabwe's diverse ecosystems and the wildlife they support</p>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-green text-white">
+                    <h5 class="mb-0"><i class="fas fa-tree me-2"></i>Miombo Woodlands</h5>
+                </div>
+                <div class="card-body">
+                    <p>Dominant ecosystem covering 60% of Zimbabwe. Characterized by Brachystegia and Julbernardia trees.</p>
+                    <ul class="small">
+                        <li>Supports diverse wildlife</li>
+                        <li>Important for timber and fuel</li>
+                        <li>Rich in medicinal plants</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-gold text-white">
+                    <h5 class="mb-0"><i class="fas fa-grass me-2"></i>Grasslands</h5>
+                </div>
+                <div class="card-body">
+                    <p>Open grasslands support large herbivore populations and are crucial for livestock grazing.</p>
+                    <ul class="small">
+                        <li>High grass diversity</li>
+                        <li>Supports grazing animals</li>
+                        <li>Fire-adapted ecosystem</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-brown text-white">
+                    <h5 class="mb-0"><i class="fas fa-water me-2"></i>Wetlands</h5>
+                </div>
+                <div class="card-body">
+                    <p>Rivers, lakes, and seasonal wetlands provide critical habitat for aquatic species and migratory birds.</p>
+                    <ul class="small">
+                        <li>High biodiversity</li>
+                        <li>Water filtration services</li>
+                        <li>Flood control</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nature-card mb-4">
+        <div class="card-header">
+            <h4>Ecosystem Services</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6 class="text-nature-brown">Provisioning Services</h6>
+                    <ul class="small">
+                        <li>Food production (crops, livestock, fish)</li>
+                        <li>Fresh water supply</li>
+                        <li>Timber and fuel wood</li>
+                        <li>Medicinal plants</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-nature-brown">Regulating Services</h6>
+                    <ul class="small">
+                        <li>Climate regulation</li>
+                        <li>Water purification</li>
+                        <li>Soil formation and retention</li>
+                        <li>Pollination services</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-nature-beige p-4 rounded">
+        <h4 class="text-nature-green mb-3">Conservation Priorities</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Threats</h6>
+                <ul class="small">
+                    <li>Habitat fragmentation</li>
+                    <li>Overgrazing and cultivation</li>
+                    <li>Invasive species</li>
+                    <li>Climate change</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Conservation Actions</h6>
+                <ul class="small">
+                    <li>Protected area management</li>
+                    <li>Community conservation programs</li>
+                    <li>Restoration projects</li>
+                    <li>Sustainable land use planning</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

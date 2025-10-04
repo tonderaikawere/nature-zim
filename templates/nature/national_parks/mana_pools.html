@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Mana Pools National Park - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('national_parks') }}">National Parks</a></li>
+            <li class="breadcrumb-item active">Mana Pools National Park</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Mana Pools National Park</h1>
+    <p class="lead">UNESCO World Heritage Site on the Zambezi River</p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>Mana Pools National Park is a UNESCO World Heritage Site renowned for its pristine wilderness and exceptional wildlife viewing opportunities. Located on the banks of the Zambezi River, it offers some of Africa's most authentic safari experiences.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Unique Features</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Walking safaris:</strong> One of few parks allowing guided walks</li>
+                        <li><strong>Zambezi River:</strong> Spectacular river frontage with islands</li>
+                        <li><strong>Seasonal pools:</strong> "Mana" means "four" in Shona</li>
+                        <li><strong>Canoe safaris:</strong> Unique water-based game viewing</li>
+                        <li><strong>Pristine wilderness:</strong> Minimal human impact</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Established:</strong> 1963</p>
+                    <p><strong>Size:</strong> 2,196 km²</p>
+                    <p><strong>UNESCO Status:</strong> World Heritage Site (1984)</p>
+                    <p><strong>Best time:</strong> April to November</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('national_parks') }}" class="btn btn-nature-outline">← Back to National Parks</a>
+    </div>
+</div>
+{% endblock %}

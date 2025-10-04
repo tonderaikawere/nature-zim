@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Elephant Grass - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('grasses') }}">Grasses</a></li>
+            <li class="breadcrumb-item active">Elephant Grass</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Elephant Grass</h1>
+    <p class="lead"><em>Pennisetum purpureum</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>Elephant grass is a tall, robust perennial grass that can reach heights of up to 4 meters. It's an important fodder crop and is also used for erosion control and biomass production in Zimbabwe.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Characteristics & Uses</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Height:</strong> 2-4 meters</li>
+                        <li><strong>Growth:</strong> Fast-growing perennial</li>
+                        <li><strong>Uses:</strong> Livestock fodder, erosion control, biomass</li>
+                        <li><strong>Habitat:</strong> Moist, fertile soils</li>
+                        <li><strong>Yield:</strong> High biomass production</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Pennisetum purpureum</p>
+                    <p><strong>Family:</strong> Poaceae</p>
+                    <p><strong>Origin:</strong> Tropical Africa</p>
+                    <p><strong>Growth Rate:</strong> Very fast</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('grasses') }}" class="btn btn-nature-outline">← Back to Grasses</a>
+    </div>
+</div>
+{% endblock %}

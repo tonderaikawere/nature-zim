@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}News - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="text-nature-green mb-4">Nature News</h1>
+        <p class="lead">Stay updated with the latest conservation efforts and nature discoveries in Zimbabwe</p>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Featured News -->
+            <div class="nature-card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <span class="badge bg-nature-green">Featured</span>
+                        <small class="text-muted">December 15, 2024</small>
+                    </div>
+                    <h3 class="text-nature-green mb-3">Zimbabwe's Elephant Population Shows Positive Growth</h3>
+                    <p>Recent wildlife census data reveals encouraging news for Zimbabwe's elephant conservation efforts. The country's elephant population has shown steady growth, reaching over 84,000 individuals across national parks and conservancies.</p>
+                    <p>This positive trend is attributed to enhanced anti-poaching measures, community conservation programs, and improved habitat management practices implemented over the past five years.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="text-muted"><i class="fas fa-tag me-1"></i>Conservation, Wildlife</span>
+                        <button class="btn btn-nature-outline btn-sm">Read More</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- News Articles -->
+            <div class="nature-card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="text-nature-green mb-0">New Baobab Research Center Opens in Masvingo</h5>
+                        <small class="text-muted">December 10, 2024</small>
+                    </div>
+                    <p>Scientists establish a dedicated research facility to study Zimbabwe's ancient Baobab trees and their role in climate adaptation.</p>
+                    <span class="text-muted small"><i class="fas fa-tag me-1"></i>Research, Trees</span>
+                </div>
+            </div>
+
+            <div class="nature-card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="text-nature-green mb-0">Mana Pools Wins International Conservation Award</h5>
+                        <small class="text-muted">December 5, 2024</small>
+                    </div>
+                    <p>UNESCO recognizes Mana Pools National Park for outstanding wilderness conservation and community engagement programs.</p>
+                    <span class="text-muted small"><i class="fas fa-tag me-1"></i>Awards, National Parks</span>
+                </div>
+            </div>
+
+            <div class="nature-card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="text-nature-green mb-0">School Nature Education Program Launches</h5>
+                        <small class="text-muted">November 28, 2024</small>
+                    </div>
+                    <p>New initiative brings interactive nature education to 500 schools across Zimbabwe, reaching over 50,000 students.</p>
+                    <span class="text-muted small"><i class="fas fa-tag me-1"></i>Education, Outreach</span>
+                </div>
+            </div>
+
+            <div class="nature-card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="text-nature-green mb-0">Rare Orchid Species Rediscovered in Eastern Highlands</h5>
+                        <small class="text-muted">November 20, 2024</small>
+                    </div>
+                    <p>Botanists confirm the rediscovery of a rare orchid species thought to be extinct, found in the Nyanga mountains.</p>
+                    <span class="text-muted small"><i class="fas fa-tag me-1"></i>Discovery, Flora</span>
+                </div>
+            </div>
+
+            <div class="nature-card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="text-nature-green mb-0">Community Rangers Graduate from Training Program</h5>
+                        <small class="text-muted">November 15, 2024</small>
+                    </div>
+                    <p>Fifty community members complete intensive wildlife protection training, strengthening local conservation efforts.</p>
+                    <span class="text-muted small"><i class="fas fa-tag me-1"></i>Training, Community</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Categories -->
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">News Categories</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none d-flex justify-content-between">
+                            <span><i class="fas fa-paw text-nature-green me-2"></i>Wildlife Conservation</span>
+                            <span class="badge bg-secondary">12</span>
+                        </a></li>
+                        <li><a href="#" class="text-decoration-none d-flex justify-content-between">
+                            <span><i class="fas fa-seedling text-nature-green me-2"></i>Flora Research</span>
+                            <span class="badge bg-secondary">8</span>
+                        </a></li>
+                        <li><a href="#" class="text-decoration-none d-flex justify-content-between">
+                            <span><i class="fas fa-graduation-cap text-nature-green me-2"></i>Education</span>
+                            <span class="badge bg-secondary">6</span>
+                        </a></li>
+                        <li><a href="#" class="text-decoration-none d-flex justify-content-between">
+                            <span><i class="fas fa-mountain text-nature-green me-2"></i>National Parks</span>
+                            <span class="badge bg-secondary">5</span>
+                        </a></li>
+                        <li><a href="#" class="text-decoration-none d-flex justify-content-between">
+                            <span><i class="fas fa-users text-nature-green me-2"></i>Community</span>
+                            <span class="badge bg-secondary">4</span>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Recent Updates -->
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Quick Updates</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <small class="text-muted">Dec 12, 2024</small>
+                        <p class="small mb-1">New bird species spotted in Hwange National Park</p>
+                    </div>
+                    <div class="mb-3">
+                        <small class="text-muted">Dec 8, 2024</small>
+                        <p class="small mb-1">Rainfall patterns show positive trends for grassland recovery</p>
+                    </div>
+                    <div class="mb-3">
+                        <small class="text-muted">Dec 3, 2024</small>
+                        <p class="small mb-1">Tree planting initiative reaches 10,000 saplings milestone</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter Signup -->
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5 class="mb-0">Stay Updated</h5>
+                </div>
+                <div class="card-body">
+                    <p class="small">Subscribe to our newsletter for the latest nature news and conservation updates.</p>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" placeholder="Your email address">
+                    </div>
+                    <button class="btn btn-nature w-100">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

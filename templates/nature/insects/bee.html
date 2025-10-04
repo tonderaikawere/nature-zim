@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Bee - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('insects') }}">Insects</a></li>
+            <li class="breadcrumb-item active">Bee</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Bees</h1>
+    <p class="lead"><em>Various species</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>Bees are among Zimbabwe's most important insects, providing essential pollination services for both wild plants and agricultural crops. From honeybees to solitary species, they play crucial ecological and economic roles.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Importance</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Pollination:</strong> Essential for plant reproduction</li>
+                        <li><strong>Honey production:</strong> Important economic activity</li>
+                        <li><strong>Crop yields:</strong> Increase agricultural productivity</li>
+                        <li><strong>Biodiversity:</strong> Support ecosystem health</li>
+                        <li><strong>Traditional uses:</strong> Honey, wax, medicine</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Order:</strong> Hymenoptera</p>
+                    <p><strong>Species:</strong> 200+ in Zimbabwe</p>
+                    <p><strong>Social structure:</strong> Varies by species</p>
+                    <p><strong>Products:</strong> Honey, wax, propolis</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('insects') }}" class="btn btn-nature-outline">← Back to Insects</a>
+    </div>
+</div>
+{% endblock %}

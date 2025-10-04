@@ -1,0 +1,415 @@
+{% extends "base.html" %}
+
+{% block title %}Sliding Puzzle - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('games_home') }}">Games</a></li>
+            <li class="breadcrumb-item active">Sliding Puzzle</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-5">
+                <h1 class="text-nature-green mb-4">🧩 Sliding Puzzle</h1>
+                <p class="lead">Solve nature-themed sliding puzzles and learn about Zimbabwe's wildlife!</p>
+            </div>
+
+            <div class="nature-card">
+                <div class="card-body">
+                    <!-- Game Controls -->
+                    <div class="text-center mb-4">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <label for="puzzleTheme" class="form-label">Choose Theme:</label>
+                                <select id="puzzleTheme" class="form-select mb-3">
+                                    <option value="baobab">Baobab Tree</option>
+                                    <option value="elephant">African Elephant</option>
+                                    <option value="eagle">Fish Eagle</option>
+                                    <option value="lion">Lion</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <button id="shuffleBtn" class="btn btn-nature me-2">
+                                <i class="fas fa-random me-2"></i>New Puzzle
+                            </button>
+                            <button id="hintBtn" class="btn btn-nature-outline me-2">
+                                <i class="fas fa-lightbulb me-2"></i>Hint
+                            </button>
+                            <button id="resetBtn" class="btn btn-outline-secondary">
+                                <i class="fas fa-redo me-2"></i>Reset
+                            </button>
+                        </div>
+
+                        <!-- Game Stats -->
+                        <div class="row text-center mb-3">
+                            <div class="col-4">
+                                <div class="h5 text-nature-green" id="moveCount">0</div>
+                                <small class="text-muted">Moves</small>
+                            </div>
+                            <div class="col-4">
+                                <div class="h5 text-nature-green" id="timeCount">00:00</div>
+                                <small class="text-muted">Time</small>
+                            </div>
+                            <div class="col-4">
+                                <div class="h5 text-nature-green" id="bestScore">--</div>
+                                <small class="text-muted">Best</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Puzzle Grid -->
+                    <div class="puzzle-container">
+                        <div id="puzzleGrid" class="puzzle-grid mx-auto">
+                            <!-- Puzzle pieces will be generated here -->
+                        </div>
+                    </div>
+
+                    <!-- Success Message -->
+                    <div id="successMessage" class="text-center mt-4" style="display: none;">
+                        <div class="alert alert-success">
+                            <h4 class="text-success mb-2">🎉 Congratulations!</h4>
+                            <p class="mb-2">You solved the puzzle in <span id="finalMoves">0</span> moves and <span id="finalTime">0</span> seconds!</p>
+                            <button id="playAgainBtn" class="btn btn-success">Play Again</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How to Play -->
+            <div class="nature-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">🎯 How to Play</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-mouse-pointer text-nature-green me-2"></i>Click tiles next to the empty space to move them</li>
+                                <li><i class="fas fa-target text-nature-green me-2"></i>Arrange the pieces to complete the picture</li>
+                                <li><i class="fas fa-trophy text-nature-green me-2"></i>Try to solve it in the fewest moves possible</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-lightbulb text-nature-gold me-2"></i>Use the hint button to see the complete picture</li>
+                                <li><i class="fas fa-random text-nature-green me-2"></i>Click "New Puzzle" to shuffle the pieces</li>
+                                <li><i class="fas fa-palette text-nature-green me-2"></i>Try different themes for variety</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="text-center mt-4">
+                <a href="{{ url_for('games_home') }}" class="btn btn-nature-outline">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Games
+                </a>
+                <a href="{{ url_for('memory_match') }}" class="btn btn-nature ms-3">
+                    Memory Match <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.puzzle-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.puzzle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2px;
+    width: 300px;
+    height: 300px;
+    border: 3px solid var(--nature-green);
+    border-radius: 8px;
+    background-color: var(--nature-green);
+    padding: 2px;
+}
+
+.puzzle-piece {
+    background-size: 300px 300px;
+    background-repeat: no-repeat;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+    position: relative;
+}
+
+.puzzle-piece:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.puzzle-piece.empty {
+    background-color: rgba(255,255,255,0.1);
+    cursor: default;
+}
+
+.puzzle-piece.empty:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.puzzle-piece.moveable {
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.6);
+}
+
+/* Theme backgrounds */
+.theme-baobab { background-image: linear-gradient(45deg, #8B4513 25%, #A0522D 25%, #A0522D 50%, #8B4513 50%, #8B4513 75%, #A0522D 75%); }
+.theme-elephant { background-image: linear-gradient(45deg, #696969 25%, #808080 25%, #808080 50%, #696969 50%, #696969 75%, #808080 75%); }
+.theme-eagle { background-image: linear-gradient(45deg, #4169E1 25%, #87CEEB 25%, #87CEEB 50%, #4169E1 50%, #4169E1 75%, #87CEEB 75%); }
+.theme-lion { background-image: linear-gradient(45deg, #DAA520 25%, #FFD700 25%, #FFD700 50%, #DAA520 50%, #DAA520 75%, #FFD700 75%); }
+
+@media (max-width: 576px) {
+    .puzzle-grid {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .puzzle-piece {
+        background-size: 250px 250px;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const puzzleGrid = document.getElementById('puzzleGrid');
+    const puzzleTheme = document.getElementById('puzzleTheme');
+    const shuffleBtn = document.getElementById('shuffleBtn');
+    const hintBtn = document.getElementById('hintBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const moveCount = document.getElementById('moveCount');
+    const timeCount = document.getElementById('timeCount');
+    const bestScore = document.getElementById('bestScore');
+    const successMessage = document.getElementById('successMessage');
+    const playAgainBtn = document.getElementById('playAgainBtn');
+    
+    let currentPuzzle = [];
+    let emptyIndex = 8;
+    let moves = 0;
+    let startTime = null;
+    let gameTimer = null;
+    let isGameActive = false;
+    
+    const solvedState = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+    
+    // Initialize puzzle
+    function initPuzzle() {
+        currentPuzzle = [...solvedState];
+        emptyIndex = 8;
+        moves = 0;
+        startTime = null;
+        isGameActive = false;
+        
+        updateDisplay();
+        renderPuzzle();
+        loadBestScore();
+        
+        if (gameTimer) {
+            clearInterval(gameTimer);
+            gameTimer = null;
+        }
+        timeCount.textContent = '00:00';
+    }
+    
+    function renderPuzzle() {
+        puzzleGrid.innerHTML = '';
+        const theme = puzzleTheme.value;
+        
+        currentPuzzle.forEach((piece, index) => {
+            const pieceElement = document.createElement('div');
+            pieceElement.className = `puzzle-piece theme-${theme}`;
+            
+            if (piece === 0) {
+                pieceElement.classList.add('empty');
+            } else {
+                pieceElement.textContent = piece;
+                pieceElement.style.backgroundPosition = getBackgroundPosition(piece - 1);
+                
+                if (isMoveable(index)) {
+                    pieceElement.classList.add('moveable');
+                }
+                
+                pieceElement.addEventListener('click', () => movePiece(index));
+            }
+            
+            puzzleGrid.appendChild(pieceElement);
+        });
+    }
+    
+    function getBackgroundPosition(pieceNumber) {
+        const row = Math.floor(pieceNumber / 3);
+        const col = pieceNumber % 3;
+        const x = -col * 100;
+        const y = -row * 100;
+        return `${x}px ${y}px`;
+    }
+    
+    function isMoveable(index) {
+        const row = Math.floor(index / 3);
+        const col = index % 3;
+        const emptyRow = Math.floor(emptyIndex / 3);
+        const emptyCol = emptyIndex % 3;
+        
+        return (Math.abs(row - emptyRow) === 1 && col === emptyCol) ||
+               (Math.abs(col - emptyCol) === 1 && row === emptyRow);
+    }
+    
+    function movePiece(index) {
+        if (!isMoveable(index)) return;
+        
+        if (!isGameActive) {
+            startGame();
+        }
+        
+        // Swap piece with empty space
+        [currentPuzzle[index], currentPuzzle[emptyIndex]] = [currentPuzzle[emptyIndex], currentPuzzle[index]];
+        emptyIndex = index;
+        moves++;
+        
+        updateDisplay();
+        renderPuzzle();
+        
+        if (isPuzzleSolved()) {
+            endGame();
+        }
+    }
+    
+    function startGame() {
+        isGameActive = true;
+        startTime = Date.now();
+        
+        gameTimer = setInterval(() => {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60).toString().padStart(2, '0');
+            const seconds = (elapsed % 60).toString().padStart(2, '0');
+            timeCount.textContent = `${minutes}:${seconds}`;
+        }, 1000);
+    }
+    
+    function endGame() {
+        isGameActive = false;
+        if (gameTimer) {
+            clearInterval(gameTimer);
+            gameTimer = null;
+        }
+        
+        const totalTime = Math.floor((Date.now() - startTime) / 1000);
+        
+        // Update best score
+        const currentBest = localStorage.getItem('puzzle_best_moves');
+        if (!currentBest || moves < parseInt(currentBest)) {
+            localStorage.setItem('puzzle_best_moves', moves.toString());
+            bestScore.textContent = moves;
+        }
+        
+        // Show success message
+        document.getElementById('finalMoves').textContent = moves;
+        document.getElementById('finalTime').textContent = totalTime;
+        successMessage.style.display = 'block';
+        
+        // Save score
+        GameUtils.saveScore('sliding_puzzle', moves);
+    }
+    
+    function isPuzzleSolved() {
+        return currentPuzzle.every((piece, index) => piece === solvedState[index]);
+    }
+    
+    function shufflePuzzle() {
+        // Generate solvable puzzle by making random valid moves
+        currentPuzzle = [...solvedState];
+        emptyIndex = 8;
+        
+        for (let i = 0; i < 1000; i++) {
+            const moveableIndices = [];
+            for (let j = 0; j < 9; j++) {
+                if (isMoveable(j)) {
+                    moveableIndices.push(j);
+                }
+            }
+            
+            if (moveableIndices.length > 0) {
+                const randomIndex = moveableIndices[Math.floor(Math.random() * moveableIndices.length)];
+                [currentPuzzle[randomIndex], currentPuzzle[emptyIndex]] = [currentPuzzle[emptyIndex], currentPuzzle[randomIndex]];
+                emptyIndex = randomIndex;
+            }
+        }
+        
+        moves = 0;
+        startTime = null;
+        isGameActive = false;
+        
+        if (gameTimer) {
+            clearInterval(gameTimer);
+            gameTimer = null;
+        }
+        
+        updateDisplay();
+        renderPuzzle();
+        successMessage.style.display = 'none';
+    }
+    
+    function showHint() {
+        // Briefly show the solved state
+        const originalPuzzle = [...currentPuzzle];
+        const originalEmpty = emptyIndex;
+        
+        currentPuzzle = [...solvedState];
+        emptyIndex = 8;
+        renderPuzzle();
+        
+        setTimeout(() => {
+            currentPuzzle = originalPuzzle;
+            emptyIndex = originalEmpty;
+            renderPuzzle();
+        }, 2000);
+    }
+    
+    function updateDisplay() {
+        moveCount.textContent = moves;
+    }
+    
+    function loadBestScore() {
+        const best = localStorage.getItem('puzzle_best_moves');
+        bestScore.textContent = best || '--';
+    }
+    
+    // Event listeners
+    shuffleBtn.addEventListener('click', shufflePuzzle);
+    hintBtn.addEventListener('click', showHint);
+    resetBtn.addEventListener('click', initPuzzle);
+    playAgainBtn.addEventListener('click', () => {
+        successMessage.style.display = 'none';
+        shufflePuzzle();
+    });
+    
+    puzzleTheme.addEventListener('change', renderPuzzle);
+    
+    // Initialize
+    initPuzzle();
+});
+</script>
+{% endblock %}

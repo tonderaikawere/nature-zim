@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Fish of Zimbabwe - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active">Fish</li>
+        </ol>
+    </nav>
+
+    <div class="text-center mb-5">
+        <h1 class="text-nature-green mb-4">Fish of Zimbabwe</h1>
+        <p class="lead">Discover the diverse fish species in Zimbabwe's rivers, lakes, and dams.</p>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-6 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-green text-white">
+                    <h5 class="mb-0"><i class="fas fa-fish me-2"></i>Tilapia</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Oreochromis species</p>
+                    <p>Important food fish, widely farmed and found in natural waters throughout Zimbabwe.</p>
+                    <a href="{{ url_for('tilapia') }}" class="btn btn-nature">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-brown text-white">
+                    <h5 class="mb-0"><i class="fas fa-fish me-2"></i>Catfish</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Clarias species</p>
+                    <p>Hardy freshwater fish known for their whisker-like barbels and ability to survive in low oxygen conditions.</p>
+                    <a href="{{ url_for('catfish') }}" class="btn btn-nature">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-nature-beige p-4 rounded">
+        <h3 class="text-nature-green mb-3">Aquatic Ecosystems</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Major Water Bodies</h6>
+                <ul class="small">
+                    <li>Zambezi River system</li>
+                    <li>Lake Kariba</li>
+                    <li>Limpopo River system</li>
+                    <li>Numerous dams and reservoirs</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Fish Diversity</h6>
+                <ul class="small">
+                    <li>Over 130 freshwater species</li>
+                    <li>Endemic species in some systems</li>
+                    <li>Important for food security</li>
+                    <li>Recreational fishing opportunities</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

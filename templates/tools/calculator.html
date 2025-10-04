@@ -1,0 +1,409 @@
+{% extends "base.html" %}
+
+{% block title %}Calculator - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('tools_home') }}">Tools</a></li>
+            <li class="breadcrumb-item active">Calculator</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="text-center mb-4">
+                <h1 class="text-nature-green mb-3">🧮 Calculator</h1>
+                <p class="lead">Perform mathematical calculations with ease</p>
+            </div>
+
+            <div class="nature-card">
+                <div class="card-body">
+                    <!-- Display -->
+                    <div class="calculator-display mb-4">
+                        <input type="text" id="display" class="form-control form-control-lg text-end" 
+                               value="0" readonly style="font-size: 2rem; background: #f8f9fa;">
+                        <div id="expression" class="text-muted text-end mt-1 small" style="min-height: 20px;"></div>
+                    </div>
+
+                    <!-- Calculator Buttons -->
+                    <div class="calculator-buttons">
+                        <div class="row g-2 mb-2">
+                            <div class="col-3">
+                                <button class="btn btn-outline-secondary w-100 calc-btn" data-action="clear">C</button>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-outline-secondary w-100 calc-btn" data-action="clear-entry">CE</button>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-outline-secondary w-100 calc-btn" data-action="backspace">⌫</button>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-nature w-100 calc-btn" data-action="operator" data-value="/">÷</button>
+                            </div>
+                        </div>
+
+                        <div class="row g-2 mb-2">
+                            <div class="col-3">
+                                <button class="btn btn-outline-dark w-100 calc-btn" data-action="number" data-value="7">7</button>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-outline-dark w-100 calc-btn" data-action="number" data-value="8">8</button>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-outline-dark w-100 calc-btn" data-action="number" data-value="9">9</button>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-nature w-100 calc-btn" data-action="operator" data-value="*">×</button>
+                            </div>
+                        </div>
+
+                        <div class="row g-2 mb-2">
+                            <div class="col-3">
+                                <button class="btn btn-outline-dark w-100 calc-btn" data-action="number" data-value="4">4</button>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-outline-dark w-100 calc-btn" data-action="number" data-value="5">5</button>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-outline-dark w-100 calc-btn" data-action="number" data-value="6">6</button>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-nature w-100 calc-btn" data-action="operator" data-value="-">−</button>
+                            </div>
+                        </div>
+
+                        <div class="row g-2 mb-2">
+                            <div class="col-3">
+                                <button class="btn btn-outline-dark w-100 calc-btn" data-action="number" data-value="1">1</button>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-outline-dark w-100 calc-btn" data-action="number" data-value="2">2</button>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-outline-dark w-100 calc-btn" data-action="number" data-value="3">3</button>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-nature w-100 calc-btn" data-action="operator" data-value="+">+</button>
+                            </div>
+                        </div>
+
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <button class="btn btn-outline-dark w-100 calc-btn" data-action="number" data-value="0">0</button>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-outline-dark w-100 calc-btn" data-action="decimal">.</button>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-success w-100 calc-btn" data-action="equals">=</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- History -->
+                    <div class="mt-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="text-nature-green mb-0">History</h6>
+                            <button id="clearHistory" class="btn btn-outline-secondary btn-sm">Clear</button>
+                        </div>
+                        <div id="history" class="bg-light p-3 rounded" style="max-height: 150px; overflow-y: auto; min-height: 60px;">
+                            <div class="text-muted text-center">No calculations yet</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calculator Tips -->
+            <div class="nature-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">💡 Calculator Tips</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled small">
+                                <li><strong>C:</strong> Clear all</li>
+                                <li><strong>CE:</strong> Clear current entry</li>
+                                <li><strong>⌫:</strong> Delete last digit</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled small">
+                                <li><strong>Keyboard:</strong> Use number keys and +, -, *, /</li>
+                                <li><strong>Enter:</strong> Calculate result</li>
+                                <li><strong>Escape:</strong> Clear all</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="text-center mt-4">
+                <a href="{{ url_for('tools_home') }}" class="btn btn-nature-outline">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Tools
+                </a>
+                <a href="{{ url_for('age_calculator') }}" class="btn btn-nature ms-3">
+                    Age Calculator <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.calc-btn {
+    height: 60px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.calc-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.calc-btn:active {
+    transform: translateY(0);
+}
+
+.calculator-display input {
+    border: 2px solid var(--nature-light-green);
+    border-radius: 8px;
+}
+
+#history {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+}
+
+.history-item {
+    padding: 4px 0;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const display = document.getElementById('display');
+    const expression = document.getElementById('expression');
+    const history = document.getElementById('history');
+    const clearHistoryBtn = document.getElementById('clearHistory');
+    
+    let currentInput = '0';
+    let operator = null;
+    let previousInput = null;
+    let waitingForOperand = false;
+    let calculationHistory = [];
+    
+    function updateDisplay() {
+        display.value = currentInput;
+    }
+    
+    function updateExpression(expr) {
+        expression.textContent = expr || '';
+    }
+    
+    function addToHistory(calculation, result) {
+        calculationHistory.unshift({ calculation, result, time: new Date() });
+        if (calculationHistory.length > 10) {
+            calculationHistory.pop();
+        }
+        updateHistoryDisplay();
+    }
+    
+    function updateHistoryDisplay() {
+        if (calculationHistory.length === 0) {
+            history.innerHTML = '<div class="text-muted text-center">No calculations yet</div>';
+            return;
+        }
+        
+        history.innerHTML = calculationHistory.map(item => `
+            <div class="history-item">
+                <span>${item.calculation}</span>
+                <span class="fw-bold">${item.result}</span>
+            </div>
+        `).join('');
+    }
+    
+    function inputNumber(num) {
+        if (waitingForOperand) {
+            currentInput = num;
+            waitingForOperand = false;
+        } else {
+            currentInput = currentInput === '0' ? num : currentInput + num;
+        }
+        updateDisplay();
+    }
+    
+    function inputOperator(nextOperator) {
+        const inputValue = parseFloat(currentInput);
+        
+        if (previousInput === null) {
+            previousInput = inputValue;
+        } else if (operator) {
+            const currentValue = previousInput || 0;
+            const newValue = calculate(currentValue, inputValue, operator);
+            
+            currentInput = String(newValue);
+            previousInput = newValue;
+            updateDisplay();
+        }
+        
+        waitingForOperand = true;
+        operator = nextOperator;
+        
+        updateExpression(`${previousInput} ${getOperatorSymbol(operator)}`);
+    }
+    
+    function calculate(firstOperand, secondOperand, operator) {
+        switch (operator) {
+            case '+':
+                return firstOperand + secondOperand;
+            case '-':
+                return firstOperand - secondOperand;
+            case '*':
+                return firstOperand * secondOperand;
+            case '/':
+                return secondOperand !== 0 ? firstOperand / secondOperand : 0;
+            default:
+                return secondOperand;
+        }
+    }
+    
+    function getOperatorSymbol(op) {
+        switch (op) {
+            case '+': return '+';
+            case '-': return '−';
+            case '*': return '×';
+            case '/': return '÷';
+            default: return '';
+        }
+    }
+    
+    function performCalculation() {
+        const inputValue = parseFloat(currentInput);
+        
+        if (previousInput !== null && operator) {
+            const calculation = `${previousInput} ${getOperatorSymbol(operator)} ${inputValue}`;
+            const newValue = calculate(previousInput, inputValue, operator);
+            
+            addToHistory(calculation, newValue);
+            
+            currentInput = String(newValue);
+            previousInput = null;
+            operator = null;
+            waitingForOperand = true;
+            
+            updateDisplay();
+            updateExpression('');
+        }
+    }
+    
+    function clearAll() {
+        currentInput = '0';
+        previousInput = null;
+        operator = null;
+        waitingForOperand = false;
+        updateDisplay();
+        updateExpression('');
+    }
+    
+    function clearEntry() {
+        currentInput = '0';
+        updateDisplay();
+    }
+    
+    function backspace() {
+        if (currentInput.length > 1) {
+            currentInput = currentInput.slice(0, -1);
+        } else {
+            currentInput = '0';
+        }
+        updateDisplay();
+    }
+    
+    function inputDecimal() {
+        if (waitingForOperand) {
+            currentInput = '0.';
+            waitingForOperand = false;
+        } else if (currentInput.indexOf('.') === -1) {
+            currentInput += '.';
+        }
+        updateDisplay();
+    }
+    
+    // Event listeners for buttons
+    document.querySelectorAll('.calc-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const action = this.dataset.action;
+            const value = this.dataset.value;
+            
+            switch (action) {
+                case 'number':
+                    inputNumber(value);
+                    break;
+                case 'operator':
+                    inputOperator(value);
+                    break;
+                case 'equals':
+                    performCalculation();
+                    break;
+                case 'decimal':
+                    inputDecimal();
+                    break;
+                case 'clear':
+                    clearAll();
+                    break;
+                case 'clear-entry':
+                    clearEntry();
+                    break;
+                case 'backspace':
+                    backspace();
+                    break;
+            }
+        });
+    });
+    
+    // Keyboard support
+    document.addEventListener('keydown', function(e) {
+        if (e.key >= '0' && e.key <= '9') {
+            inputNumber(e.key);
+        } else if (['+', '-', '*', '/'].includes(e.key)) {
+            inputOperator(e.key);
+        } else if (e.key === 'Enter' || e.key === '=') {
+            e.preventDefault();
+            performCalculation();
+        } else if (e.key === '.') {
+            inputDecimal();
+        } else if (e.key === 'Escape') {
+            clearAll();
+        } else if (e.key === 'Backspace') {
+            backspace();
+        }
+    });
+    
+    // Clear history
+    clearHistoryBtn.addEventListener('click', function() {
+        calculationHistory = [];
+        updateHistoryDisplay();
+    });
+    
+    // Initialize
+    updateDisplay();
+    updateHistoryDisplay();
+});
+</script>
+{% endblock %}

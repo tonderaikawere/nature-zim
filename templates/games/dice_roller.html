@@ -1,0 +1,285 @@
+{% extends "base.html" %}
+
+{% block title %}Dice Roller - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('games_home') }}">Games</a></li>
+            <li class="breadcrumb-item active">Dice Roller</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-5">
+                <h1 class="text-nature-green mb-4">🎲 Dice Roller</h1>
+                <p class="lead">Roll virtual dice for your games and activities!</p>
+            </div>
+
+            <div class="nature-card">
+                <div class="card-body text-center">
+                    <!-- Dice Display -->
+                    <div id="diceDisplay" class="mb-4">
+                        <div class="dice-container d-flex justify-content-center gap-3 mb-4">
+                            <div class="dice" id="dice1">
+                                <div class="dice-face">?</div>
+                            </div>
+                            <div class="dice" id="dice2" style="display: none;">
+                                <div class="dice-face">?</div>
+                            </div>
+                        </div>
+                        
+                        <div id="result" class="display-4 text-nature-green mb-3">
+                            Click Roll to Start!
+                        </div>
+                        
+                        <div id="total" class="h5 text-muted" style="display: none;">
+                            Total: <span id="totalValue">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="controls mb-4">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <label for="diceCount" class="form-label">Number of Dice:</label>
+                                <select id="diceCount" class="form-select mb-3">
+                                    <option value="1">1 Die</option>
+                                    <option value="2">2 Dice</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="diceSides" class="form-label">Dice Type:</label>
+                                <select id="diceSides" class="form-select mb-3">
+                                    <option value="6">6-sided (Standard)</option>
+                                    <option value="4">4-sided</option>
+                                    <option value="8">8-sided</option>
+                                    <option value="10">10-sided</option>
+                                    <option value="12">12-sided</option>
+                                    <option value="20">20-sided</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button id="rollButton" class="btn btn-nature btn-lg me-3">
+                            <i class="fas fa-dice me-2"></i>Roll Dice
+                        </button>
+                        
+                        <button id="resetButton" class="btn btn-nature-outline">
+                            <i class="fas fa-redo me-2"></i>Reset
+                        </button>
+                    </div>
+
+                    <!-- Roll History -->
+                    <div id="historySection" style="display: none;">
+                        <h5 class="text-nature-green">Roll History</h5>
+                        <div id="rollHistory" class="bg-light p-3 rounded mb-3" style="max-height: 200px; overflow-y: auto;">
+                            <!-- History will be populated here -->
+                        </div>
+                        <button id="clearHistory" class="btn btn-outline-secondary btn-sm">Clear History</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Suggestions -->
+            <div class="nature-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">🎮 Game Ideas</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-nature-green">Nature Learning Games</h6>
+                            <ul class="small">
+                                <li><strong>Animal Movement:</strong> Roll to see how many steps different animals take</li>
+                                <li><strong>Tree Height:</strong> Roll to determine tree heights in meters</li>
+                                <li><strong>Rainfall Game:</strong> Roll for monthly rainfall amounts</li>
+                                <li><strong>Wildlife Spotting:</strong> Roll to see how many animals you spot</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-nature-green">Educational Activities</h6>
+                            <ul class="small">
+                                <li><strong>Math Practice:</strong> Add, subtract, or multiply dice results</li>
+                                <li><strong>Probability:</strong> Learn about chance and statistics</li>
+                                <li><strong>Decision Making:</strong> Use dice to make random choices</li>
+                                <li><strong>Story Creation:</strong> Roll for story elements</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="text-center mt-4">
+                <a href="{{ url_for('games_home') }}" class="btn btn-nature-outline">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Games
+                </a>
+                <a href="{{ url_for('quiz_game') }}" class="btn btn-nature ms-3">
+                    Try Nature Quiz <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.dice {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border: 3px solid var(--nature-green);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--nature-green);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.dice.rolling {
+    animation: roll 0.6s ease-in-out;
+}
+
+@keyframes roll {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.1); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+.dice-face {
+    transition: all 0.3s ease;
+}
+
+#rollHistory {
+    text-align: left;
+    font-family: monospace;
+}
+
+.history-item {
+    padding: 2px 0;
+    border-bottom: 1px solid #eee;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const rollButton = document.getElementById('rollButton');
+    const resetButton = document.getElementById('resetButton');
+    const clearHistoryButton = document.getElementById('clearHistory');
+    const diceCountSelect = document.getElementById('diceCount');
+    const diceSidesSelect = document.getElementById('diceSides');
+    const dice1 = document.getElementById('dice1');
+    const dice2 = document.getElementById('dice2');
+    const result = document.getElementById('result');
+    const total = document.getElementById('total');
+    const totalValue = document.getElementById('totalValue');
+    const historySection = document.getElementById('historySection');
+    const rollHistory = document.getElementById('rollHistory');
+    
+    let history = [];
+    
+    // Update dice display based on count
+    diceCountSelect.addEventListener('change', function() {
+        if (this.value === '2') {
+            dice2.style.display = 'block';
+            total.style.display = 'block';
+        } else {
+            dice2.style.display = 'none';
+            total.style.display = 'none';
+        }
+    });
+    
+    // Roll dice function
+    function rollDice() {
+        const diceCount = parseInt(diceCountSelect.value);
+        const sides = parseInt(diceSidesSelect.value);
+        
+        // Add rolling animation
+        dice1.classList.add('rolling');
+        if (diceCount === 2) {
+            dice2.classList.add('rolling');
+        }
+        
+        rollButton.disabled = true;
+        result.textContent = 'Rolling...';
+        
+        setTimeout(() => {
+            const roll1 = Math.floor(Math.random() * sides) + 1;
+            let roll2 = 0;
+            
+            dice1.querySelector('.dice-face').textContent = roll1;
+            
+            if (diceCount === 2) {
+                roll2 = Math.floor(Math.random() * sides) + 1;
+                dice2.querySelector('.dice-face').textContent = roll2;
+                const sum = roll1 + roll2;
+                result.textContent = `${roll1} + ${roll2}`;
+                totalValue.textContent = sum;
+                
+                // Add to history
+                history.unshift(`${new Date().toLocaleTimeString()}: ${roll1} + ${roll2} = ${sum} (${sides}-sided)`);
+            } else {
+                result.textContent = roll1;
+                
+                // Add to history
+                history.unshift(`${new Date().toLocaleTimeString()}: ${roll1} (${sides}-sided)`);
+            }
+            
+            // Remove rolling animation
+            dice1.classList.remove('rolling');
+            dice2.classList.remove('rolling');
+            
+            // Update history display
+            updateHistory();
+            
+            rollButton.disabled = false;
+        }, 600);
+    }
+    
+    function updateHistory() {
+        if (history.length > 0) {
+            historySection.style.display = 'block';
+            rollHistory.innerHTML = history.slice(0, 20).map(item => 
+                `<div class="history-item">${item}</div>`
+            ).join('');
+        }
+    }
+    
+    function resetDice() {
+        dice1.querySelector('.dice-face').textContent = '?';
+        dice2.querySelector('.dice-face').textContent = '?';
+        result.textContent = 'Click Roll to Start!';
+        totalValue.textContent = '0';
+    }
+    
+    function clearHistory() {
+        history = [];
+        historySection.style.display = 'none';
+        rollHistory.innerHTML = '';
+    }
+    
+    // Event listeners
+    rollButton.addEventListener('click', rollDice);
+    resetButton.addEventListener('click', resetDice);
+    clearHistoryButton.addEventListener('click', clearHistory);
+    
+    // Keyboard support
+    document.addEventListener('keydown', function(e) {
+        if (e.code === 'Space' || e.code === 'Enter') {
+            e.preventDefault();
+            if (!rollButton.disabled) {
+                rollDice();
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

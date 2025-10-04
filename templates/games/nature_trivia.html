@@ -1,0 +1,333 @@
+{% extends "base.html" %}
+
+{% block title %}Nature Trivia - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('games_home') }}">Games</a></li>
+            <li class="breadcrumb-item active">Nature Trivia</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-5">
+                <h1 class="text-nature-green mb-4">🧠 Nature Trivia</h1>
+                <p class="lead">Quick trivia questions about Zimbabwe's amazing nature!</p>
+            </div>
+
+            <div class="nature-card">
+                <div class="card-body">
+                    <div id="triviaGame">
+                        <!-- Question Display -->
+                        <div id="questionCard" class="text-center mb-4">
+                            <div class="h4 text-nature-green mb-3" id="questionText">Click "Start Trivia" to begin!</div>
+                            <div id="questionImage" class="mb-3" style="display: none;">
+                                <img src="" alt="Question image" class="img-fluid rounded" style="max-height: 200px;">
+                            </div>
+                        </div>
+
+                        <!-- Answer Options -->
+                        <div id="answerOptions" class="row mb-4" style="display: none;">
+                            <div class="col-md-6 mb-2">
+                                <button class="btn btn-outline-nature w-100 answer-btn" data-answer="A">
+                                    <span class="option-letter">A.</span> <span class="option-text"></span>
+                                </button>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <button class="btn btn-outline-nature w-100 answer-btn" data-answer="B">
+                                    <span class="option-letter">B.</span> <span class="option-text"></span>
+                                </button>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <button class="btn btn-outline-nature w-100 answer-btn" data-answer="C">
+                                    <span class="option-letter">C.</span> <span class="option-text"></span>
+                                </button>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <button class="btn btn-outline-nature w-100 answer-btn" data-answer="D">
+                                    <span class="option-letter">D.</span> <span class="option-text"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Game Controls -->
+                        <div class="text-center mb-4">
+                            <button id="startBtn" class="btn btn-nature btn-lg">
+                                <i class="fas fa-play me-2"></i>Start Trivia
+                            </button>
+                            <button id="nextBtn" class="btn btn-nature" style="display: none;">
+                                Next Question <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+
+                        <!-- Game Stats -->
+                        <div id="gameStats" class="row text-center mb-4" style="display: none;">
+                            <div class="col-3">
+                                <div class="h5 text-nature-green" id="currentQuestion">1</div>
+                                <small class="text-muted">Question</small>
+                            </div>
+                            <div class="col-3">
+                                <div class="h5 text-nature-green" id="correctAnswers">0</div>
+                                <small class="text-muted">Correct</small>
+                            </div>
+                            <div class="col-3">
+                                <div class="h5 text-nature-green" id="totalQuestions">10</div>
+                                <small class="text-muted">Total</small>
+                            </div>
+                            <div class="col-3">
+                                <div class="h5 text-nature-green" id="accuracy">0%</div>
+                                <small class="text-muted">Accuracy</small>
+                            </div>
+                        </div>
+
+                        <!-- Results -->
+                        <div id="resultsCard" class="text-center" style="display: none;">
+                            <div class="alert alert-success">
+                                <h4 class="text-success mb-3">🎉 Trivia Complete!</h4>
+                                <p class="mb-2">You got <span id="finalScore">0</span> out of <span id="finalTotal">10</span> questions correct!</p>
+                                <p class="mb-3">Final accuracy: <span id="finalAccuracy">0%</span></p>
+                                <button id="playAgainBtn" class="btn btn-success">Play Again</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="text-center mt-4">
+                <a href="{{ url_for('games_home') }}" class="btn btn-nature-outline">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Games
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.answer-btn {
+    text-align: left;
+    padding: 15px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.answer-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.answer-btn.correct {
+    background-color: var(--nature-light-green);
+    border-color: var(--nature-light-green);
+    color: white;
+}
+
+.answer-btn.incorrect {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+.option-letter {
+    font-weight: bold;
+    margin-right: 10px;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const startBtn = document.getElementById('startBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const playAgainBtn = document.getElementById('playAgainBtn');
+    const questionText = document.getElementById('questionText');
+    const answerOptions = document.getElementById('answerOptions');
+    const gameStats = document.getElementById('gameStats');
+    const resultsCard = document.getElementById('resultsCard');
+    const answerBtns = document.querySelectorAll('.answer-btn');
+    
+    let currentQuestionIndex = 0;
+    let correctAnswers = 0;
+    let gameActive = false;
+    
+    // Zimbabwe nature trivia questions
+    const triviaQuestions = [
+        {
+            question: "What is Zimbabwe's national flower?",
+            options: ["Flame Lily", "Wild Orchid", "Sunflower", "Baobab Flower"],
+            correct: "A",
+            explanation: "The Flame Lily (Gloriosa superba) is Zimbabwe's national flower."
+        },
+        {
+            question: "Which is Zimbabwe's largest national park?",
+            options: ["Mana Pools", "Hwange", "Matobo Hills", "Gonarezhou"],
+            correct: "B",
+            explanation: "Hwange National Park covers 14,651 square kilometers."
+        },
+        {
+            question: "What is the scientific name of the Baobab tree?",
+            options: ["Adansonia digitata", "Colophospermum mopane", "Brachystegia spiciformis", "Acacia tortilis"],
+            correct: "A",
+            explanation: "The Baobab's scientific name is Adansonia digitata."
+        },
+        {
+            question: "Which river forms Zimbabwe's northern border?",
+            options: ["Limpopo", "Save", "Zambezi", "Mazowe"],
+            correct: "C",
+            explanation: "The Zambezi River forms Zimbabwe's entire northern border."
+        },
+        {
+            question: "What is Zimbabwe's national bird?",
+            options: ["Hornbill", "African Fish Eagle", "Weaver Bird", "Secretary Bird"],
+            correct: "B",
+            explanation: "The African Fish Eagle is Zimbabwe's national bird."
+        },
+        {
+            question: "Which ecosystem covers about 60% of Zimbabwe?",
+            options: ["Grasslands", "Wetlands", "Miombo Woodlands", "Desert"],
+            correct: "C",
+            explanation: "Miombo Woodlands are Zimbabwe's dominant ecosystem."
+        },
+        {
+            question: "Lake Kariba is the world's largest what?",
+            options: ["Natural lake", "Artificial lake by volume", "Freshwater lake", "Salt lake"],
+            correct: "B",
+            explanation: "Lake Kariba is the world's largest artificial lake by volume."
+        },
+        {
+            question: "Which tree is known for its butterfly-shaped leaves?",
+            options: ["Baobab", "Msasa", "Mopane", "Acacia"],
+            correct: "C",
+            explanation: "The Mopane tree has distinctive butterfly-shaped leaves."
+        },
+        {
+            question: "What does 'Mosi-oa-Tunya' mean?",
+            options: ["Great River", "The Smoke That Thunders", "Sacred Waters", "Mighty Falls"],
+            correct: "B",
+            explanation: "Mosi-oa-Tunya means 'The Smoke That Thunders' - the local name for Victoria Falls."
+        },
+        {
+            question: "Which grass is known as Zimbabwe's most important pasture grass?",
+            options: ["Spear Grass", "Red Grass", "Buffalo Grass", "Star Grass"],
+            correct: "B",
+            explanation: "Red Grass (Themeda triandra) is considered Zimbabwe's most important pasture grass."
+        }
+    ];
+    
+    function startGame() {
+        currentQuestionIndex = 0;
+        correctAnswers = 0;
+        gameActive = true;
+        
+        startBtn.style.display = 'none';
+        gameStats.style.display = 'flex';
+        resultsCard.style.display = 'none';
+        
+        showQuestion();
+    }
+    
+    function showQuestion() {
+        const question = triviaQuestions[currentQuestionIndex];
+        
+        questionText.textContent = question.question;
+        answerOptions.style.display = 'flex';
+        
+        answerBtns.forEach((btn, index) => {
+            const optionText = btn.querySelector('.option-text');
+            optionText.textContent = question.options[index];
+            btn.className = 'btn btn-outline-nature w-100 answer-btn';
+            btn.disabled = false;
+        });
+        
+        updateStats();
+        nextBtn.style.display = 'none';
+    }
+    
+    function handleAnswer(selectedAnswer) {
+        if (!gameActive) return;
+        
+        const question = triviaQuestions[currentQuestionIndex];
+        const isCorrect = selectedAnswer === question.correct;
+        
+        if (isCorrect) {
+            correctAnswers++;
+        }
+        
+        // Show correct/incorrect answers
+        answerBtns.forEach(btn => {
+            const answer = btn.dataset.answer;
+            btn.disabled = true;
+            
+            if (answer === question.correct) {
+                btn.classList.add('correct');
+            } else if (answer === selectedAnswer && !isCorrect) {
+                btn.classList.add('incorrect');
+            }
+        });
+        
+        updateStats();
+        
+        // Show next button or end game
+        setTimeout(() => {
+            if (currentQuestionIndex < triviaQuestions.length - 1) {
+                nextBtn.style.display = 'inline-block';
+            } else {
+                endGame();
+            }
+        }, 1500);
+    }
+    
+    function nextQuestion() {
+        currentQuestionIndex++;
+        showQuestion();
+    }
+    
+    function endGame() {
+        gameActive = false;
+        answerOptions.style.display = 'none';
+        
+        const accuracy = Math.round((correctAnswers / triviaQuestions.length) * 100);
+        
+        document.getElementById('finalScore').textContent = correctAnswers;
+        document.getElementById('finalTotal').textContent = triviaQuestions.length;
+        document.getElementById('finalAccuracy').textContent = accuracy + '%';
+        
+        resultsCard.style.display = 'block';
+        
+        // Save score
+        GameUtils.saveScore('nature_trivia', accuracy);
+    }
+    
+    function updateStats() {
+        document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+        document.getElementById('correctAnswers').textContent = correctAnswers;
+        
+        const accuracy = currentQuestionIndex === 0 ? 0 : Math.round((correctAnswers / (currentQuestionIndex + 1)) * 100);
+        document.getElementById('accuracy').textContent = accuracy + '%';
+    }
+    
+    function resetGame() {
+        gameActive = false;
+        startBtn.style.display = 'inline-block';
+        gameStats.style.display = 'none';
+        answerOptions.style.display = 'none';
+        resultsCard.style.display = 'none';
+        questionText.textContent = "Click 'Start Trivia' to begin!";
+    }
+    
+    // Event listeners
+    startBtn.addEventListener('click', startGame);
+    nextBtn.addEventListener('click', nextQuestion);
+    playAgainBtn.addEventListener('click', resetGame);
+    
+    answerBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            handleAnswer(btn.dataset.answer);
+        });
+    });
+});
+</script>
+{% endblock %}

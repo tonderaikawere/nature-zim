@@ -1,0 +1,410 @@
+{% extends "base.html" %}
+
+{% block title %}Scoreboard - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('games_home') }}">Games</a></li>
+            <li class="breadcrumb-item active">Scoreboard</li>
+        </ol>
+    </nav>
+
+    <div class="text-center mb-5">
+        <h1 class="text-nature-green mb-4">🏆 Game Scoreboard</h1>
+        <p class="lead">Track your progress and achievements across all games!</p>
+    </div>
+
+    <!-- Overall Stats -->
+    <div class="nature-card mb-4">
+        <div class="card-header">
+            <h4 class="mb-0"><i class="fas fa-chart-line me-2"></i>Overall Statistics</h4>
+        </div>
+        <div class="card-body">
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <div class="h3 text-nature-green" id="totalGamesPlayed">0</div>
+                    <small class="text-muted">Games Played</small>
+                </div>
+                <div class="col-md-3">
+                    <div class="h3 text-nature-green" id="averageScore">0%</div>
+                    <small class="text-muted">Average Score</small>
+                </div>
+                <div class="col-md-3">
+                    <div class="h3 text-nature-green" id="bestGame">-</div>
+                    <small class="text-muted">Best Game</small>
+                </div>
+                <div class="col-md-3">
+                    <div class="h3 text-nature-green" id="achievementsEarned">0</div>
+                    <small class="text-muted">Achievements</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Scores -->
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-gamepad me-2"></i>Game Scores</h5>
+                </div>
+                <div class="card-body">
+                    <div id="gameScores">
+                        <!-- Scores will be populated by JavaScript -->
+                    </div>
+                    
+                    <div id="noScores" class="text-center text-muted py-4" style="display: none;">
+                        <i class="fas fa-chart-bar fa-3x mb-3"></i>
+                        <p>No scores recorded yet. Start playing games to see your progress!</p>
+                        <a href="{{ url_for('games_home') }}" class="btn btn-nature">Play Games</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Achievements -->
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-trophy me-2"></i>Achievements</h5>
+                </div>
+                <div class="card-body">
+                    <div id="achievementsList">
+                        <!-- Achievements will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-bolt me-2"></i>Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button id="clearScoresBtn" class="btn btn-outline-danger btn-sm">
+                            <i class="fas fa-trash me-2"></i>Clear All Scores
+                        </button>
+                        <button id="exportScoresBtn" class="btn btn-outline-secondary btn-sm">
+                            <i class="fas fa-download me-2"></i>Export Scores
+                        </button>
+                        <a href="{{ url_for('games_home') }}" class="btn btn-nature btn-sm">
+                            <i class="fas fa-play me-2"></i>Play More Games
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="text-center mt-4">
+        <a href="{{ url_for('games_home') }}" class="btn btn-nature-outline">
+            <i class="fas fa-arrow-left me-2"></i>Back to Games
+        </a>
+    </div>
+</div>
+
+<style>
+.game-score-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.game-score-item:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.score-badge {
+    font-size: 1.2rem;
+    padding: 8px 12px;
+}
+
+.achievement-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    background: var(--nature-beige);
+}
+
+.achievement-item.earned {
+    background: rgba(40, 167, 69, 0.1);
+    border-left: 4px solid var(--nature-light-green);
+}
+
+.achievement-item.locked {
+    opacity: 0.6;
+    background: #f8f9fa;
+}
+
+.achievement-icon {
+    font-size: 1.5rem;
+    margin-right: 10px;
+    width: 30px;
+    text-align: center;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const gameScores = document.getElementById('gameScores');
+    const noScores = document.getElementById('noScores');
+    const achievementsList = document.getElementById('achievementsList');
+    const clearScoresBtn = document.getElementById('clearScoresBtn');
+    const exportScoresBtn = document.getElementById('exportScoresBtn');
+    
+    // Game definitions
+    const gameDefinitions = {
+        'dice_roller': { name: 'Dice Roller', icon: '🎲', scoreType: 'rolls' },
+        'nature_quiz': { name: 'Nature Quiz', icon: '🧠', scoreType: 'percentage' },
+        'sliding_puzzle': { name: 'Sliding Puzzle', icon: '🧩', scoreType: 'moves' },
+        'memory_match': { name: 'Memory Match', icon: '🧠', scoreType: 'percentage' },
+        'word_search': { name: 'Word Search', icon: '🔍', scoreType: 'time' },
+        'nature_trivia': { name: 'Nature Trivia', icon: '🌿', scoreType: 'percentage' },
+        'animal_sounds': { name: 'Animal Sounds', icon: '🔊', scoreType: 'percentage' },
+        'grass_id_challenge': { name: 'Grass ID Challenge', icon: '🌾', scoreType: 'percentage' },
+        'wildlife_flashcards': { name: 'Wildlife Flashcards', icon: '🦁', scoreType: 'cards' }
+    };
+    
+    // Achievement definitions
+    const achievements = [
+        {
+            id: 'first_game',
+            name: 'First Steps',
+            description: 'Play your first game',
+            icon: '🎮',
+            condition: (scores) => Object.keys(scores).length > 0
+        },
+        {
+            id: 'quiz_master',
+            name: 'Quiz Master',
+            description: 'Score 100% on Nature Quiz',
+            icon: '🏆',
+            condition: (scores) => scores.nature_quiz && Math.max(...scores.nature_quiz) === 100
+        },
+        {
+            id: 'puzzle_solver',
+            name: 'Puzzle Solver',
+            description: 'Complete sliding puzzle in under 50 moves',
+            icon: '🧩',
+            condition: (scores) => scores.sliding_puzzle && Math.min(...scores.sliding_puzzle) < 50
+        },
+        {
+            id: 'memory_champion',
+            name: 'Memory Champion',
+            description: 'Score 90%+ on Memory Match',
+            icon: '🧠',
+            condition: (scores) => scores.memory_match && Math.max(...scores.memory_match) >= 90
+        },
+        {
+            id: 'nature_expert',
+            name: 'Nature Expert',
+            description: 'Score 80%+ on all quiz games',
+            icon: '🌟',
+            condition: (scores) => {
+                const quizGames = ['nature_quiz', 'nature_trivia', 'grass_id_challenge', 'animal_sounds'];
+                return quizGames.every(game => 
+                    scores[game] && Math.max(...scores[game]) >= 80
+                );
+            }
+        },
+        {
+            id: 'dedicated_player',
+            name: 'Dedicated Player',
+            description: 'Play 25 games total',
+            icon: '🎯',
+            condition: (scores) => {
+                return Object.values(scores).reduce((total, gameScores) => 
+                    total + gameScores.length, 0) >= 25;
+            }
+        }
+    ];
+    
+    function loadScores() {
+        const scores = {};
+        
+        // Load scores from localStorage
+        Object.keys(gameDefinitions).forEach(gameId => {
+            const gameScores = JSON.parse(localStorage.getItem(`${gameId}_scores`) || '[]');
+            if (gameScores.length > 0) {
+                scores[gameId] = gameScores;
+            }
+        });
+        
+        return scores;
+    }
+    
+    function displayScores() {
+        const scores = loadScores();
+        
+        if (Object.keys(scores).length === 0) {
+            noScores.style.display = 'block';
+            gameScores.style.display = 'none';
+            return;
+        }
+        
+        noScores.style.display = 'none';
+        gameScores.style.display = 'block';
+        gameScores.innerHTML = '';
+        
+        Object.entries(scores).forEach(([gameId, gameScores]) => {
+            const gameDef = gameDefinitions[gameId];
+            if (!gameDef) return;
+            
+            const bestScore = getBestScore(gameScores, gameDef.scoreType);
+            const averageScore = getAverageScore(gameScores);
+            const timesPlayed = gameScores.length;
+            
+            const scoreItem = document.createElement('div');
+            scoreItem.className = 'game-score-item';
+            scoreItem.innerHTML = `
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h6 class="mb-1">
+                            <span class="me-2">${gameDef.icon}</span>
+                            ${gameDef.name}
+                        </h6>
+                        <small class="text-muted">Played ${timesPlayed} time${timesPlayed !== 1 ? 's' : ''}</small>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <div class="score-badge badge bg-nature-green">
+                            Best: ${formatScore(bestScore, gameDef.scoreType)}
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <div class="score-badge badge bg-nature-light-green">
+                            Avg: ${formatScore(averageScore, gameDef.scoreType)}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            gameScores.appendChild(scoreItem);
+        });
+        
+        updateOverallStats(scores);
+        updateAchievements(scores);
+    }
+    
+    function getBestScore(scores, scoreType) {
+        switch (scoreType) {
+            case 'percentage':
+                return Math.max(...scores);
+            case 'moves':
+            case 'time':
+                return Math.min(...scores);
+            default:
+                return Math.max(...scores);
+        }
+    }
+    
+    function getAverageScore(scores) {
+        return Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+    }
+    
+    function formatScore(score, scoreType) {
+        switch (scoreType) {
+            case 'percentage':
+                return score + '%';
+            case 'moves':
+                return score + ' moves';
+            case 'time':
+                return score + 's';
+            case 'rolls':
+                return score + ' rolls';
+            case 'cards':
+                return score + ' cards';
+            default:
+                return score;
+        }
+    }
+    
+    function updateOverallStats(scores) {
+        const totalGames = Object.values(scores).reduce((total, gameScores) => 
+            total + gameScores.length, 0);
+        
+        const allScores = Object.values(scores).flat();
+        const averageScore = allScores.length > 0 ? 
+            Math.round(allScores.reduce((a, b) => a + b, 0) / allScores.length) : 0;
+        
+        let bestGame = '-';
+        let bestScore = 0;
+        Object.entries(scores).forEach(([gameId, gameScores]) => {
+            const gameDef = gameDefinitions[gameId];
+            const best = getBestScore(gameScores, gameDef.scoreType);
+            if (gameDef.scoreType === 'percentage' && best > bestScore) {
+                bestScore = best;
+                bestGame = gameDef.name;
+            }
+        });
+        
+        const earnedAchievements = achievements.filter(achievement => 
+            achievement.condition(scores)).length;
+        
+        document.getElementById('totalGamesPlayed').textContent = totalGames;
+        document.getElementById('averageScore').textContent = averageScore + '%';
+        document.getElementById('bestGame').textContent = bestGame;
+        document.getElementById('achievementsEarned').textContent = earnedAchievements;
+    }
+    
+    function updateAchievements(scores) {
+        achievementsList.innerHTML = '';
+        
+        achievements.forEach(achievement => {
+            const earned = achievement.condition(scores);
+            
+            const achievementItem = document.createElement('div');
+            achievementItem.className = `achievement-item ${earned ? 'earned' : 'locked'}`;
+            achievementItem.innerHTML = `
+                <div class="achievement-icon">${earned ? achievement.icon : '🔒'}</div>
+                <div>
+                    <div class="fw-bold">${achievement.name}</div>
+                    <small class="text-muted">${achievement.description}</small>
+                </div>
+            `;
+            
+            achievementsList.appendChild(achievementItem);
+        });
+    }
+    
+    function clearAllScores() {
+        if (confirm('Are you sure you want to clear all scores? This action cannot be undone.')) {
+            Object.keys(gameDefinitions).forEach(gameId => {
+                localStorage.removeItem(`${gameId}_scores`);
+            });
+            displayScores();
+            NatureUtils.showNotification('All scores cleared successfully!', 'success');
+        }
+    }
+    
+    function exportScores() {
+        const scores = loadScores();
+        const dataStr = JSON.stringify(scores, null, 2);
+        const dataBlob = new Blob([dataStr], {type: 'application/json'});
+        
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(dataBlob);
+        link.download = 'nature-zimbabwe-scores.json';
+        link.click();
+        
+        NatureUtils.showNotification('Scores exported successfully!', 'success');
+    }
+    
+    // Event listeners
+    clearScoresBtn.addEventListener('click', clearAllScores);
+    exportScoresBtn.addEventListener('click', exportScores);
+    
+    // Initialize
+    displayScores();
+});
+</script>
+{% endblock %}

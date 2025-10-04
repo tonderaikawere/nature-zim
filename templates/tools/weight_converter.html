@@ -1,0 +1,321 @@
+{% extends "base.html" %}
+
+{% block title %}Weight Converter - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('tools_home') }}">Tools</a></li>
+            <li class="breadcrumb-item active">Weight Converter</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-4">
+                <h1 class="text-nature-green mb-3">⚖️ Weight Converter</h1>
+                <p class="lead">Convert between different units of weight and mass</p>
+            </div>
+
+            <div class="nature-card">
+                <div class="card-body">
+                    <!-- Converter Interface -->
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="mb-3">
+                                <label for="fromValue" class="form-label">From:</label>
+                                <div class="input-group">
+                                    <input type="number" id="fromValue" class="form-control" placeholder="Enter value" step="any">
+                                    <select id="fromUnit" class="form-select">
+                                        <option value="mg">Milligrams (mg)</option>
+                                        <option value="g">Grams (g)</option>
+                                        <option value="kg" selected>Kilograms (kg)</option>
+                                        <option value="t">Tonnes (t)</option>
+                                        <option value="oz">Ounces (oz)</option>
+                                        <option value="lb">Pounds (lb)</option>
+                                        <option value="st">Stones (st)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 text-center d-flex align-items-center justify-content-center">
+                            <button id="swapBtn" class="btn btn-nature-outline btn-sm">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="mb-3">
+                                <label for="toValue" class="form-label">To:</label>
+                                <div class="input-group">
+                                    <input type="number" id="toValue" class="form-control" placeholder="Result" readonly>
+                                    <select id="toUnit" class="form-select">
+                                        <option value="mg">Milligrams (mg)</option>
+                                        <option value="g">Grams (g)</option>
+                                        <option value="kg">Kilograms (kg)</option>
+                                        <option value="t">Tonnes (t)</option>
+                                        <option value="oz">Ounces (oz)</option>
+                                        <option value="lb" selected>Pounds (lb)</option>
+                                        <option value="st">Stones (st)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Conversions -->
+                    <div class="text-center mb-4">
+                        <h6 class="text-nature-brown mb-3">Quick Conversions:</h6>
+                        <div class="btn-group flex-wrap" role="group">
+                            <button class="btn btn-outline-secondary btn-sm quick-convert" data-value="1" data-from="kg" data-to="lb">1kg → lb</button>
+                            <button class="btn btn-outline-secondary btn-sm quick-convert" data-value="1" data-from="lb" data-to="kg">1lb → kg</button>
+                            <button class="btn btn-outline-secondary btn-sm quick-convert" data-value="1000" data-from="g" data-to="oz">1000g → oz</button>
+                            <button class="btn btn-outline-secondary btn-sm quick-convert" data-value="1" data-from="t" data-to="kg">1t → kg</button>
+                        </div>
+                    </div>
+
+                    <!-- Conversion Result Display -->
+                    <div id="resultDisplay" class="alert alert-info text-center" style="display: none;">
+                        <h5 id="conversionResult" class="mb-2"></h5>
+                        <div id="conversionFormula" class="small text-muted"></div>
+                    </div>
+
+                    <!-- Clear Button -->
+                    <div class="text-center">
+                        <button id="clearBtn" class="btn btn-nature-outline">
+                            <i class="fas fa-eraser me-2"></i>Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conversion Reference -->
+            <div class="nature-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">⚖️ Conversion Reference</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-nature-brown">Metric System</h6>
+                            <ul class="small">
+                                <li>1 tonne = 1,000 kilograms</li>
+                                <li>1 kilogram = 1,000 grams</li>
+                                <li>1 gram = 1,000 milligrams</li>
+                                <li>1 milligram = 0.001 grams</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-nature-brown">Imperial System</h6>
+                            <ul class="small">
+                                <li>1 stone = 14 pounds</li>
+                                <li>1 pound = 16 ounces</li>
+                                <li>1 pound = 453.592 grams</li>
+                                <li>1 ounce = 28.35 grams</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wildlife Weight Examples -->
+            <div class="nature-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">🦁 Wildlife Weight Examples</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-nature-brown">Large Animals</h6>
+                            <ul class="small">
+                                <li>African elephant: 4,000-7,000 kg</li>
+                                <li>White rhino: 1,800-2,700 kg</li>
+                                <li>Hippo: 1,500-4,000 kg</li>
+                                <li>Giraffe: 800-1,200 kg</li>
+                                <li>Buffalo: 500-900 kg</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-nature-brown">Medium & Small Animals</h6>
+                            <ul class="small">
+                                <li>Lion: 150-250 kg</li>
+                                <li>Leopard: 30-90 kg</li>
+                                <li>Zebra: 200-450 kg</li>
+                                <li>Warthog: 50-150 kg</li>
+                                <li>Baboon: 15-40 kg</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="text-center mt-4">
+                <a href="{{ url_for('tools_home') }}" class="btn btn-nature-outline">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Tools
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const fromValue = document.getElementById('fromValue');
+    const toValue = document.getElementById('toValue');
+    const fromUnit = document.getElementById('fromUnit');
+    const toUnit = document.getElementById('toUnit');
+    const swapBtn = document.getElementById('swapBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const resultDisplay = document.getElementById('resultDisplay');
+    const conversionResult = document.getElementById('conversionResult');
+    const conversionFormula = document.getElementById('conversionFormula');
+    const quickConvertBtns = document.querySelectorAll('.quick-convert');
+    
+    // Conversion factors to grams
+    const conversionFactors = {
+        'mg': 0.001,
+        'g': 1,
+        'kg': 1000,
+        't': 1000000,
+        'oz': 28.3495,
+        'lb': 453.592,
+        'st': 6350.29
+    };
+    
+    const unitNames = {
+        'mg': 'milligrams',
+        'g': 'grams',
+        'kg': 'kilograms',
+        't': 'tonnes',
+        'oz': 'ounces',
+        'lb': 'pounds',
+        'st': 'stones'
+    };
+    
+    function convert() {
+        const value = parseFloat(fromValue.value);
+        
+        if (isNaN(value) || value === '') {
+            toValue.value = '';
+            resultDisplay.style.display = 'none';
+            return;
+        }
+        
+        const fromFactor = conversionFactors[fromUnit.value];
+        const toFactor = conversionFactors[toUnit.value];
+        
+        // Convert to grams first, then to target unit
+        const grams = value * fromFactor;
+        const result = grams / toFactor;
+        
+        // Format result appropriately
+        let formattedResult;
+        if (result < 0.001) {
+            formattedResult = result.toExponential(3);
+        } else if (result < 1) {
+            formattedResult = result.toFixed(6).replace(/\.?0+$/, '');
+        } else if (result < 1000) {
+            formattedResult = result.toFixed(3).replace(/\.?0+$/, '');
+        } else {
+            formattedResult = result.toLocaleString(undefined, {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 3
+            });
+        }
+        
+        toValue.value = formattedResult;
+        
+        // Show detailed result
+        showResult(value, fromUnit.value, formattedResult, toUnit.value);
+    }
+    
+    function showResult(fromVal, fromU, toVal, toU) {
+        const fromUnitName = unitNames[fromU];
+        const toUnitName = unitNames[toU];
+        
+        conversionResult.textContent = `${fromVal} ${fromUnitName} = ${toVal} ${toUnitName}`;
+        
+        // Show conversion factor
+        const factor = conversionFactors[toU] / conversionFactors[fromU];
+        if (factor >= 1) {
+            conversionFormula.textContent = `1 ${fromUnitName} = ${factor.toFixed(6).replace(/\.?0+$/, '')} ${toUnitName}`;
+        } else {
+            conversionFormula.textContent = `1 ${toUnitName} = ${(1/factor).toFixed(6).replace(/\.?0+$/, '')} ${fromUnitName}`;
+        }
+        
+        resultDisplay.style.display = 'block';
+    }
+    
+    function swapUnits() {
+        // Swap the unit selections
+        const tempUnit = fromUnit.value;
+        fromUnit.value = toUnit.value;
+        toUnit.value = tempUnit;
+        
+        // Swap the values
+        const tempValue = fromValue.value;
+        fromValue.value = toValue.value;
+        toValue.value = tempValue;
+        
+        // Recalculate if there's a value
+        if (fromValue.value) {
+            convert();
+        }
+    }
+    
+    function clearAll() {
+        fromValue.value = '';
+        toValue.value = '';
+        resultDisplay.style.display = 'none';
+        fromValue.focus();
+    }
+    
+    function quickConvert(value, from, to) {
+        fromValue.value = value;
+        fromUnit.value = from;
+        toUnit.value = to;
+        convert();
+    }
+    
+    // Event listeners
+    fromValue.addEventListener('input', convert);
+    fromUnit.addEventListener('change', convert);
+    toUnit.addEventListener('change', convert);
+    swapBtn.addEventListener('click', swapUnits);
+    clearBtn.addEventListener('click', clearAll);
+    
+    // Quick conversion buttons
+    quickConvertBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const value = btn.dataset.value;
+            const from = btn.dataset.from;
+            const to = btn.dataset.to;
+            quickConvert(value, from, to);
+        });
+    });
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey || e.metaKey) {
+            switch(e.key) {
+                case 'Enter':
+                    e.preventDefault();
+                    convert();
+                    break;
+                case 'Backspace':
+                    e.preventDefault();
+                    clearAll();
+                    break;
+            }
+        }
+    });
+    
+    // Focus on input when page loads
+    fromValue.focus();
+});
+</script>
+{% endblock %}

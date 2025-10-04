@@ -1,0 +1,417 @@
+{% extends "base.html" %}
+
+{% block title %}Memory Match - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('games_home') }}">Games</a></li>
+            <li class="breadcrumb-item active">Memory Match</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-5">
+                <h1 class="text-nature-green mb-4">🧠 Memory Match</h1>
+                <p class="lead">Match pairs of Zimbabwe's animals and plants to test your memory!</p>
+            </div>
+
+            <div class="nature-card">
+                <div class="card-body">
+                    <!-- Game Controls -->
+                    <div class="text-center mb-4">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <label for="difficulty" class="form-label">Difficulty Level:</label>
+                                <select id="difficulty" class="form-select mb-3">
+                                    <option value="easy">Easy (3×2 grid)</option>
+                                    <option value="medium" selected>Medium (4×3 grid)</option>
+                                    <option value="hard">Hard (4×4 grid)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button id="startBtn" class="btn btn-nature btn-lg">
+                            <i class="fas fa-play me-2"></i>Start Game
+                        </button>
+                    </div>
+
+                    <!-- Game Stats -->
+                    <div class="row text-center mb-4" id="gameStats" style="display: none;">
+                        <div class="col-3">
+                            <div class="h5 text-nature-green" id="matchCount">0</div>
+                            <small class="text-muted">Matches</small>
+                        </div>
+                        <div class="col-3">
+                            <div class="h5 text-nature-green" id="attemptCount">0</div>
+                            <small class="text-muted">Attempts</small>
+                        </div>
+                        <div class="col-3">
+                            <div class="h5 text-nature-green" id="timeCount">00:00</div>
+                            <small class="text-muted">Time</small>
+                        </div>
+                        <div class="col-3">
+                            <div class="h5 text-nature-green" id="accuracy">100%</div>
+                            <small class="text-muted">Accuracy</small>
+                        </div>
+                    </div>
+
+                    <!-- Memory Grid -->
+                    <div class="memory-container">
+                        <div id="memoryGrid" class="memory-grid mx-auto">
+                            <!-- Memory cards will be generated here -->
+                        </div>
+                    </div>
+
+                    <!-- Success Message -->
+                    <div id="successMessage" class="text-center mt-4" style="display: none;">
+                        <div class="alert alert-success">
+                            <h4 class="text-success mb-2">🎉 Excellent Memory!</h4>
+                            <p class="mb-2">You completed the game with <span id="finalAccuracy">0</span>% accuracy in <span id="finalTime">0</span> seconds!</p>
+                            <button id="playAgainBtn" class="btn btn-success">Play Again</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Instructions -->
+            <div class="nature-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">🎯 How to Play</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-mouse-pointer text-nature-green me-2"></i>Click cards to flip them over</li>
+                                <li><i class="fas fa-eye text-nature-green me-2"></i>Remember the locations of matching pairs</li>
+                                <li><i class="fas fa-check-double text-nature-green me-2"></i>Match all pairs to win the game</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-clock text-nature-gold me-2"></i>Try to complete the game as quickly as possible</li>
+                                <li><i class="fas fa-target text-nature-green me-2"></i>Aim for high accuracy with fewer attempts</li>
+                                <li><i class="fas fa-trophy text-nature-green me-2"></i>Challenge yourself with harder difficulty levels</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="text-center mt-4">
+                <a href="{{ url_for('games_home') }}" class="btn btn-nature-outline">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Games
+                </a>
+                <a href="{{ url_for('word_search') }}" class="btn btn-nature ms-3">
+                    Word Search <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.memory-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.memory-grid {
+    display: grid;
+    gap: 10px;
+    padding: 20px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--nature-beige), #f8f9fa);
+}
+
+.memory-grid.easy {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    max-width: 300px;
+}
+
+.memory-grid.medium {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    max-width: 400px;
+}
+
+.memory-grid.hard {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    max-width: 400px;
+}
+
+.memory-card {
+    width: 80px;
+    height: 80px;
+    background: var(--nature-green);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    transition: all 0.3s ease;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.memory-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.memory-card.flipped {
+    background: white;
+    color: var(--nature-green);
+    border: 2px solid var(--nature-green);
+}
+
+.memory-card.matched {
+    background: var(--nature-light-green);
+    color: white;
+    cursor: default;
+    transform: scale(0.95);
+}
+
+.memory-card.matched:hover {
+    transform: scale(0.95);
+}
+
+.card-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.card-front {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.memory-card.flipped .card-back {
+    display: none;
+}
+
+.memory-card.flipped .card-front {
+    display: flex;
+}
+
+@media (max-width: 576px) {
+    .memory-card {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .memory-grid {
+        gap: 8px;
+        padding: 15px;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const memoryGrid = document.getElementById('memoryGrid');
+    const difficulty = document.getElementById('difficulty');
+    const startBtn = document.getElementById('startBtn');
+    const gameStats = document.getElementById('gameStats');
+    const matchCount = document.getElementById('matchCount');
+    const attemptCount = document.getElementById('attemptCount');
+    const timeCount = document.getElementById('timeCount');
+    const accuracy = document.getElementById('accuracy');
+    const successMessage = document.getElementById('successMessage');
+    const playAgainBtn = document.getElementById('playAgainBtn');
+    
+    let gameCards = [];
+    let flippedCards = [];
+    let matchedPairs = 0;
+    let attempts = 0;
+    let matches = 0;
+    let startTime = null;
+    let gameTimer = null;
+    let isGameActive = false;
+    
+    // Nature symbols for the cards
+    const symbols = {
+        easy: ['🌳', '🦁', '🐘'],
+        medium: ['🌳', '🦁', '🐘', '🦅', '🌿', '🦓'],
+        hard: ['🌳', '🦁', '🐘', '🦅', '🌿', '🦓', '🦏', '🐆']
+    };
+    
+    function initGame() {
+        const level = difficulty.value;
+        const cardSymbols = symbols[level];
+        
+        // Create pairs
+        gameCards = [...cardSymbols, ...cardSymbols];
+        
+        // Shuffle cards
+        for (let i = gameCards.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [gameCards[i], gameCards[j]] = [gameCards[j], gameCards[i]];
+        }
+        
+        // Reset game state
+        flippedCards = [];
+        matchedPairs = 0;
+        attempts = 0;
+        matches = 0;
+        startTime = Date.now();
+        isGameActive = true;
+        
+        // Update grid class
+        memoryGrid.className = `memory-grid ${level}`;
+        
+        // Create cards
+        renderCards();
+        
+        // Show stats and start timer
+        gameStats.style.display = 'flex';
+        startBtn.style.display = 'none';
+        successMessage.style.display = 'none';
+        
+        updateStats();
+        startTimer();
+    }
+    
+    function renderCards() {
+        memoryGrid.innerHTML = '';
+        
+        gameCards.forEach((symbol, index) => {
+            const card = document.createElement('div');
+            card.className = 'memory-card';
+            card.dataset.index = index;
+            card.dataset.symbol = symbol;
+            
+            card.innerHTML = `
+                <div class="card-back">❓</div>
+                <div class="card-front">${symbol}</div>
+            `;
+            
+            card.addEventListener('click', () => flipCard(card, index));
+            memoryGrid.appendChild(card);
+        });
+    }
+    
+    function flipCard(card, index) {
+        if (!isGameActive || card.classList.contains('flipped') || card.classList.contains('matched') || flippedCards.length >= 2) {
+            return;
+        }
+        
+        card.classList.add('flipped');
+        flippedCards.push({ card, index, symbol: card.dataset.symbol });
+        
+        if (flippedCards.length === 2) {
+            attempts++;
+            updateStats();
+            
+            setTimeout(() => {
+                checkMatch();
+            }, 1000);
+        }
+    }
+    
+    function checkMatch() {
+        const [card1, card2] = flippedCards;
+        
+        if (card1.symbol === card2.symbol) {
+            // Match found
+            card1.card.classList.add('matched');
+            card2.card.classList.add('matched');
+            matchedPairs++;
+            matches++;
+            
+            if (matchedPairs === gameCards.length / 2) {
+                endGame();
+            }
+        } else {
+            // No match
+            card1.card.classList.remove('flipped');
+            card2.card.classList.remove('flipped');
+        }
+        
+        flippedCards = [];
+        updateStats();
+    }
+    
+    function updateStats() {
+        matchCount.textContent = matches;
+        attemptCount.textContent = attempts;
+        
+        const accuracyPercent = attempts === 0 ? 100 : Math.round((matches / attempts) * 100);
+        accuracy.textContent = `${accuracyPercent}%`;
+    }
+    
+    function startTimer() {
+        gameTimer = setInterval(() => {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60).toString().padStart(2, '0');
+            const seconds = (elapsed % 60).toString().padStart(2, '0');
+            timeCount.textContent = `${minutes}:${seconds}`;
+        }, 1000);
+    }
+    
+    function endGame() {
+        isGameActive = false;
+        if (gameTimer) {
+            clearInterval(gameTimer);
+            gameTimer = null;
+        }
+        
+        const totalTime = Math.floor((Date.now() - startTime) / 1000);
+        const finalAccuracyPercent = Math.round((matches / attempts) * 100);
+        
+        // Show success message
+        document.getElementById('finalAccuracy').textContent = finalAccuracyPercent;
+        document.getElementById('finalTime').textContent = totalTime;
+        successMessage.style.display = 'block';
+        
+        // Save score
+        GameUtils.saveScore('memory_match', finalAccuracyPercent);
+    }
+    
+    function resetGame() {
+        if (gameTimer) {
+            clearInterval(gameTimer);
+            gameTimer = null;
+        }
+        
+        isGameActive = false;
+        gameStats.style.display = 'none';
+        startBtn.style.display = 'inline-block';
+        successMessage.style.display = 'none';
+        memoryGrid.innerHTML = '';
+        
+        matchCount.textContent = '0';
+        attemptCount.textContent = '0';
+        timeCount.textContent = '00:00';
+        accuracy.textContent = '100%';
+    }
+    
+    // Event listeners
+    startBtn.addEventListener('click', initGame);
+    playAgainBtn.addEventListener('click', () => {
+        resetGame();
+        initGame();
+    });
+    
+    difficulty.addEventListener('change', resetGame);
+});
+</script>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Star Grass - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('grasses') }}">Grasses</a></li>
+            <li class="breadcrumb-item active">Star Grass</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Star Grass</h1>
+    <p class="lead"><em>Cynodon plectostachyus</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>Star grass gets its name from its distinctive star-shaped seed heads. This creeping perennial grass is excellent for pastures and is widely used in Zimbabwe's agricultural systems due to its high nutritional value and palatability.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Features & Benefits</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Growth habit:</strong> Creeping stoloniferous perennial</li>
+                        <li><strong>Seed heads:</strong> Distinctive star-shaped arrangement</li>
+                        <li><strong>Palatability:</strong> Excellent for livestock</li>
+                        <li><strong>Drought tolerance:</strong> Good resistance to dry conditions</li>
+                        <li><strong>Soil binding:</strong> Helps prevent erosion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Cynodon plectostachyus</p>
+                    <p><strong>Family:</strong> Poaceae</p>
+                    <p><strong>Growth form:</strong> Creeping perennial</p>
+                    <p><strong>Best use:</strong> Pasture grass</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('grasses') }}" class="btn btn-nature-outline">← Back to Grasses</a>
+    </div>
+</div>
+{% endblock %}

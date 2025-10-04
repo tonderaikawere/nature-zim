@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+
+{% block title %}Tools - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <h1 class="text-nature-green mb-4">Useful Tools</h1>
+        <p class="lead">Handy calculators, converters, and utilities for your daily needs!</p>
+    </div>
+
+    <!-- Featured Tools -->
+    <div class="row mb-5">
+        <div class="col-lg-4 mb-4">
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h4 class="text-nature-green">Calculator</h4>
+                <p>Perform basic and advanced mathematical calculations with our easy-to-use calculator.</p>
+                <a href="{{ url_for('calculator') }}" class="btn btn-nature">Use Calculator</a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-thermometer-half"></i>
+                </div>
+                <h4 class="text-nature-green">Temperature Converter</h4>
+                <p>Convert between Celsius, Fahrenheit, and Kelvin temperature scales instantly.</p>
+                <a href="{{ url_for('temperature_converter') }}" class="btn btn-nature">Convert Temperature</a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-birthday-cake"></i>
+                </div>
+                <h4 class="text-nature-green">Age Calculator</h4>
+                <p>Calculate your exact age in years, months, days, and even hours and minutes.</p>
+                <a href="{{ url_for('age_calculator') }}" class="btn btn-nature">Calculate Age</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- All Tools Grid -->
+    <h2 class="text-center section-title mb-4">All Tools</h2>
+    <div class="row">
+        <!-- Calculators -->
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="tool-card h-100">
+                <div class="tool-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h5>Calculator</h5>
+                <p class="small">Basic and scientific calculations.</p>
+                <a href="{{ url_for('calculator') }}" class="btn btn-nature-outline btn-sm">Use</a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="tool-card h-100">
+                <div class="tool-icon">
+                    <i class="fas fa-weight"></i>
+                </div>
+                <h5>BMI Calculator</h5>
+                <p class="small">Calculate your Body Mass Index.</p>
+                <a href="{{ url_for('bmi_calculator') }}" class="btn btn-nature-outline btn-sm">Calculate</a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="tool-card h-100">
+                <div class="tool-icon">
+                    <i class="fas fa-birthday-cake"></i>
+                </div>
+                <h5>Age Calculator</h5>
+                <p class="small">Calculate exact age from birth date.</p>
+                <a href="{{ url_for('age_calculator') }}" class="btn btn-nature-outline btn-sm">Calculate</a>
+            </div>
+        </div>
+
+        <!-- Converters -->
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="tool-card h-100">
+                <div class="tool-icon">
+                    <i class="fas fa-thermometer-half"></i>
+                </div>
+                <h5>Temperature</h5>
+                <p class="small">Convert °C, °F, and Kelvin.</p>
+                <a href="{{ url_for('temperature_converter') }}" class="btn btn-nature-outline btn-sm">Convert</a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="tool-card h-100">
+                <div class="tool-icon">
+                    <i class="fas fa-ruler"></i>
+                </div>
+                <h5>Length</h5>
+                <p class="small">Convert meters, feet, inches, etc.</p>
+                <a href="{{ url_for('length_converter') }}" class="btn btn-nature-outline btn-sm">Convert</a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="tool-card h-100">
+                <div class="tool-icon">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h5>Weight</h5>
+                <p class="small">Convert kg, lbs, grams, etc.</p>
+                <a href="{{ url_for('weight_converter') }}" class="btn btn-nature-outline btn-sm">Convert</a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="tool-card h-100">
+                <div class="tool-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <h5>Currency</h5>
+                <p class="small">Convert between currencies.</p>
+                <a href="{{ url_for('currency_converter') }}" class="btn btn-nature-outline btn-sm">Convert</a>
+            </div>
+        </div>
+
+        <!-- Utilities -->
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="tool-card h-100">
+                <div class="tool-icon">
+                    <i class="fas fa-calendar"></i>
+                </div>
+                <h5>Calendar</h5>
+                <p class="small">View monthly calendar.</p>
+                <a href="{{ url_for('calendar_viewer') }}" class="btn btn-nature-outline btn-sm">View</a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="tool-card h-100">
+                <div class="tool-icon">
+                    <i class="fas fa-stopwatch"></i>
+                </div>
+                <h5>Stopwatch</h5>
+                <p class="small">Timer and stopwatch functions.</p>
+                <a href="{{ url_for('stopwatch') }}" class="btn btn-nature-outline btn-sm">Start</a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="tool-card h-100">
+                <div class="tool-icon">
+                    <i class="fas fa-list"></i>
+                </div>
+                <h5>To-Do List</h5>
+                <p class="small">Manage your tasks and reminders.</p>
+                <a href="{{ url_for('todo_list') }}" class="btn btn-nature-outline btn-sm">Organize</a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="tool-card h-100">
+                <div class="tool-icon">
+                    <i class="fas fa-sticky-note"></i>
+                </div>
+                <h5>Notes</h5>
+                <p class="small">Take and save quick notes.</p>
+                <a href="{{ url_for('notes_app') }}" class="btn btn-nature-outline btn-sm">Write</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tool Categories -->
+    <div class="row mt-5">
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-calculator me-2"></i>Calculators</h5>
+                </div>
+                <div class="card-body">
+                    <p class="small">Mathematical tools for calculations, measurements, and health metrics.</p>
+                    <ul class="list-unstyled small">
+                        <li>• Basic Calculator</li>
+                        <li>• Age Calculator</li>
+                        <li>• BMI Calculator</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-exchange-alt me-2"></i>Converters</h5>
+                </div>
+                <div class="card-body">
+                    <p class="small">Convert between different units of measurement and currencies.</p>
+                    <ul class="list-unstyled small">
+                        <li>• Temperature Converter</li>
+                        <li>• Length Converter</li>
+                        <li>• Weight Converter</li>
+                        <li>• Currency Converter</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-tools me-2"></i>Utilities</h5>
+                </div>
+                <div class="card-body">
+                    <p class="small">Helpful tools for productivity and time management.</p>
+                    <ul class="list-unstyled small">
+                        <li>• Calendar Viewer</li>
+                        <li>• Stopwatch & Timer</li>
+                        <li>• To-Do List</li>
+                        <li>• Notes App</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tips -->
+    <div class="bg-nature-beige p-4 rounded mt-5">
+        <h3 class="text-nature-green mb-3">💡 Tool Tips</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-bookmark text-nature-gold me-2"></i>Bookmark frequently used tools</li>
+                    <li><i class="fas fa-mobile-alt text-nature-gold me-2"></i>All tools work on mobile devices</li>
+                    <li><i class="fas fa-save text-nature-gold me-2"></i>Some tools save your data locally</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-keyboard text-nature-gold me-2"></i>Use keyboard shortcuts when available</li>
+                    <li><i class="fas fa-share text-nature-gold me-2"></i>Share results with friends and family</li>
+                    <li><i class="fas fa-question-circle text-nature-gold me-2"></i>Hover over buttons for help tips</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

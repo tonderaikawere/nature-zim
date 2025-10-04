@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Culture & Nature - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active">Culture & Nature</li>
+        </ol>
+    </nav>
+
+    <div class="text-center mb-5">
+        <h1 class="text-nature-green mb-4">Culture & Nature in Zimbabwe</h1>
+        <p class="lead">The deep connections between Zimbabwean culture and the natural world</p>
+    </div>
+
+    <div class="nature-card mb-4">
+        <div class="card-header">
+            <h4>Traditional Ecological Knowledge</h4>
+        </div>
+        <div class="card-body">
+            <p>Zimbabwe's indigenous communities have developed sophisticated understanding of local ecosystems over thousands of years. This traditional knowledge continues to play important roles in conservation and sustainable resource management.</p>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-lg-6">
+            <div class="nature-card h-100">
+                <div class="card-header">
+                    <h5>Sacred Sites & Totems</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Sacred forests:</strong> Protected groves with spiritual significance</li>
+                        <li><strong>Totemic animals:</strong> Clan animals that are protected</li>
+                        <li><strong>Sacred pools:</strong> Water bodies with cultural importance</li>
+                        <li><strong>Ancestral sites:</strong> Places of spiritual connection</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="nature-card h-100">
+                <div class="card-header">
+                    <h5>Traditional Practices</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Seasonal ceremonies:</strong> Rituals linked to natural cycles</li>
+                        <li><strong>Traditional medicine:</strong> Plant-based healing systems</li>
+                        <li><strong>Sustainable harvesting:</strong> Traditional resource management</li>
+                        <li><strong>Weather prediction:</strong> Natural indicators and signs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nature-card mb-4">
+        <div class="card-header">
+            <h4>Cultural Symbols in Nature</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <h6 class="text-nature-brown">National Symbols</h6>
+                    <ul class="small">
+                        <li>Flame Lily (national flower)</li>
+                        <li>African Fish Eagle (national bird)</li>
+                        <li>Baobab Tree (iconic symbol)</li>
+                        <li>Zimbabwe Bird (soapstone carving)</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="text-nature-brown">Totemic Animals</h6>
+                    <ul class="small">
+                        <li>Soko (monkey)</li>
+                        <li>Shava (eland)</li>
+                        <li>Nzou (elephant)</li>
+                        <li>Shumba (lion)</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="text-nature-brown">Sacred Trees</h6>
+                    <ul class="small">
+                        <li>Mukwa (baobab)</li>
+                        <li>Muhacha (cream of tartar tree)</li>
+                        <li>Mubvumira (kirkia)</li>
+                        <li>Mukombe (wild fig)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-nature-beige p-4 rounded">
+        <h4 class="text-nature-green mb-3">Modern Conservation & Culture</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Community-Based Conservation</h6>
+                <ul class="small">
+                    <li>CAMPFIRE program</li>
+                    <li>Traditional leadership involvement</li>
+                    <li>Cultural protocols in conservation</li>
+                    <li>Indigenous knowledge integration</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Cultural Tourism</h6>
+                <ul class="small">
+                    <li>Cultural villages and experiences</li>
+                    <li>Traditional craft markets</li>
+                    <li>Storytelling and folklore</li>
+                    <li>Cultural festivals and celebrations</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

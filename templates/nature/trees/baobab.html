@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+
+{% block title %}Baobab Tree - The Tree of Life in Zimbabwe | Tonde's Nature Zimbabwe{% endblock %}
+
+{% block meta_title %}Baobab Tree - The Tree of Life in Zimbabwe | Tonde's Nature Zimbabwe{% endblock %}
+
+{% block description %}Discover the magnificent Baobab tree, Zimbabwe's iconic Tree of Life! Learn about its unique characteristics, cultural significance, and ecological importance in African landscapes. Educational content by Tonde.{% endblock %}
+
+{% block keywords %}Baobab tree Zimbabwe, Tree of Life Africa, Adansonia digitata, African baobab, Zimbabwe trees, baobab facts, African wildlife, Tonde nature education, Zimbabwe flora, iconic African trees{% endblock %}
+
+{% block og_title %}Baobab Tree - The Tree of Life in Zimbabwe{% endblock %}
+
+{% block og_description %}Discover the magnificent Baobab tree, Zimbabwe's iconic Tree of Life! Learn about its unique characteristics, cultural significance, and ecological importance.{% endblock %}
+
+{% block twitter_title %}Baobab Tree - The Tree of Life in Zimbabwe{% endblock %}
+
+{% block twitter_description %}Discover the magnificent Baobab tree, Zimbabwe's iconic Tree of Life! Learn about its unique characteristics, cultural significance, and ecological importance.{% endblock %}
+
+{% block schema_type %}Article{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('trees') }}">Trees</a></li>
+            <li class="breadcrumb-item active">Baobab</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <h1 class="text-nature-green mb-4">Baobab Tree - The Tree of Life</h1>
+            <p class="lead"><em>Adansonia digitata</em></p>
+
+            <!-- Hero Image Placeholder -->
+            <div class="bg-nature-beige p-5 rounded mb-4 text-center">
+                <svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Baobab Tree Illustration -->
+                    <g fill="#8B4513">
+                        <!-- Massive trunk -->
+                        <ellipse cx="150" cy="140" rx="60" ry="40"/>
+                        <rect x="90" y="100" width="120" height="80" rx="20"/>
+                        <!-- Branches -->
+                        <circle cx="80" cy="80" r="12"/>
+                        <circle cx="150" cy="60" r="15"/>
+                        <circle cx="220" cy="80" r="12"/>
+                        <circle cx="50" cy="100" r="8"/>
+                        <circle cx="250" cy="100" r="8"/>
+                        <circle cx="120" cy="50" r="10"/>
+                        <circle cx="180" cy="50" r="10"/>
+                        <!-- Branch connections -->
+                        <line x1="90" y1="100" x2="80" y2="92" stroke="#8B4513" stroke-width="6"/>
+                        <line x1="150" y1="100" x2="150" y2="75" stroke="#8B4513" stroke-width="8"/>
+                        <line x1="210" y1="100" x2="220" y2="92" stroke="#8B4513" stroke-width="6"/>
+                        <line x1="90" y1="110" x2="50" y2="108" stroke="#8B4513" stroke-width="4"/>
+                        <line x1="210" y1="110" x2="250" y2="108" stroke="#8B4513" stroke-width="4"/>
+                        <line x1="130" y1="100" x2="120" y2="60" stroke="#8B4513" stroke-width="5"/>
+                        <line x1="170" y1="100" x2="180" y2="60" stroke="#8B4513" stroke-width="5"/>
+                    </g>
+                    <!-- Sparse foliage -->
+                    <g fill="#228B22" opacity="0.7">
+                        <circle cx="80" cy="75" r="8"/>
+                        <circle cx="150" cy="55" r="10"/>
+                        <circle cx="220" cy="75" r="8"/>
+                        <circle cx="50" cy="95" r="5"/>
+                        <circle cx="250" cy="95" r="5"/>
+                        <circle cx="120" cy="45" r="6"/>
+                        <circle cx="180" cy="45" r="6"/>
+                    </g>
+                    <!-- Ground -->
+                    <rect x="0" y="180" width="300" height="20" fill="#8B7355"/>
+                </svg>
+                <p class="text-muted mt-3">The mighty Baobab - Zimbabwe's most iconic tree</p>
+            </div>
+
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h3 class="mb-0">Overview</h3>
+                </div>
+                <div class="card-body">
+                    <p>The Baobab tree, known as the "Tree of Life," is one of Africa's most distinctive and revered trees. In Zimbabwe, these ancient giants dot the landscape, particularly in the drier regions, serving as landmarks and sources of life for both humans and animals.</p>
+                    
+                    <p>Legend says that the gods planted the Baobab upside down, with its roots reaching toward the sky. This distinctive appearance, with its massive trunk and sparse, twisted branches, makes it unmistakable in the African landscape.</p>
+                </div>
+            </div>
+
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h3 class="mb-0">Physical Characteristics</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="text-nature-green">Size & Structure</h5>
+                            <ul>
+                                <li><strong>Height:</strong> 15-25 meters</li>
+                                <li><strong>Trunk diameter:</strong> Up to 10 meters</li>
+                                <li><strong>Trunk circumference:</strong> Up to 47 meters</li>
+                                <li><strong>Lifespan:</strong> 1,000-2,000+ years</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="text-nature-green">Distinctive Features</h5>
+                            <ul>
+                                <li>Massive, bottle-shaped trunk</li>
+                                <li>Sparse, twisted branches</li>
+                                <li>Smooth, grey bark</li>
+                                <li>Large, white flowers</li>
+                                <li>Oval-shaped fruit pods</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h3 class="mb-0">Ecological Importance</h3>
+                </div>
+                <div class="card-body">
+                    <h5 class="text-nature-green">Water Storage</h5>
+                    <p>The Baobab's massive trunk can store up to 120,000 liters of water, helping it survive droughts that can last several years. This adaptation makes it crucial for desert and semi-arid ecosystems.</p>
+                    
+                    <h5 class="text-nature-green">Wildlife Habitat</h5>
+                    <p>Baobabs provide:</p>
+                    <ul>
+                        <li>Nesting sites for birds in hollow trunks</li>
+                        <li>Food for elephants, baboons, and other animals</li>
+                        <li>Shelter during hot days</li>
+                        <li>Water source during dry seasons</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h3 class="mb-0">Uses and Benefits</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="text-nature-green">Traditional Uses</h5>
+                            <ul>
+                                <li><strong>Food:</strong> Fruit pulp, seeds, leaves</li>
+                                <li><strong>Medicine:</strong> Bark, leaves, fruit</li>
+                                <li><strong>Fiber:</strong> Bark for rope and cloth</li>
+                                <li><strong>Shelter:</strong> Hollow trunks as homes</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="text-nature-green">Modern Applications</h5>
+                            <ul>
+                                <li>Nutritional supplements</li>
+                                <li>Cosmetic products</li>
+                                <li>Eco-tourism attractions</li>
+                                <li>Carbon sequestration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h3 class="mb-0">Cultural Significance</h3>
+                </div>
+                <div class="card-body">
+                    <p>In Zimbabwean culture, Baobab trees hold deep spiritual significance:</p>
+                    <ul>
+                        <li><strong>Meeting Places:</strong> Traditional courts and community gatherings</li>
+                        <li><strong>Sacred Sites:</strong> Ancestral spirits believed to reside in ancient trees</li>
+                        <li><strong>Navigation:</strong> Landmarks for travelers and traders</li>
+                        <li><strong>Storytelling:</strong> Centers for oral tradition and folklore</li>
+                    </ul>
+                    
+                    <div class="alert alert-nature mt-3">
+                        <strong>Cultural Note:</strong> Many Baobab trees in Zimbabwe have names and are considered part of the community, with some serving as post offices or meeting points for generations.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm">
+                        <tr>
+                            <td><strong>Scientific Name:</strong></td>
+                            <td>Adansonia digitata</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Family:</strong></td>
+                            <td>Malvaceae</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Common Names:</strong></td>
+                            <td>Tree of Life, Upside-down Tree, Monkey Bread Tree</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Native Range:</strong></td>
+                            <td>Sub-Saharan Africa</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Conservation Status:</strong></td>
+                            <td>Least Concern</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Where to Find</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>In Zimbabwe:</strong></p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt text-nature-green me-2"></i>Hwange National Park</li>
+                        <li><i class="fas fa-map-marker-alt text-nature-green me-2"></i>Mana Pools National Park</li>
+                        <li><i class="fas fa-map-marker-alt text-nature-green me-2"></i>Gonarezhou National Park</li>
+                        <li><i class="fas fa-map-marker-alt text-nature-green me-2"></i>Matabeleland regions</li>
+                        <li><i class="fas fa-map-marker-alt text-nature-green me-2"></i>Lowveld areas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Conservation</h5>
+                </div>
+                <div class="card-body">
+                    <p class="small">While not currently threatened, Baobab trees face challenges from:</p>
+                    <ul class="small">
+                        <li>Climate change</li>
+                        <li>Habitat loss</li>
+                        <li>Over-harvesting</li>
+                        <li>Human encroachment</li>
+                    </ul>
+                    <a href="{{ url_for('conservation') }}" class="btn btn-nature-outline btn-sm">Learn About Conservation</a>
+                </div>
+            </div>
+
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5 class="mb-0">Related Pages</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li><a href="{{ url_for('trees') }}" class="text-decoration-none">← Back to Trees</a></li>
+                        <li><a href="{{ url_for('msasa') }}" class="text-decoration-none">Msasa Tree</a></li>
+                        <li><a href="{{ url_for('mopane') }}" class="text-decoration-none">Mopane Tree</a></li>
+                        <li><a href="{{ url_for('national_parks') }}" class="text-decoration-none">National Parks</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Conservation & Sustainability - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active">Conservation</li>
+        </ol>
+    </nav>
+
+    <div class="text-center mb-5">
+        <h1 class="text-nature-green mb-4">Conservation & Sustainability</h1>
+        <p class="lead">Protecting Zimbabwe's natural heritage for future generations</p>
+    </div>
+
+    <div class="nature-card mb-4">
+        <div class="card-header">
+            <h4 class="mb-0"><i class="fas fa-shield-alt me-2"></i>Conservation Priorities</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6 class="text-nature-green">Wildlife Protection</h6>
+                    <ul>
+                        <li>Anti-poaching initiatives</li>
+                        <li>Habitat preservation</li>
+                        <li>Species monitoring programs</li>
+                        <li>Community-based conservation</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-nature-green">Ecosystem Management</h6>
+                    <ul>
+                        <li>Forest conservation</li>
+                        <li>Wetland protection</li>
+                        <li>Grassland restoration</li>
+                        <li>Sustainable land use</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-lg-6">
+            <div class="nature-card h-100">
+                <div class="card-header">
+                    <h5 class="mb-0">Success Stories</h5>
+                </div>
+                <div class="card-body">
+                    <h6 class="text-nature-brown">Elephant Population Recovery</h6>
+                    <p class="small">Zimbabwe's elephant population has grown from 47,000 in 1989 to over 84,000 today through effective conservation measures.</p>
+                    
+                    <h6 class="text-nature-brown">Community Conservation Areas</h6>
+                    <p class="small">Over 100,000 hectares of land are now under community-based natural resource management programs.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="nature-card h-100">
+                <div class="card-header">
+                    <h5 class="mb-0">Get Involved</h5>
+                </div>
+                <div class="card-body">
+                    <h6 class="text-nature-brown">How You Can Help</h6>
+                    <ul class="small">
+                        <li>Support local conservation organizations</li>
+                        <li>Practice sustainable tourism</li>
+                        <li>Reduce, reuse, recycle</li>
+                        <li>Educate others about conservation</li>
+                        <li>Participate in citizen science projects</li>
+                    </ul>
+                    <a href="{{ url_for('contact') }}" class="btn btn-nature btn-sm">Join Our Efforts</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-nature-beige p-4 rounded">
+        <h4 class="text-nature-green mb-3">Conservation Challenges</h4>
+        <div class="row">
+            <div class="col-md-4">
+                <h6 class="text-nature-brown">Climate Change</h6>
+                <p class="small">Changing rainfall patterns and temperatures affect ecosystems and species distribution.</p>
+            </div>
+            <div class="col-md-4">
+                <h6 class="text-nature-brown">Human-Wildlife Conflict</h6>
+                <p class="small">Growing human populations increase pressure on natural habitats and create conflicts.</p>
+            </div>
+            <div class="col-md-4">
+                <h6 class="text-nature-brown">Resource Exploitation</h6>
+                <p class="small">Unsustainable harvesting of natural resources threatens biodiversity.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

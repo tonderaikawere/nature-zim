@@ -1,0 +1,492 @@
+{% extends "base.html" %}
+
+{% block title %}Wildlife Flashcards - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('games_home') }}">Games</a></li>
+            <li class="breadcrumb-item active">Wildlife Flashcards</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-5">
+                <h1 class="text-nature-green mb-4">🦁 Wildlife Flashcards</h1>
+                <p class="lead">Study Zimbabwe's amazing wildlife with interactive flashcards!</p>
+            </div>
+
+            <div class="nature-card">
+                <div class="card-body">
+                    <!-- Controls -->
+                    <div class="text-center mb-4">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <label for="categorySelect" class="form-label">Choose Category:</label>
+                                <select id="categorySelect" class="form-select mb-3">
+                                    <option value="all">All Animals</option>
+                                    <option value="mammals">Mammals</option>
+                                    <option value="birds">Birds</option>
+                                    <option value="reptiles">Reptiles</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button id="startBtn" class="btn btn-nature btn-lg">
+                            <i class="fas fa-play me-2"></i>Start Studying
+                        </button>
+                    </div>
+
+                    <!-- Flashcard Display -->
+                    <div id="flashcardArea" style="display: none;">
+                        <!-- Progress Bar -->
+                        <div class="progress mb-4" style="height: 8px;">
+                            <div id="progressBar" class="progress-bar bg-nature-green" style="width: 0%"></div>
+                        </div>
+
+                        <!-- Flashcard -->
+                        <div class="flashcard-container">
+                            <div id="flashcard" class="flashcard">
+                                <div class="flashcard-front">
+                                    <div class="animal-icon mb-3" id="animalIcon">🦁</div>
+                                    <h3 id="animalName" class="text-nature-green mb-3">African Lion</h3>
+                                    <p class="text-muted">Click to reveal details</p>
+                                </div>
+                                <div class="flashcard-back">
+                                    <h4 id="scientificName" class="text-nature-brown mb-3">Panthera leo</h4>
+                                    <div id="animalDetails" class="text-start">
+                                        <!-- Details populated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Navigation -->
+                        <div class="text-center mt-4">
+                            <button id="prevBtn" class="btn btn-nature-outline me-2">
+                                <i class="fas fa-arrow-left me-2"></i>Previous
+                            </button>
+                            <button id="flipBtn" class="btn btn-nature me-2">
+                                <i class="fas fa-sync-alt me-2"></i>Flip Card
+                            </button>
+                            <button id="nextBtn" class="btn btn-nature-outline">
+                                Next <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+
+                        <!-- Card Counter -->
+                        <div class="text-center mt-3">
+                            <span class="text-muted">Card <span id="currentCard">1</span> of <span id="totalCards">20</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Study Complete -->
+                    <div id="completeArea" class="text-center" style="display: none;">
+                        <div class="alert alert-success">
+                            <h4 class="text-success mb-3">🎉 Study Session Complete!</h4>
+                            <p class="mb-3">You've reviewed all the flashcards in this category.</p>
+                            <button id="restartBtn" class="btn btn-success me-2">Study Again</button>
+                            <button id="newCategoryBtn" class="btn btn-nature-outline">Choose New Category</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Study Tips -->
+            <div class="nature-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">📚 Study Tips</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-lightbulb text-nature-gold me-2"></i>Read the animal name first, try to recall facts</li>
+                                <li><i class="fas fa-sync-alt text-nature-green me-2"></i>Flip the card to check your knowledge</li>
+                                <li><i class="fas fa-repeat text-nature-green me-2"></i>Review cards multiple times for better retention</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-brain text-nature-green me-2"></i>Focus on scientific names and key facts</li>
+                                <li><i class="fas fa-bookmark text-nature-green me-2"></i>Take notes on interesting details</li>
+                                <li><i class="fas fa-users text-nature-green me-2"></i>Study with friends for better learning</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="text-center mt-4">
+                <a href="{{ url_for('games_home') }}" class="btn btn-nature-outline">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Games
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.flashcard-container {
+    perspective: 1000px;
+    height: 400px;
+    margin: 20px 0;
+}
+
+.flashcard {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.flashcard.flipped {
+    transform: rotateY(180deg);
+}
+
+.flashcard-front, .flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border: 3px solid var(--nature-green);
+    border-radius: 15px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #f8f9fa, var(--nature-beige));
+}
+
+.flashcard-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, var(--nature-beige), #f8f9fa);
+}
+
+.animal-icon {
+    font-size: 4rem;
+}
+
+.animal-details {
+    max-width: 100%;
+}
+
+.animal-details ul {
+    text-align: left;
+    margin: 0;
+}
+
+.animal-details li {
+    margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+    .flashcard-container {
+        height: 350px;
+    }
+    
+    .flashcard-front, .flashcard-back {
+        padding: 20px;
+    }
+    
+    .animal-icon {
+        font-size: 3rem;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const categorySelect = document.getElementById('categorySelect');
+    const startBtn = document.getElementById('startBtn');
+    const flashcardArea = document.getElementById('flashcardArea');
+    const completeArea = document.getElementById('completeArea');
+    const flashcard = document.getElementById('flashcard');
+    const flipBtn = document.getElementById('flipBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const newCategoryBtn = document.getElementById('newCategoryBtn');
+    const progressBar = document.getElementById('progressBar');
+    
+    let currentIndex = 0;
+    let currentCards = [];
+    let isFlipped = false;
+    
+    // Wildlife data
+    const wildlifeData = {
+        mammals: [
+            {
+                name: 'African Lion',
+                scientific: 'Panthera leo',
+                icon: '🦁',
+                details: [
+                    'Apex predator of the African savanna',
+                    'Lives in prides of 10-15 individuals',
+                    'Males have distinctive manes',
+                    'Can weigh up to 250 kg',
+                    'Found in Hwange and other national parks'
+                ]
+            },
+            {
+                name: 'African Elephant',
+                scientific: 'Loxodonta africana',
+                icon: '🐘',
+                details: [
+                    'Largest land mammal on Earth',
+                    'Can weigh up to 6,000 kg',
+                    'Highly intelligent and social',
+                    'Zimbabwe has over 80,000 elephants',
+                    'Important ecosystem engineers'
+                ]
+            },
+            {
+                name: 'Plains Zebra',
+                scientific: 'Equus quagga',
+                icon: '🦓',
+                details: [
+                    'Each zebra has unique stripe patterns',
+                    'Live in family groups called harems',
+                    'Migrate seasonally following rains',
+                    'Primary prey for lions and hyenas',
+                    'Excellent eyesight and hearing'
+                ]
+            },
+            {
+                name: 'Spotted Hyena',
+                scientific: 'Crocuta crocuta',
+                icon: '🐺',
+                details: [
+                    'Powerful jaws can crush bones',
+                    'Live in matriarchal societies',
+                    'Famous for "laughing" calls',
+                    'Excellent scavengers and hunters',
+                    'Play important ecological role'
+                ]
+            },
+            {
+                name: 'African Buffalo',
+                scientific: 'Syncerus caffer',
+                icon: '🐃',
+                details: [
+                    'One of the "Big Five" animals',
+                    'Live in large herds of hundreds',
+                    'Both males and females have horns',
+                    'Can be very dangerous when threatened',
+                    'Important grazer in ecosystems'
+                ]
+            }
+        ],
+        birds: [
+            {
+                name: 'African Fish Eagle',
+                scientific: 'Haliaeetus vocifer',
+                icon: '🦅',
+                details: [
+                    'Zimbabwe\'s national bird',
+                    'Distinctive white head and tail',
+                    'Excellent fishers and hunters',
+                    'Loud, distinctive call',
+                    'Symbol of African wilderness'
+                ]
+            },
+            {
+                name: 'Southern Ground Hornbill',
+                scientific: 'Bucorvus leadbeateri',
+                icon: '🐦',
+                details: [
+                    'Largest hornbill species',
+                    'Lives in family groups',
+                    'Walks on ground hunting prey',
+                    'Distinctive red facial skin',
+                    'Important in traditional culture'
+                ]
+            },
+            {
+                name: 'Lilac-breasted Roller',
+                scientific: 'Coracias caudatus',
+                icon: '🌈',
+                details: [
+                    'Botswana\'s national bird',
+                    'Spectacular aerial displays',
+                    'Brilliant blue and lilac colors',
+                    'Perches on prominent branches',
+                    'Migrates seasonally'
+                ]
+            }
+        ],
+        reptiles: [
+            {
+                name: 'Nile Crocodile',
+                scientific: 'Crocodylus niloticus',
+                icon: '🐊',
+                details: [
+                    'Africa\'s largest freshwater predator',
+                    'Can live over 70 years',
+                    'Excellent mothers, guard nests',
+                    'Powerful bite force',
+                    'Found in Zambezi River system'
+                ]
+            },
+            {
+                name: 'African Python',
+                scientific: 'Python sebae',
+                icon: '🐍',
+                details: [
+                    'One of Africa\'s largest snakes',
+                    'Non-venomous constrictor',
+                    'Can grow up to 6 meters long',
+                    'Important in traditional culture',
+                    'Helps control rodent populations'
+                ]
+            },
+            {
+                name: 'Flap-necked Chameleon',
+                scientific: 'Chamaeleo dilepis',
+                icon: '🦎',
+                details: [
+                    'Can change color for communication',
+                    'Eyes move independently',
+                    'Projectile tongue catches prey',
+                    'Specialized feet for gripping',
+                    'Found throughout Zimbabwe'
+                ]
+            }
+        ]
+    };
+    
+    function startStudying() {
+        const category = categorySelect.value;
+        
+        if (category === 'all') {
+            currentCards = [...wildlifeData.mammals, ...wildlifeData.birds, ...wildlifeData.reptiles];
+        } else {
+            currentCards = wildlifeData[category] || [];
+        }
+        
+        // Shuffle cards
+        currentCards = currentCards.sort(() => Math.random() - 0.5);
+        
+        currentIndex = 0;
+        isFlipped = false;
+        
+        document.querySelector('.nature-card .card-body > div:first-child').style.display = 'none';
+        flashcardArea.style.display = 'block';
+        completeArea.style.display = 'none';
+        
+        updateCard();
+        updateProgress();
+    }
+    
+    function updateCard() {
+        if (currentIndex >= currentCards.length) {
+            showComplete();
+            return;
+        }
+        
+        const animal = currentCards[currentIndex];
+        
+        // Update front of card
+        document.getElementById('animalIcon').textContent = animal.icon;
+        document.getElementById('animalName').textContent = animal.name;
+        
+        // Update back of card
+        document.getElementById('scientificName').textContent = animal.scientific;
+        const detailsList = animal.details.map(detail => `<li>${detail}</li>`).join('');
+        document.getElementById('animalDetails').innerHTML = `<ul>${detailsList}</ul>`;
+        
+        // Reset card to front
+        flashcard.classList.remove('flipped');
+        isFlipped = false;
+        
+        // Update counter
+        document.getElementById('currentCard').textContent = currentIndex + 1;
+        document.getElementById('totalCards').textContent = currentCards.length;
+        
+        // Update button states
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === currentCards.length - 1;
+        
+        updateProgress();
+    }
+    
+    function updateProgress() {
+        const progress = ((currentIndex + 1) / currentCards.length) * 100;
+        progressBar.style.width = progress + '%';
+    }
+    
+    function flipCard() {
+        flashcard.classList.toggle('flipped');
+        isFlipped = !isFlipped;
+    }
+    
+    function previousCard() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateCard();
+        }
+    }
+    
+    function nextCard() {
+        if (currentIndex < currentCards.length - 1) {
+            currentIndex++;
+            updateCard();
+        }
+    }
+    
+    function showComplete() {
+        flashcardArea.style.display = 'none';
+        completeArea.style.display = 'block';
+    }
+    
+    function restart() {
+        currentIndex = 0;
+        completeArea.style.display = 'none';
+        flashcardArea.style.display = 'block';
+        updateCard();
+    }
+    
+    function newCategory() {
+        completeArea.style.display = 'none';
+        flashcardArea.style.display = 'none';
+        document.querySelector('.nature-card .card-body > div:first-child').style.display = 'block';
+    }
+    
+    // Event listeners
+    startBtn.addEventListener('click', startStudying);
+    flipBtn.addEventListener('click', flipCard);
+    prevBtn.addEventListener('click', previousCard);
+    nextBtn.addEventListener('click', nextCard);
+    restartBtn.addEventListener('click', restart);
+    newCategoryBtn.addEventListener('click', newCategory);
+    flashcard.addEventListener('click', flipCard);
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (flashcardArea.style.display === 'block') {
+            switch(e.key) {
+                case 'ArrowLeft':
+                    previousCard();
+                    break;
+                case 'ArrowRight':
+                    nextCard();
+                    break;
+                case ' ':
+                case 'Enter':
+                    e.preventDefault();
+                    flipCard();
+                    break;
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,874 @@
+{% extends "base.html" %}
+
+{% block title %}Zimbabwe Animal Sounds Quiz - Learn Wildlife Calls | Tonde's Nature Zimbabwe{% endblock %}
+
+{% block meta_title %}Zimbabwe Animal Sounds Quiz - Learn Wildlife Calls | Tonde's Nature Zimbabwe{% endblock %}
+
+{% block description %}Test your knowledge of Zimbabwe's wildlife with Tonde's interactive animal sounds game! Learn to identify lions, elephants, hippos, and more African animals by their unique calls and sounds.{% endblock %}
+
+{% block keywords %}Zimbabwe animal sounds, African wildlife calls, lion roar, elephant trumpet, hippo grunt, animal identification game, wildlife education Zimbabwe, African animal sounds quiz, Tonde educational games{% endblock %}
+
+{% block og_title %}Zimbabwe Animal Sounds Quiz - Learn Wildlife Calls{% endblock %}
+
+{% block og_description %}Test your knowledge of Zimbabwe's wildlife with Tonde's interactive animal sounds game! Learn to identify lions, elephants, hippos, and more African animals.{% endblock %}
+
+{% block twitter_title %}Zimbabwe Animal Sounds Quiz - Learn Wildlife Calls{% endblock %}
+
+{% block twitter_description %}Test your knowledge of Zimbabwe's wildlife with Tonde's interactive animal sounds game! Learn to identify lions, elephants, hippos, and more African animals.{% endblock %}
+
+{% block schema_type %}Game{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('games_home') }}">Games</a></li>
+            <li class="breadcrumb-item active">Animal Sounds Match</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-5">
+                <h1 class="text-nature-green mb-4">🔊 Animal Sounds Match</h1>
+                <p class="lead">Match the sounds to Zimbabwe's amazing animals!</p>
+            </div>
+
+            <div class="nature-card">
+                <div class="card-body">
+                    <!-- Game Instructions -->
+                    <div id="instructions" class="text-center mb-4">
+                        <p class="lead">Listen to the animal sound and choose the correct animal!</p>
+                        <button id="startGameBtn" class="btn btn-nature btn-lg">
+                            <i class="fas fa-play me-2"></i>Start Game
+                        </button>
+                    </div>
+
+                    <!-- Game Area -->
+                    <div id="gameArea" style="display: none;">
+                        <!-- Sound Player -->
+                        <div class="text-center mb-4">
+                            <div class="sound-player p-4 bg-nature-beige rounded">
+                                <h4 class="text-nature-green mb-3">Listen to this sound:</h4>
+                                <button id="playBtn" class="btn btn-nature btn-lg me-3">
+                                    <i class="fas fa-play me-2"></i>Play Sound
+                                </button>
+                                <button id="replayBtn" class="btn btn-nature-outline">
+                                    <i class="fas fa-redo me-2"></i>Replay
+                                </button>
+                                <div class="mt-3">
+                                    <div id="soundDescription" class="text-muted small"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Animal Options -->
+                        <div id="animalOptions" class="row mb-4">
+                            <!-- Options will be populated by JavaScript -->
+                        </div>
+
+                        <!-- Game Stats -->
+                        <div class="row text-center mb-4">
+                            <div class="col-3">
+                                <div class="h5 text-nature-green" id="currentRound">1</div>
+                                <small class="text-muted">Round</small>
+                            </div>
+                            <div class="col-3">
+                                <div class="h5 text-nature-green" id="correctCount">0</div>
+                                <small class="text-muted">Correct</small>
+                            </div>
+                            <div class="col-3">
+                                <div class="h5 text-nature-green" id="totalRounds">10</div>
+                                <small class="text-muted">Total</small>
+                            </div>
+                            <div class="col-3">
+                                <div class="h5 text-nature-green" id="scorePercent">0%</div>
+                                <small class="text-muted">Score</small>
+                            </div>
+                        </div>
+
+                        <!-- Next Button -->
+                        <div class="text-center">
+                            <button id="nextBtn" class="btn btn-nature" style="display: none;">
+                                Next Round <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Audio Test Button -->
+                        <div class="text-center mt-3">
+                            <button id="testAudioBtn" class="btn btn-outline-secondary btn-sm">
+                                <i class="fas fa-volume-up me-2"></i>Test Audio
+                            </button>
+                            <small class="d-block text-muted mt-1">Click to test if audio is working</small>
+                        </div>
+                    </div>
+
+                    <!-- Results -->
+                    <div id="resultsArea" class="text-center" style="display: none;">
+                        <div class="alert alert-success">
+                            <h4 class="text-success mb-3">🎉 Game Complete!</h4>
+                            <p class="mb-2">You correctly identified <span id="finalCorrect">0</span> out of <span id="finalTotal">10</span> animal sounds!</p>
+                            <p class="mb-3">Final Score: <span id="finalScore">0%</span></p>
+                            <button id="playAgainBtn" class="btn btn-success">Play Again</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How to Play -->
+            <div class="nature-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">🎯 How to Play</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-volume-up text-nature-green me-2"></i>Click "Play Sound" to hear an animal sound</li>
+                                <li><i class="fas fa-mouse-pointer text-nature-green me-2"></i>Choose the animal that makes that sound</li>
+                                <li><i class="fas fa-redo text-nature-green me-2"></i>Use "Replay" if you need to hear it again</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-trophy text-nature-gold me-2"></i>Try to get all 10 sounds correct</li>
+                                <li><i class="fas fa-headphones text-nature-green me-2"></i>Use headphones for the best experience</li>
+                                <li><i class="fas fa-brain text-nature-green me-2"></i>Learn about Zimbabwe's amazing wildlife</li>
+                                <li><i class="fas fa-volume-up text-nature-green me-2"></i>Synthetic animal sounds generated when audio files unavailable</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="text-center mt-4">
+                <a href="{{ url_for('games_home') }}" class="btn btn-nature-outline">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Games
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.animal-option {
+    margin-bottom: 15px;
+}
+
+.animal-card {
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.animal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border-color: var(--nature-green);
+}
+
+.animal-card.correct {
+    border-color: var(--nature-light-green);
+    background-color: rgba(40, 167, 69, 0.1);
+}
+
+.animal-card.incorrect {
+    border-color: #dc3545;
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+.animal-card.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.animal-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.sound-player {
+    border: 2px dashed var(--nature-green);
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const startGameBtn = document.getElementById('startGameBtn');
+    const instructions = document.getElementById('instructions');
+    const gameArea = document.getElementById('gameArea');
+    const resultsArea = document.getElementById('resultsArea');
+    const playBtn = document.getElementById('playBtn');
+    const replayBtn = document.getElementById('replayBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const playAgainBtn = document.getElementById('playAgainBtn');
+    const animalOptions = document.getElementById('animalOptions');
+    const soundDescription = document.getElementById('soundDescription');
+    
+    let currentRound = 0;
+    let correctAnswers = 0;
+    let gameActive = false;
+    let currentSound = null;
+    
+    // Animal sounds data with real audio files
+    const animalSounds = [
+        {
+            animal: 'Lion',
+            sound: 'Roar',
+            audioFile: '/static/sounds/lion_roar.mp3',
+            description: 'A deep, powerful roar that can be heard up to 8 kilometers away',
+            icon: '🦁',
+            options: ['Lion', 'Leopard', 'Hyena', 'Wild Dog']
+        },
+        {
+            animal: 'Elephant',
+            sound: 'Trumpet',
+            audioFile: '/static/sounds/elephant_trumpet.mp3',
+            description: 'A loud trumpeting call made through the trunk',
+            icon: '🐘',
+            options: ['Elephant', 'Rhino', 'Buffalo', 'Hippo']
+        },
+        {
+            animal: 'African Fish Eagle',
+            sound: 'Call',
+            audioFile: '/static/sounds/fish_eagle_call.mp3',
+            description: 'A distinctive high-pitched call, often heard near water',
+            icon: '🦅',
+            options: ['African Fish Eagle', 'Hornbill', 'Secretary Bird', 'Vulture']
+        },
+        {
+            animal: 'Hippo',
+            sound: 'Grunt',
+            audioFile: '/static/sounds/hippo_grunt.mp3',
+            description: 'Deep grunting and snorting sounds, especially at night',
+            icon: '🦛',
+            options: ['Hippo', 'Crocodile', 'Buffalo', 'Warthog']
+        },
+        {
+            animal: 'Hyena',
+            sound: 'Laugh',
+            audioFile: '/static/sounds/hyena_laugh.mp3',
+            description: 'The famous "laughing" call that sounds like human laughter',
+            icon: '🐺',
+            options: ['Hyena', 'Wild Dog', 'Jackal', 'Lion']
+        },
+        {
+            animal: 'Zebra',
+            sound: 'Bark',
+            audioFile: '/static/sounds/zebra_bark.mp3',
+            description: 'A barking sound, similar to a dog but more nasal',
+            icon: '🦓',
+            options: ['Zebra', 'Wildebeest', 'Antelope', 'Buffalo']
+        },
+        {
+            animal: 'Hornbill',
+            sound: 'Call',
+            audioFile: '/static/sounds/hornbill_call.mp3',
+            description: 'A loud, resonant call that echoes through the forest',
+            icon: '🐦',
+            options: ['Hornbill', 'Weaver Bird', 'Kingfisher', 'Bee-eater']
+        },
+        {
+            animal: 'Baboon',
+            sound: 'Bark',
+            audioFile: '/static/sounds/baboon_bark.mp3',
+            description: 'Sharp barking calls, especially when alarmed',
+            icon: '🐒',
+            options: ['Baboon', 'Vervet Monkey', 'Chimpanzee', 'Bush Baby']
+        },
+        {
+            animal: 'Leopard',
+            sound: 'Cough',
+            audioFile: '/static/sounds/leopard_cough.mp3',
+            description: 'A rasping cough-like call, often repeated',
+            icon: '🐆',
+            options: ['Leopard', 'Lion', 'Cheetah', 'Caracal']
+        },
+        {
+            animal: 'Wild Dog',
+            sound: 'Chirp',
+            audioFile: '/static/sounds/wild_dog_chirp.mp3',
+            description: 'High-pitched chirping and twittering sounds',
+            icon: '🐕',
+            options: ['Wild Dog', 'Hyena', 'Jackal', 'Fox']
+        }
+    ];
+    
+    function startGame() {
+        currentRound = 0;
+        correctAnswers = 0;
+        gameActive = true;
+        
+        instructions.style.display = 'none';
+        gameArea.style.display = 'block';
+        resultsArea.style.display = 'none';
+        
+        nextRound();
+    }
+    
+    function nextRound() {
+        if (currentRound >= animalSounds.length) {
+            endGame();
+            return;
+        }
+        
+        currentSound = animalSounds[currentRound];
+        
+        // Update round display
+        document.getElementById('currentRound').textContent = currentRound + 1;
+        updateStats();
+        
+        // Reset buttons
+        playBtn.style.display = 'inline-block';
+        replayBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+        
+        // Clear sound description
+        soundDescription.textContent = '';
+        
+        // Create animal options
+        createAnimalOptions();
+    }
+    
+    function createAnimalOptions() {
+        animalOptions.innerHTML = '';
+        
+        // Shuffle options
+        const shuffledOptions = [...currentSound.options].sort(() => Math.random() - 0.5);
+        
+        shuffledOptions.forEach(animal => {
+            const col = document.createElement('div');
+            col.className = 'col-md-6 animal-option';
+            
+            const animalIcon = getAnimalIcon(animal);
+            
+            col.innerHTML = `
+                <div class="animal-card" data-animal="${animal}">
+                    <div class="animal-icon">${animalIcon}</div>
+                    <h5 class="text-nature-green">${animal}</h5>
+                </div>
+            `;
+            
+            animalOptions.appendChild(col);
+        });
+        
+        // Add click listeners
+        document.querySelectorAll('.animal-card').forEach(card => {
+            card.addEventListener('click', () => selectAnimal(card.dataset.animal));
+        });
+    }
+    
+    function getAnimalIcon(animal) {
+        const iconMap = {
+            'Lion': '🦁', 'Elephant': '🐘', 'African Fish Eagle': '🦅',
+            'Hippo': '🦛', 'Hyena': '🐺', 'Zebra': '🦓',
+            'Hornbill': '🐦', 'Baboon': '🐒', 'Leopard': '🐆',
+            'Wild Dog': '🐕', 'Rhino': '🦏', 'Buffalo': '🐃',
+            'Crocodile': '🐊', 'Cheetah': '🐆', 'Antelope': '🦌'
+        };
+        return iconMap[animal] || '🐾';
+    }
+    
+    function playSound() {
+        if (!currentSound) return;
+        
+        playBtn.innerHTML = '<i class="fas fa-volume-up me-2"></i>Playing...';
+        playBtn.disabled = true;
+        
+        // Skip trying to load audio files and go directly to synthetic sounds
+        console.log('Playing sound for:', currentSound.animal);
+        soundDescription.textContent = `🔊 Generating ${currentSound.animal} sound...`;
+        
+        // Small delay to show the loading message
+        setTimeout(() => {
+            playTextToSpeech();
+        }, 100);
+    }
+    
+    function playTextToSpeech() {
+        // Try synthetic animal sound first
+        if (playSyntheticSound()) {
+            return;
+        }
+        
+        // Fallback to text-to-speech
+        if ('speechSynthesis' in window) {
+            const utterance = new SpeechSynthesisUtterance();
+            utterance.text = `This is the sound of a ${currentSound.animal}. ${currentSound.description}`;
+            utterance.rate = 0.8;
+            utterance.pitch = 1;
+            
+            // Try to find a suitable voice
+            const voices = speechSynthesis.getVoices();
+            const englishVoice = voices.find(voice => voice.lang.startsWith('en'));
+            if (englishVoice) {
+                utterance.voice = englishVoice;
+            }
+            
+            utterance.onstart = () => {
+                soundDescription.textContent = `🔊 Speaking: ${currentSound.animal} information`;
+            };
+            
+            utterance.onend = () => {
+                resetPlayButton();
+            };
+            
+            utterance.onerror = () => {
+                soundDescription.textContent = `🔊 ${currentSound.description} (Audio not available)`;
+                resetPlayButton();
+            };
+            
+            speechSynthesis.speak(utterance);
+        } else {
+            // Final fallback - just show description
+            soundDescription.textContent = `🔊 ${currentSound.description} (Audio not supported in this browser)`;
+            resetPlayButton();
+        }
+    }
+    
+    function playSyntheticSound() {
+        // Create synthetic animal sounds using Web Audio API
+        if (!window.AudioContext && !window.webkitAudioContext) {
+            console.log('Web Audio API not supported');
+            return false;
+        }
+        
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            // Resume audio context if suspended (required by browsers)
+            if (audioContext.state === 'suspended') {
+                audioContext.resume().then(() => {
+                    console.log('Audio context resumed');
+                    generateAnimalSound(audioContext);
+                }).catch(error => {
+                    console.log('Failed to resume audio context:', error);
+                    return false;
+                });
+            } else {
+                generateAnimalSound(audioContext);
+            }
+            
+            return true;
+        } catch (error) {
+            console.log('Audio context creation failed:', error);
+            return false;
+        }
+    }
+    
+    function generateAnimalSound(audioContext) {
+        const animal = currentSound.animal.toLowerCase();
+        
+        soundDescription.textContent = `🔊 Playing synthetic ${currentSound.animal} sound`;
+        console.log('Generating sound for:', animal);
+        
+        try {
+            switch (animal) {
+                case 'lion':
+                    playLionRoar(audioContext);
+                    break;
+                case 'elephant':
+                    playElephantTrumpet(audioContext);
+                    break;
+                case 'african fish eagle':
+                    playEagleCall(audioContext);
+                    break;
+                case 'hippo':
+                    playHippoGrunt(audioContext);
+                    break;
+                case 'hyena':
+                    playHyenaLaugh(audioContext);
+                    break;
+                case 'zebra':
+                    playZebraBark(audioContext);
+                    break;
+                case 'hornbill':
+                    playHornbillCall(audioContext);
+                    break;
+                case 'baboon':
+                    playBaboonBark(audioContext);
+                    break;
+                case 'leopard':
+                    playLeopardCough(audioContext);
+                    break;
+                case 'wild dog':
+                    playWildDogChirp(audioContext);
+                    break;
+                default:
+                    console.log('No sound defined for:', animal);
+                    resetPlayButton();
+                    return;
+            }
+        } catch (error) {
+            console.log('Synthetic sound generation failed:', error);
+            resetPlayButton();
+        }
+    }
+    
+    function playLionRoar(audioContext) {
+        console.log('Playing lion roar...');
+        const duration = 2;
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        // Make it more audible with higher frequency and volume
+        oscillator.frequency.setValueAtTime(120, audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(80, audioContext.currentTime + duration);
+        
+        gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.5, audioContext.currentTime + 0.1); // Increased volume
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration);
+        
+        console.log('Lion roar should be playing for', duration, 'seconds');
+        setTimeout(() => {
+            console.log('Lion roar finished');
+            resetPlayButton();
+        }, duration * 1000);
+    }
+    
+    function playElephantTrumpet(audioContext) {
+        const duration = 1.5;
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+        oscillator.frequency.linearRampToValueAtTime(400, audioContext.currentTime + 0.3);
+        oscillator.frequency.linearRampToValueAtTime(300, audioContext.currentTime + duration);
+        
+        gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + 0.1);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration);
+        
+        setTimeout(() => resetPlayButton(), duration * 1000);
+    }
+    
+    function playEagleCall(audioContext) {
+        const duration = 1;
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+        oscillator.frequency.linearRampToValueAtTime(1200, audioContext.currentTime + 0.2);
+        oscillator.frequency.linearRampToValueAtTime(600, audioContext.currentTime + duration);
+        
+        gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.15, audioContext.currentTime + 0.05);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration);
+        
+        setTimeout(() => resetPlayButton(), duration * 1000);
+    }
+    
+    function playHippoGrunt(audioContext) {
+        const duration = 1.2;
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(120, audioContext.currentTime);
+        oscillator.frequency.setValueAtTime(100, audioContext.currentTime + 0.3);
+        oscillator.frequency.setValueAtTime(130, audioContext.currentTime + 0.6);
+        oscillator.frequency.setValueAtTime(110, audioContext.currentTime + duration);
+        
+        gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.25, audioContext.currentTime + 0.1);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration);
+        
+        setTimeout(() => resetPlayButton(), duration * 1000);
+    }
+    
+    function playHyenaLaugh(audioContext) {
+        const duration = 2;
+        let time = audioContext.currentTime;
+        
+        // Create multiple short bursts for laughing effect
+        for (let i = 0; i < 6; i++) {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(300 + (i * 50), time);
+            oscillator.frequency.exponentialRampToValueAtTime(400 + (i * 30), time + 0.15);
+            
+            gainNode.gain.setValueAtTime(0, time);
+            gainNode.gain.linearRampToValueAtTime(0.1, time + 0.02);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, time + 0.2);
+            
+            oscillator.start(time);
+            oscillator.stop(time + 0.2);
+            
+            time += 0.3;
+        }
+        
+        setTimeout(() => resetPlayButton(), duration * 1000);
+    }
+    
+    function playZebraBark(audioContext) {
+        const duration = 0.8;
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(250, audioContext.currentTime);
+        oscillator.frequency.linearRampToValueAtTime(180, audioContext.currentTime + duration);
+        
+        gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + 0.05);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration);
+        
+        setTimeout(() => resetPlayButton(), duration * 1000);
+    }
+    
+    function playHornbillCall(audioContext) {
+        const duration = 1.5;
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
+        oscillator.frequency.linearRampToValueAtTime(400, audioContext.currentTime + 0.5);
+        oscillator.frequency.linearRampToValueAtTime(500, audioContext.currentTime + duration);
+        
+        gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.15, audioContext.currentTime + 0.1);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration);
+        
+        setTimeout(() => resetPlayButton(), duration * 1000);
+    }
+    
+    function playBaboonBark(audioContext) {
+        const duration = 0.6;
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(300, audioContext.currentTime);
+        oscillator.frequency.linearRampToValueAtTime(200, audioContext.currentTime + duration);
+        
+        gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.18, audioContext.currentTime + 0.03);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration);
+        
+        setTimeout(() => resetPlayButton(), duration * 1000);
+    }
+    
+    function playLeopardCough(audioContext) {
+        const duration = 0.5;
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(150, audioContext.currentTime);
+        oscillator.frequency.linearRampToValueAtTime(100, audioContext.currentTime + duration);
+        
+        gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + 0.02);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration);
+        
+        setTimeout(() => resetPlayButton(), duration * 1000);
+    }
+    
+    function playWildDogChirp(audioContext) {
+        const duration = 1;
+        let time = audioContext.currentTime;
+        
+        // Create chirping pattern
+        for (let i = 0; i < 4; i++) {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(800 + (i * 100), time);
+            oscillator.frequency.exponentialRampToValueAtTime(600 + (i * 80), time + 0.1);
+            
+            gainNode.gain.setValueAtTime(0, time);
+            gainNode.gain.linearRampToValueAtTime(0.08, time + 0.01);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, time + 0.15);
+            
+            oscillator.start(time);
+            oscillator.stop(time + 0.15);
+            
+            time += 0.2;
+        }
+        
+        setTimeout(() => resetPlayButton(), duration * 1000);
+    }
+    
+    function resetPlayButton() {
+        playBtn.innerHTML = '<i class="fas fa-play me-2"></i>Play Sound';
+        playBtn.disabled = false;
+        replayBtn.style.display = 'inline-block';
+    }
+    
+    function selectAnimal(selectedAnimal) {
+        if (!gameActive) return;
+        
+        const isCorrect = selectedAnimal === currentSound.animal;
+        
+        if (isCorrect) {
+            correctAnswers++;
+        }
+        
+        // Show results
+        document.querySelectorAll('.animal-card').forEach(card => {
+            card.classList.add('disabled');
+            
+            if (card.dataset.animal === currentSound.animal) {
+                card.classList.add('correct');
+            } else if (card.dataset.animal === selectedAnimal && !isCorrect) {
+                card.classList.add('incorrect');
+            }
+        });
+        
+        updateStats();
+        
+        // Show next button
+        setTimeout(() => {
+            currentRound++;
+            if (currentRound < animalSounds.length) {
+                nextBtn.style.display = 'inline-block';
+            } else {
+                endGame();
+            }
+        }, 1500);
+    }
+    
+    function updateStats() {
+        document.getElementById('correctCount').textContent = correctAnswers;
+        const percentage = currentRound === 0 ? 0 : Math.round((correctAnswers / currentRound) * 100);
+        document.getElementById('scorePercent').textContent = percentage + '%';
+    }
+    
+    function endGame() {
+        gameActive = false;
+        gameArea.style.display = 'none';
+        
+        const finalPercentage = Math.round((correctAnswers / animalSounds.length) * 100);
+        
+        document.getElementById('finalCorrect').textContent = correctAnswers;
+        document.getElementById('finalTotal').textContent = animalSounds.length;
+        document.getElementById('finalScore').textContent = finalPercentage + '%';
+        
+        resultsArea.style.display = 'block';
+        
+        // Save score
+        GameUtils.saveScore('animal_sounds', finalPercentage);
+    }
+    
+    function resetGame() {
+        gameActive = false;
+        instructions.style.display = 'block';
+        gameArea.style.display = 'none';
+        resultsArea.style.display = 'none';
+        currentRound = 0;
+        correctAnswers = 0;
+    }
+    
+    // Test audio function
+    function testAudio() {
+        console.log('Testing audio...');
+        
+        // Try a simple beep first
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            if (audioContext.state === 'suspended') {
+                audioContext.resume().then(() => {
+                    playTestBeep(audioContext);
+                });
+            } else {
+                playTestBeep(audioContext);
+            }
+        } catch (error) {
+            console.log('Audio test failed:', error);
+            alert('Audio not supported in this browser. Error: ' + error.message);
+        }
+    }
+    
+    function playTestBeep(audioContext) {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(440, audioContext.currentTime); // A4 note
+        
+        gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.01);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.5);
+        
+        console.log('Test beep should be playing...');
+        alert('If you heard a beep, audio is working! If not, check your volume and browser settings.');
+    }
+
+    // Event listeners
+    startGameBtn.addEventListener('click', startGame);
+    playBtn.addEventListener('click', playSound);
+    replayBtn.addEventListener('click', playSound);
+    nextBtn.addEventListener('click', nextRound);
+    playAgainBtn.addEventListener('click', resetGame);
+    
+    // Add test audio button listener
+    const testAudioBtn = document.getElementById('testAudioBtn');
+    if (testAudioBtn) {
+        testAudioBtn.addEventListener('click', testAudio);
+    }
+});
+</script>
+{% endblock %}

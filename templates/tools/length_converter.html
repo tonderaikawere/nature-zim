@@ -1,0 +1,323 @@
+{% extends "base.html" %}
+
+{% block title %}Length Converter - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('tools_home') }}">Tools</a></li>
+            <li class="breadcrumb-item active">Length Converter</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-4">
+                <h1 class="text-nature-green mb-3">📏 Length Converter</h1>
+                <p class="lead">Convert between different units of length and distance</p>
+            </div>
+
+            <div class="nature-card">
+                <div class="card-body">
+                    <!-- Converter Interface -->
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="mb-3">
+                                <label for="fromValue" class="form-label">From:</label>
+                                <div class="input-group">
+                                    <input type="number" id="fromValue" class="form-control" placeholder="Enter value" step="any">
+                                    <select id="fromUnit" class="form-select">
+                                        <option value="mm">Millimeters (mm)</option>
+                                        <option value="cm">Centimeters (cm)</option>
+                                        <option value="m" selected>Meters (m)</option>
+                                        <option value="km">Kilometers (km)</option>
+                                        <option value="in">Inches (in)</option>
+                                        <option value="ft">Feet (ft)</option>
+                                        <option value="yd">Yards (yd)</option>
+                                        <option value="mi">Miles (mi)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 text-center d-flex align-items-center justify-content-center">
+                            <button id="swapBtn" class="btn btn-nature-outline btn-sm">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="mb-3">
+                                <label for="toValue" class="form-label">To:</label>
+                                <div class="input-group">
+                                    <input type="number" id="toValue" class="form-control" placeholder="Result" readonly>
+                                    <select id="toUnit" class="form-select">
+                                        <option value="mm">Millimeters (mm)</option>
+                                        <option value="cm">Centimeters (cm)</option>
+                                        <option value="m">Meters (m)</option>
+                                        <option value="km" selected>Kilometers (km)</option>
+                                        <option value="in">Inches (in)</option>
+                                        <option value="ft">Feet (ft)</option>
+                                        <option value="yd">Yards (yd)</option>
+                                        <option value="mi">Miles (mi)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Conversions -->
+                    <div class="text-center mb-4">
+                        <h6 class="text-nature-brown mb-3">Quick Conversions:</h6>
+                        <div class="btn-group flex-wrap" role="group">
+                            <button class="btn btn-outline-secondary btn-sm quick-convert" data-value="1" data-from="m" data-to="ft">1m → ft</button>
+                            <button class="btn btn-outline-secondary btn-sm quick-convert" data-value="1" data-from="km" data-to="mi">1km → mi</button>
+                            <button class="btn btn-outline-secondary btn-sm quick-convert" data-value="100" data-from="cm" data-to="in">100cm → in</button>
+                            <button class="btn btn-outline-secondary btn-sm quick-convert" data-value="1" data-from="ft" data-to="m">1ft → m</button>
+                        </div>
+                    </div>
+
+                    <!-- Conversion Result Display -->
+                    <div id="resultDisplay" class="alert alert-info text-center" style="display: none;">
+                        <h5 id="conversionResult" class="mb-2"></h5>
+                        <div id="conversionFormula" class="small text-muted"></div>
+                    </div>
+
+                    <!-- Clear Button -->
+                    <div class="text-center">
+                        <button id="clearBtn" class="btn btn-nature-outline">
+                            <i class="fas fa-eraser me-2"></i>Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conversion Reference -->
+            <div class="nature-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">📐 Conversion Reference</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-nature-brown">Metric System</h6>
+                            <ul class="small">
+                                <li>1 kilometer = 1,000 meters</li>
+                                <li>1 meter = 100 centimeters</li>
+                                <li>1 centimeter = 10 millimeters</li>
+                                <li>1 millimeter = 0.001 meters</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-nature-brown">Imperial System</h6>
+                            <ul class="small">
+                                <li>1 mile = 1,760 yards</li>
+                                <li>1 yard = 3 feet</li>
+                                <li>1 foot = 12 inches</li>
+                                <li>1 inch = 2.54 centimeters</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nature Examples -->
+            <div class="nature-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">🌿 Nature Examples</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-nature-brown">Trees & Plants</h6>
+                            <ul class="small">
+                                <li>Baobab tree: up to 25m tall</li>
+                                <li>Msasa tree: 15-20m average height</li>
+                                <li>Elephant grass: up to 4m tall</li>
+                                <li>Flame lily: 1-3m climbing height</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-nature-brown">Animals</h6>
+                            <ul class="small">
+                                <li>African elephant: 3-4m tall</li>
+                                <li>Giraffe: up to 5.5m tall</li>
+                                <li>Lion: 1.2m at shoulder</li>
+                                <li>Nile crocodile: up to 5m long</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="text-center mt-4">
+                <a href="{{ url_for('tools_home') }}" class="btn btn-nature-outline">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Tools
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const fromValue = document.getElementById('fromValue');
+    const toValue = document.getElementById('toValue');
+    const fromUnit = document.getElementById('fromUnit');
+    const toUnit = document.getElementById('toUnit');
+    const swapBtn = document.getElementById('swapBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const resultDisplay = document.getElementById('resultDisplay');
+    const conversionResult = document.getElementById('conversionResult');
+    const conversionFormula = document.getElementById('conversionFormula');
+    const quickConvertBtns = document.querySelectorAll('.quick-convert');
+    
+    // Conversion factors to meters
+    const conversionFactors = {
+        'mm': 0.001,
+        'cm': 0.01,
+        'm': 1,
+        'km': 1000,
+        'in': 0.0254,
+        'ft': 0.3048,
+        'yd': 0.9144,
+        'mi': 1609.344
+    };
+    
+    const unitNames = {
+        'mm': 'millimeters',
+        'cm': 'centimeters',
+        'm': 'meters',
+        'km': 'kilometers',
+        'in': 'inches',
+        'ft': 'feet',
+        'yd': 'yards',
+        'mi': 'miles'
+    };
+    
+    function convert() {
+        const value = parseFloat(fromValue.value);
+        
+        if (isNaN(value) || value === '') {
+            toValue.value = '';
+            resultDisplay.style.display = 'none';
+            return;
+        }
+        
+        const fromFactor = conversionFactors[fromUnit.value];
+        const toFactor = conversionFactors[toUnit.value];
+        
+        // Convert to meters first, then to target unit
+        const meters = value * fromFactor;
+        const result = meters / toFactor;
+        
+        // Format result appropriately
+        let formattedResult;
+        if (result < 0.001) {
+            formattedResult = result.toExponential(3);
+        } else if (result < 1) {
+            formattedResult = result.toFixed(6).replace(/\.?0+$/, '');
+        } else if (result < 1000) {
+            formattedResult = result.toFixed(3).replace(/\.?0+$/, '');
+        } else {
+            formattedResult = result.toLocaleString(undefined, {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 3
+            });
+        }
+        
+        toValue.value = formattedResult;
+        
+        // Show detailed result
+        showResult(value, fromUnit.value, formattedResult, toUnit.value);
+    }
+    
+    function showResult(fromVal, fromU, toVal, toU) {
+        const fromUnitName = unitNames[fromU];
+        const toUnitName = unitNames[toU];
+        
+        conversionResult.textContent = `${fromVal} ${fromUnitName} = ${toVal} ${toUnitName}`;
+        
+        // Show conversion factor
+        const factor = conversionFactors[toU] / conversionFactors[fromU];
+        if (factor >= 1) {
+            conversionFormula.textContent = `1 ${fromUnitName} = ${factor.toFixed(6).replace(/\.?0+$/, '')} ${toUnitName}`;
+        } else {
+            conversionFormula.textContent = `1 ${toUnitName} = ${(1/factor).toFixed(6).replace(/\.?0+$/, '')} ${fromUnitName}`;
+        }
+        
+        resultDisplay.style.display = 'block';
+    }
+    
+    function swapUnits() {
+        // Swap the unit selections
+        const tempUnit = fromUnit.value;
+        fromUnit.value = toUnit.value;
+        toUnit.value = tempUnit;
+        
+        // Swap the values
+        const tempValue = fromValue.value;
+        fromValue.value = toValue.value;
+        toValue.value = tempValue;
+        
+        // Recalculate if there's a value
+        if (fromValue.value) {
+            convert();
+        }
+    }
+    
+    function clearAll() {
+        fromValue.value = '';
+        toValue.value = '';
+        resultDisplay.style.display = 'none';
+        fromValue.focus();
+    }
+    
+    function quickConvert(value, from, to) {
+        fromValue.value = value;
+        fromUnit.value = from;
+        toUnit.value = to;
+        convert();
+    }
+    
+    // Event listeners
+    fromValue.addEventListener('input', convert);
+    fromUnit.addEventListener('change', convert);
+    toUnit.addEventListener('change', convert);
+    swapBtn.addEventListener('click', swapUnits);
+    clearBtn.addEventListener('click', clearAll);
+    
+    // Quick conversion buttons
+    quickConvertBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const value = btn.dataset.value;
+            const from = btn.dataset.from;
+            const to = btn.dataset.to;
+            quickConvert(value, from, to);
+        });
+    });
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey || e.metaKey) {
+            switch(e.key) {
+                case 'Enter':
+                    e.preventDefault();
+                    convert();
+                    break;
+                case 'Backspace':
+                    e.preventDefault();
+                    clearAll();
+                    break;
+            }
+        }
+    });
+    
+    // Focus on input when page loads
+    fromValue.focus();
+});
+</script>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}Soils & Agriculture - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active">Soils & Agriculture</li>
+        </ol>
+    </nav>
+
+    <div class="text-center mb-5">
+        <h1 class="text-nature-green mb-4">Soils & Agriculture in Zimbabwe</h1>
+        <p class="lead">Understanding Zimbabwe's soil types and agricultural systems</p>
+    </div>
+
+    <div class="nature-card mb-4">
+        <div class="card-header">
+            <h4>Major Soil Types</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <h6 class="text-nature-brown">Red Clays</h6>
+                    <ul class="small">
+                        <li>High fertility when well-managed</li>
+                        <li>Good for tobacco and maize</li>
+                        <li>Found in highveld areas</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="text-nature-brown">Sandy Soils</h6>
+                    <ul class="small">
+                        <li>Well-drained but low fertility</li>
+                        <li>Suitable for groundnuts</li>
+                        <li>Common in lowveld regions</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="text-nature-brown">Black Cotton Soils</h6>
+                    <ul class="small">
+                        <li>High clay content</li>
+                        <li>Fertile but difficult to work</li>
+                        <li>Good for cotton and sorghum</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-lg-6">
+            <div class="nature-card h-100">
+                <div class="card-header">
+                    <h5>Major Crops</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Maize:</strong> Staple food crop</li>
+                        <li><strong>Tobacco:</strong> Major export crop</li>
+                        <li><strong>Cotton:</strong> Important cash crop</li>
+                        <li><strong>Sorghum & Millet:</strong> Drought-resistant grains</li>
+                        <li><strong>Groundnuts:</strong> Protein-rich legume</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="nature-card h-100">
+                <div class="card-header">
+                    <h5>Sustainable Practices</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Conservation agriculture:</strong> Minimal tillage</li>
+                        <li><strong>Crop rotation:</strong> Maintaining soil fertility</li>
+                        <li><strong>Agroforestry:</strong> Trees in farming systems</li>
+                        <li><strong>Organic farming:</strong> Natural fertilizers</li>
+                        <li><strong>Water harvesting:</strong> Rainwater collection</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-nature-beige p-4 rounded">
+        <h4 class="text-nature-green mb-3">Agricultural Challenges & Solutions</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Challenges</h6>
+                <ul class="small">
+                    <li>Soil erosion and degradation</li>
+                    <li>Irregular rainfall patterns</li>
+                    <li>Limited access to inputs</li>
+                    <li>Climate change impacts</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Solutions</h6>
+                <ul class="small">
+                    <li>Soil conservation techniques</li>
+                    <li>Drought-resistant varieties</li>
+                    <li>Improved extension services</li>
+                    <li>Climate-smart agriculture</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

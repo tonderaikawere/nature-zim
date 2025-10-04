@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+
+{% block title %}Nature Zimbabwe - Tonde's Educational Journey Through Zimbabwe's Wildlife{% endblock %}
+
+{% block meta_title %}Nature Zimbabwe - Tonde's Educational Journey Through Zimbabwe's Wildlife{% endblock %}
+
+{% block description %}Join Tonde's mission to educate people about Zimbabwe's incredible nature! Discover wildlife, learn about conservation, play educational games, and explore the rich biodiversity of Zimbabwe's national parks, animals, and ecosystems.{% endblock %}
+
+{% block keywords %}Tonde Kawere, Zimbabwe wildlife education, nature conservation Zimbabwe, African wildlife, baobab trees, Victoria Falls, Hwange National Park, Mana Pools, educational games, wildlife conservation, Zimbabwe tourism, African nature, environmental education{% endblock %}
+
+{% block og_title %}Nature Zimbabwe - Tonde's Educational Journey Through Zimbabwe's Wildlife{% endblock %}
+
+{% block og_description %}Join Tonde's mission to educate people about Zimbabwe's incredible nature! Discover wildlife, learn about conservation, and explore the rich biodiversity through interactive learning.{% endblock %}
+
+{% block twitter_title %}Nature Zimbabwe - Tonde's Educational Journey Through Zimbabwe's Wildlife{% endblock %}
+
+{% block twitter_description %}Join Tonde's mission to educate people about Zimbabwe's incredible nature! Discover wildlife, learn about conservation, and explore the rich biodiversity through interactive learning.{% endblock %}
+
+{% block schema_type %}WebSite{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 hero-content">
+                <h1 class="hero-title">Welcome to Nature Zimbabwe</h1>
+                <p class="hero-subtitle">Discover the incredible biodiversity and natural wonders of Zimbabwe. From the iconic Baobab trees to the diverse wildlife that roams our beautiful landscapes.</p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="{{ url_for('trees') }}" class="btn btn-nature">Explore Nature</a>
+                    <a href="{{ url_for('games_home') }}" class="btn btn-nature">Play Games</a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <div class="hero-image">
+                    <svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Large Baobab Tree -->
+                        <g fill="#8B4513">
+                            <!-- Main trunk -->
+                            <rect x="180" y="180" width="40" height="120" rx="8"/>
+                            <!-- Major branches -->
+                            <circle cx="120" cy="140" r="15"/>
+                            <circle cx="200" cy="100" r="20"/>
+                            <circle cx="280" cy="140" r="15"/>
+                            <circle cx="80" cy="170" r="12"/>
+                            <circle cx="320" cy="170" r="12"/>
+                            <!-- Branch connections -->
+                            <line x1="180" y1="180" x2="135" y2="155" stroke="#8B4513" stroke-width="8"/>
+                            <line x1="200" y1="180" x2="200" y2="120" stroke="#8B4513" stroke-width="10"/>
+                            <line x1="220" y1="180" x2="265" y2="155" stroke="#8B4513" stroke-width="8"/>
+                            <line x1="180" y1="200" x2="92" y2="182" stroke="#8B4513" stroke-width="6"/>
+                            <line x1="220" y1="200" x2="308" y2="182" stroke="#8B4513" stroke-width="6"/>
+                        </g>
+                        <!-- Foliage -->
+                        <g fill="#228B22" opacity="0.9">
+                            <circle cx="120" cy="130" r="25"/>
+                            <circle cx="200" cy="85" r="35"/>
+                            <circle cx="280" cy="130" r="25"/>
+                            <circle cx="80" cy="160" r="18"/>
+                            <circle cx="320" cy="160" r="18"/>
+                        </g>
+                        <!-- Ground -->
+                        <rect x="0" y="280" width="400" height="20" fill="#8B7355"/>
+                        <!-- Grass -->
+                        <g fill="#32CD32">
+                            <rect x="20" y="270" width="3" height="15"/>
+                            <rect x="30" y="275" width="2" height="10"/>
+                            <rect x="45" y="272" width="3" height="13"/>
+                            <rect x="350" y="270" width="3" height="15"/>
+                            <rect x="360" y="275" width="2" height="10"/>
+                            <rect x="375" y="272" width="3" height="13"/>
+                        </g>
+                        <!-- Birds -->
+                        <g fill="#4169E1">
+                            <path d="M50 80 Q55 75 60 80 Q55 85 50 80"/>
+                            <path d="M340 90 Q345 85 350 90 Q345 95 340 90"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="feature-section">
+    <div class="container">
+        <h2 class="text-center section-title">Explore Zimbabwe's Natural World</h2>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h4 class="text-nature-green">Flora & Fauna</h4>
+                    <p>Discover Zimbabwe's diverse plant and animal life, from towering Baobab trees to the Big Five animals that roam our national parks.</p>
+                    <a href="{{ url_for('trees') }}" class="btn btn-nature-outline">Learn More</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h4 class="text-nature-green">Interactive Games</h4>
+                    <p>Test your knowledge with fun educational games, quizzes, and challenges about Zimbabwe's natural heritage.</p>
+                    <a href="{{ url_for('games_home') }}" class="btn btn-nature-outline">Play Now</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h4 class="text-nature-green">Useful Tools</h4>
+                    <p>Access calculators, converters, and other helpful tools for your daily needs and educational purposes.</p>
+                    <a href="{{ url_for('tools_home') }}" class="btn btn-nature-outline">Explore Tools</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Nature Categories -->
+<section class="py-5 bg-nature-beige">
+    <div class="container">
+        <h2 class="text-center section-title">Nature Categories</h2>
+        <div class="nature-grid">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-seedling me-2"></i>Grasses</h5>
+                </div>
+                <div class="card-body">
+                    <p>Explore Zimbabwe's diverse grass species that form the foundation of our ecosystems.</p>
+                    <a href="{{ url_for('grasses') }}" class="btn btn-nature">Discover Grasses</a>
+                </div>
+            </div>
+            
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-tree me-2"></i>Trees</h5>
+                </div>
+                <div class="card-body">
+                    <p>Learn about our magnificent trees, from the iconic Baobab to the hardy Mopane.</p>
+                    <a href="{{ url_for('trees') }}" class="btn btn-nature">Explore Trees</a>
+                </div>
+            </div>
+            
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-dove me-2"></i>Birds</h5>
+                </div>
+                <div class="card-body">
+                    <p>Discover Zimbabwe's rich birdlife, including our national bird, the African Fish Eagle.</p>
+                    <a href="{{ url_for('birds') }}" class="btn btn-nature">See Birds</a>
+                </div>
+            </div>
+            
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-paw me-2"></i>Mammals</h5>
+                </div>
+                <div class="card-body">
+                    <p>Meet Zimbabwe's incredible mammals, from elephants to the elusive leopard.</p>
+                    <a href="{{ url_for('mammals') }}" class="btn btn-nature">Meet Mammals</a>
+                </div>
+            </div>
+            
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-fish me-2"></i>Aquatic Life</h5>
+                </div>
+                <div class="card-body">
+                    <p>Explore the fish species in our rivers and lakes, from Tilapia to Catfish.</p>
+                    <a href="{{ url_for('fish') }}" class="btn btn-nature">Dive In</a>
+                </div>
+            </div>
+            
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-mountain me-2"></i>National Parks</h5>
+                </div>
+                <div class="card-body">
+                    <p>Visit Zimbabwe's protected areas, including Hwange, Mana Pools, and Matobo.</p>
+                    <a href="{{ url_for('national_parks') }}" class="btn btn-nature">Visit Parks</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Stats -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="bg-white p-4 rounded shadow-sm">
+                    <h3 class="text-nature-green display-4">40+</h3>
+                    <p class="text-muted">Interactive Pages</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="bg-white p-4 rounded shadow-sm">
+                    <h3 class="text-nature-green display-4">10+</h3>
+                    <p class="text-muted">Educational Games</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="bg-white p-4 rounded shadow-sm">
+                    <h3 class="text-nature-green display-4">15+</h3>
+                    <p class="text-muted">Useful Tools</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="bg-white p-4 rounded shadow-sm">
+                    <h3 class="text-nature-green display-4">100%</h3>
+                    <p class="text-muted">Zimbabwean Content</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5 bg-nature-green text-white">
+    <div class="container text-center">
+        <h2 class="mb-4">Start Your Journey Today</h2>
+        <p class="lead mb-4">Join us in exploring and preserving Zimbabwe's natural heritage for future generations.</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="{{ url_for('about') }}" class="btn btn-light btn-lg">Learn About Us</a>
+            <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-lg">Get In Touch</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

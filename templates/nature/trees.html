@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block title %}Trees of Zimbabwe - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active">Trees</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-8 mx-auto text-center mb-5">
+            <h1 class="text-nature-green mb-4">Trees of Zimbabwe</h1>
+            <p class="lead">Zimbabwe is home to over 600 tree species, from the iconic Baobab to the economically important hardwoods. Our trees provide shelter, food, medicine, and are integral to our cultural heritage.</p>
+        </div>
+    </div>
+
+    <!-- Featured Trees -->
+    <div class="row mb-5">
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-green text-white">
+                    <h5 class="mb-0"><i class="fas fa-tree me-2"></i>Baobab Tree</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Adansonia digitata</p>
+                    <p>The iconic "Tree of Life" can live for over 1,000 years. Its massive trunk stores water during dry seasons, and every part of the tree is useful to humans and animals.</p>
+                    <ul class="list-unstyled">
+                        <li><strong>Height:</strong> Up to 25 meters</li>
+                        <li><strong>Habitat:</strong> Dry savannas</li>
+                        <li><strong>Uses:</strong> Food, medicine, shelter</li>
+                    </ul>
+                    <a href="{{ url_for('baobab') }}" class="btn btn-nature">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-light-green text-white">
+                    <h5 class="mb-0"><i class="fas fa-tree me-2"></i>Msasa Tree</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Brachystegia spiciformis</p>
+                    <p>Dominant in Zimbabwe's miombo woodlands, the Msasa is crucial for timber production and provides habitat for numerous wildlife species.</p>
+                    <ul class="list-unstyled">
+                        <li><strong>Height:</strong> Up to 20 meters</li>
+                        <li><strong>Habitat:</strong> Miombo woodlands</li>
+                        <li><strong>Uses:</strong> Timber, fuel, construction</li>
+                    </ul>
+                    <a href="{{ url_for('msasa') }}" class="btn btn-nature">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-brown text-white">
+                    <h5 class="mb-0"><i class="fas fa-tree me-2"></i>Mopane Tree</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Colophospermum mopane</p>
+                    <p>Adapted to hot, dry conditions, the Mopane forms extensive woodlands in the Lowveld. Its butterfly-shaped leaves are distinctive.</p>
+                    <ul class="list-unstyled">
+                        <li><strong>Height:</strong> 4-18 meters</li>
+                        <li><strong>Habitat:</strong> Hot, dry lowlands</li>
+                        <li><strong>Uses:</strong> Timber, fuel, fodder</li>
+                    </ul>
+                    <a href="{{ url_for('mopane') }}" class="btn btn-nature">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- All Trees Grid -->
+    <h2 class="text-center section-title mb-4">Explore All Trees</h2>
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="nature-card">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-3">
+                            <div class="text-center">
+                                <i class="fas fa-tree text-nature-green" style="font-size: 3rem;"></i>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <h5 class="card-title">Acacia Trees</h5>
+                            <p class="card-text">Thorny trees adapted to arid conditions, providing food and shelter for wildlife.</p>
+                            <a href="{{ url_for('acacia') }}" class="btn btn-nature-outline btn-sm">Explore</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+            <div class="nature-card">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-3">
+                            <div class="text-center">
+                                <i class="fas fa-tree text-nature-brown" style="font-size: 3rem;"></i>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <h5 class="card-title">Mahogany Trees</h5>
+                            <p class="card-text">Valuable hardwood trees prized for their beautiful timber and fast growth.</p>
+                            <a href="{{ url_for('mahogany') }}" class="btn btn-nature-outline btn-sm">Explore</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tree Facts -->
+    <div class="bg-nature-beige p-4 rounded mt-5">
+        <h3 class="text-nature-green mb-3">Did You Know?</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-leaf text-nature-green me-2"></i>Zimbabwe has over 600 tree species</li>
+                    <li><i class="fas fa-seedling text-nature-green me-2"></i>Miombo woodlands cover 60% of the country</li>
+                    <li><i class="fas fa-tree text-nature-green me-2"></i>Some Baobab trees are over 2,000 years old</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-home text-nature-green me-2"></i>Trees provide homes for 80% of wildlife</li>
+                    <li><i class="fas fa-lungs text-nature-green me-2"></i>One tree produces oxygen for 2 people per day</li>
+                    <li><i class="fas fa-shield-alt text-nature-green me-2"></i>Trees prevent soil erosion and flooding</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conservation Message -->
+    <div class="text-center mt-5">
+        <h3 class="text-nature-green">Help Protect Our Trees</h3>
+        <p class="lead">Trees are vital for our environment, economy, and culture. Learn how you can help conserve Zimbabwe's forests.</p>
+        <a href="{{ url_for('conservation') }}" class="btn btn-nature btn-lg">Conservation Efforts</a>
+    </div>
+</div>
+{% endblock %}

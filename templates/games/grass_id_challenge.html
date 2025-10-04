@@ -1,0 +1,437 @@
+{% extends "base.html" %}
+
+{% block title %}Grass ID Challenge - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('games_home') }}">Games</a></li>
+            <li class="breadcrumb-item active">Grass ID Challenge</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-5">
+                <h1 class="text-nature-green mb-4">🌾 Grass ID Challenge</h1>
+                <p class="lead">Test your knowledge of Zimbabwe's important grass species!</p>
+            </div>
+
+            <div class="nature-card">
+                <div class="card-body">
+                    <!-- Start Screen -->
+                    <div id="startScreen" class="text-center">
+                        <p class="lead mb-4">Learn to identify Zimbabwe's most important grass species. Each grass plays a vital role in the ecosystem and agriculture.</p>
+                        <button id="startBtn" class="btn btn-nature btn-lg">
+                            <i class="fas fa-seedling me-2"></i>Start Challenge
+                        </button>
+                    </div>
+
+                    <!-- Game Screen -->
+                    <div id="gameScreen" style="display: none;">
+                        <!-- Grass Display -->
+                        <div class="text-center mb-4">
+                            <div class="grass-display p-4 bg-nature-beige rounded">
+                                <div id="grassIcon" class="grass-icon mb-3">🌾</div>
+                                <h4 id="grassQuestion" class="text-nature-green mb-3">Identify this grass:</h4>
+                                <div id="grassHints" class="text-muted small">
+                                    <div id="hint1"></div>
+                                    <div id="hint2"></div>
+                                    <div id="hint3"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Answer Options -->
+                        <div id="answerGrid" class="row mb-4">
+                            <!-- Options populated by JavaScript -->
+                        </div>
+
+                        <!-- Game Stats -->
+                        <div class="row text-center mb-4">
+                            <div class="col-3">
+                                <div class="h5 text-nature-green" id="currentQuestion">1</div>
+                                <small class="text-muted">Question</small>
+                            </div>
+                            <div class="col-3">
+                                <div class="h5 text-nature-green" id="correctAnswers">0</div>
+                                <small class="text-muted">Correct</small>
+                            </div>
+                            <div class="col-3">
+                                <div class="h5 text-nature-green" id="totalQuestions">8</div>
+                                <small class="text-muted">Total</small>
+                            </div>
+                            <div class="col-3">
+                                <div class="h5 text-nature-green" id="accuracy">0%</div>
+                                <small class="text-muted">Accuracy</small>
+                            </div>
+                        </div>
+
+                        <!-- Next Button -->
+                        <div class="text-center">
+                            <button id="nextBtn" class="btn btn-nature" style="display: none;">
+                                Next Grass <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Results Screen -->
+                    <div id="resultsScreen" class="text-center" style="display: none;">
+                        <div class="alert alert-success">
+                            <h4 class="text-success mb-3">🎉 Challenge Complete!</h4>
+                            <p class="mb-2">You correctly identified <span id="finalCorrect">0</span> out of <span id="finalTotal">8</span> grass species!</p>
+                            <p class="mb-3">Final Score: <span id="finalScore">0%</span></p>
+                            <div id="expertiseLevel" class="mb-3"></div>
+                            <button id="playAgainBtn" class="btn btn-success">Try Again</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grass Information -->
+            <div class="nature-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">🌱 About Zimbabwe's Grasses</h5>
+                </div>
+                <div class="card-body">
+                    <p class="small">Zimbabwe has over 400 grass species, many of which are crucial for livestock grazing and ecosystem health. Learning to identify key species helps in pasture management and conservation.</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-nature-brown">Importance</h6>
+                            <ul class="small">
+                                <li>Livestock feed and nutrition</li>
+                                <li>Soil erosion control</li>
+                                <li>Wildlife habitat</li>
+                                <li>Carbon sequestration</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-nature-brown">Key Features</h6>
+                            <ul class="small">
+                                <li>Leaf shape and size</li>
+                                <li>Growth form and height</li>
+                                <li>Seed head characteristics</li>
+                                <li>Palatability to animals</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="text-center mt-4">
+                <a href="{{ url_for('games_home') }}" class="btn btn-nature-outline">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Games
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.grass-display {
+    border: 2px solid var(--nature-green);
+    min-height: 200px;
+}
+
+.grass-icon {
+    font-size: 4rem;
+}
+
+.grass-option {
+    margin-bottom: 15px;
+}
+
+.grass-card {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+    height: 100%;
+}
+
+.grass-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    border-color: var(--nature-green);
+}
+
+.grass-card.correct {
+    border-color: var(--nature-light-green);
+    background-color: rgba(40, 167, 69, 0.1);
+}
+
+.grass-card.incorrect {
+    border-color: #dc3545;
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+.grass-card.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const startBtn = document.getElementById('startBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const playAgainBtn = document.getElementById('playAgainBtn');
+    const startScreen = document.getElementById('startScreen');
+    const gameScreen = document.getElementById('gameScreen');
+    const resultsScreen = document.getElementById('resultsScreen');
+    const answerGrid = document.getElementById('answerGrid');
+    
+    let currentQuestionIndex = 0;
+    let correctCount = 0;
+    let gameActive = false;
+    
+    // Zimbabwe grass species data
+    const grassSpecies = [
+        {
+            name: 'Red Grass',
+            scientific: 'Themeda triandra',
+            hints: [
+                'Most important pasture grass in Zimbabwe',
+                'Reddish seed heads when mature',
+                'Highly palatable to livestock'
+            ],
+            icon: '🌾',
+            options: ['Red Grass', 'Star Grass', 'Buffalo Grass', 'Spear Grass']
+        },
+        {
+            name: 'Star Grass',
+            scientific: 'Cynodon plectostachyus',
+            hints: [
+                'Distinctive star-shaped seed heads',
+                'Creeping growth habit',
+                'Excellent for pastures'
+            ],
+            icon: '⭐',
+            options: ['Star Grass', 'Red Grass', 'Couch Grass', 'Finger Grass']
+        },
+        {
+            name: 'Buffalo Grass',
+            scientific: 'Panicum maximum',
+            hints: [
+                'Large, robust tufted grass',
+                'Can grow up to 2 meters tall',
+                'High nutritional value'
+            ],
+            icon: '🌿',
+            options: ['Buffalo Grass', 'Elephant Grass', 'Guinea Grass', 'Rhodes Grass']
+        },
+        {
+            name: 'Spear Grass',
+            scientific: 'Heteropogon contortus',
+            hints: [
+                'Twisted, spear-like awns',
+                'Adapted to poor soils',
+                'Drought tolerant'
+            ],
+            icon: '🗡️',
+            options: ['Spear Grass', 'Needle Grass', 'Wire Grass', 'Barbed Grass']
+        },
+        {
+            name: 'Elephant Grass',
+            scientific: 'Pennisetum purpureum',
+            hints: [
+                'Very tall grass, up to 4 meters',
+                'Purple-tinged seed heads',
+                'Used for fodder and thatching'
+            ],
+            icon: '🐘',
+            options: ['Elephant Grass', 'Buffalo Grass', 'Giant Grass', 'Reed Grass']
+        },
+        {
+            name: 'Love Grass',
+            scientific: 'Eragrostis species',
+            hints: [
+                'Small, delicate seed heads',
+                'Many species in Zimbabwe',
+                'Important pioneer grass'
+            ],
+            icon: '💚',
+            options: ['Love Grass', 'Hair Grass', 'Silk Grass', 'Feather Grass']
+        },
+        {
+            name: 'Thatching Grass',
+            scientific: 'Hyparrhenia species',
+            hints: [
+                'Used for traditional roof thatching',
+                'Tall with feathery seed heads',
+                'Common in miombo areas'
+            ],
+            icon: '🏠',
+            options: ['Thatching Grass', 'Roof Grass', 'Straw Grass', 'Cover Grass']
+        },
+        {
+            name: 'Finger Grass',
+            scientific: 'Digitaria species',
+            hints: [
+                'Finger-like seed head arrangement',
+                'Good early grazing grass',
+                'Quick to establish'
+            ],
+            icon: '✋',
+            options: ['Finger Grass', 'Hand Grass', 'Digit Grass', 'Palm Grass']
+        }
+    ];
+    
+    function startGame() {
+        currentQuestionIndex = 0;
+        correctCount = 0;
+        gameActive = true;
+        
+        startScreen.style.display = 'none';
+        gameScreen.style.display = 'block';
+        resultsScreen.style.display = 'none';
+        
+        showQuestion();
+    }
+    
+    function showQuestion() {
+        const grass = grassSpecies[currentQuestionIndex];
+        
+        // Update display
+        document.getElementById('grassIcon').textContent = grass.icon;
+        document.getElementById('grassQuestion').textContent = `Identify this grass:`;
+        
+        // Show hints
+        document.getElementById('hint1').textContent = `• ${grass.hints[0]}`;
+        document.getElementById('hint2').textContent = `• ${grass.hints[1]}`;
+        document.getElementById('hint3').textContent = `• ${grass.hints[2]}`;
+        
+        // Create answer options
+        createAnswerOptions(grass);
+        
+        // Update stats
+        updateStats();
+        
+        nextBtn.style.display = 'none';
+    }
+    
+    function createAnswerOptions(grass) {
+        answerGrid.innerHTML = '';
+        
+        // Shuffle options
+        const shuffledOptions = [...grass.options].sort(() => Math.random() - 0.5);
+        
+        shuffledOptions.forEach(option => {
+            const col = document.createElement('div');
+            col.className = 'col-md-6 grass-option';
+            
+            col.innerHTML = `
+                <div class="grass-card" data-grass="${option}">
+                    <h6 class="text-nature-green mb-2">${option}</h6>
+                    <div class="small text-muted">${getScientificName(option)}</div>
+                </div>
+            `;
+            
+            answerGrid.appendChild(col);
+        });
+        
+        // Add click listeners
+        document.querySelectorAll('.grass-card').forEach(card => {
+            card.addEventListener('click', () => selectGrass(card.dataset.grass));
+        });
+    }
+    
+    function getScientificName(grassName) {
+        const grass = grassSpecies.find(g => g.name === grassName);
+        return grass ? grass.scientific : '';
+    }
+    
+    function selectGrass(selectedGrass) {
+        if (!gameActive) return;
+        
+        const currentGrass = grassSpecies[currentQuestionIndex];
+        const isCorrect = selectedGrass === currentGrass.name;
+        
+        if (isCorrect) {
+            correctCount++;
+        }
+        
+        // Show results
+        document.querySelectorAll('.grass-card').forEach(card => {
+            card.classList.add('disabled');
+            
+            if (card.dataset.grass === currentGrass.name) {
+                card.classList.add('correct');
+            } else if (card.dataset.grass === selectedGrass && !isCorrect) {
+                card.classList.add('incorrect');
+            }
+        });
+        
+        updateStats();
+        
+        // Show next button or end game
+        setTimeout(() => {
+            if (currentQuestionIndex < grassSpecies.length - 1) {
+                nextBtn.style.display = 'inline-block';
+            } else {
+                endGame();
+            }
+        }, 1500);
+    }
+    
+    function nextQuestion() {
+        currentQuestionIndex++;
+        showQuestion();
+    }
+    
+    function updateStats() {
+        document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+        document.getElementById('correctAnswers').textContent = correctCount;
+        
+        const accuracy = currentQuestionIndex === 0 ? 0 : Math.round((correctCount / (currentQuestionIndex + 1)) * 100);
+        document.getElementById('accuracy').textContent = accuracy + '%';
+    }
+    
+    function endGame() {
+        gameActive = false;
+        gameScreen.style.display = 'none';
+        
+        const finalPercentage = Math.round((correctCount / grassSpecies.length) * 100);
+        
+        document.getElementById('finalCorrect').textContent = correctCount;
+        document.getElementById('finalTotal').textContent = grassSpecies.length;
+        document.getElementById('finalScore').textContent = finalPercentage + '%';
+        
+        // Set expertise level
+        const expertiseLevel = document.getElementById('expertiseLevel');
+        if (finalPercentage >= 90) {
+            expertiseLevel.innerHTML = '<span class="badge bg-success">🏆 Grass Expert!</span>';
+        } else if (finalPercentage >= 70) {
+            expertiseLevel.innerHTML = '<span class="badge bg-primary">🌟 Grass Enthusiast</span>';
+        } else if (finalPercentage >= 50) {
+            expertiseLevel.innerHTML = '<span class="badge bg-warning">🌱 Grass Learner</span>';
+        } else {
+            expertiseLevel.innerHTML = '<span class="badge bg-secondary">📚 Keep Studying!</span>';
+        }
+        
+        resultsScreen.style.display = 'block';
+        
+        // Save score
+        GameUtils.saveScore('grass_id_challenge', finalPercentage);
+    }
+    
+    function resetGame() {
+        gameActive = false;
+        startScreen.style.display = 'block';
+        gameScreen.style.display = 'none';
+        resultsScreen.style.display = 'none';
+    }
+    
+    // Event listeners
+    startBtn.addEventListener('click', startGame);
+    nextBtn.addEventListener('click', nextQuestion);
+    playAgainBtn.addEventListener('click', resetGame);
+});
+</script>
+{% endblock %}

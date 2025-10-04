@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Mahogany Tree - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('trees') }}">Trees</a></li>
+            <li class="breadcrumb-item active">Mahogany Tree</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Mahogany Tree</h1>
+    <p class="lead"><em>Khaya anthotheca</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>The African Mahogany is a magnificent tree prized for its beautiful reddish-brown timber. It's one of Zimbabwe's most valuable indigenous trees, playing important roles in both natural ecosystems and human communities.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Features</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Height:</strong> Up to 30 meters tall</li>
+                        <li><strong>Timber:</strong> Beautiful reddish-brown wood</li>
+                        <li><strong>Leaves:</strong> Large compound leaves</li>
+                        <li><strong>Flowers:</strong> Small white flowers in clusters</li>
+                        <li><strong>Fruit:</strong> Woody capsules that split to release winged seeds</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Khaya anthotheca</p>
+                    <p><strong>Family:</strong> Meliaceae</p>
+                    <p><strong>Uses:</strong> High-quality furniture, construction</p>
+                    <p><strong>Status:</strong> Protected species</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('trees') }}" class="btn btn-nature-outline">← Back to Trees</a>
+    </div>
+</div>
+{% endblock %}

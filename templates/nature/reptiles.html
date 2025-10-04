@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Reptiles of Zimbabwe - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active">Reptiles</li>
+        </ol>
+    </nav>
+
+    <div class="text-center mb-5">
+        <h1 class="text-nature-green mb-4">Reptiles of Zimbabwe</h1>
+        <p class="lead">Discover Zimbabwe's fascinating reptile species, from mighty crocodiles to colorful chameleons.</p>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-green text-white">
+                    <h5 class="mb-0"><i class="fas fa-dragon me-2"></i>Nile Crocodile</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Crocodylus niloticus</p>
+                    <p>Africa's largest freshwater predator, found in Zimbabwe's rivers and lakes.</p>
+                    <a href="{{ url_for('crocodile') }}" class="btn btn-nature">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-brown text-white">
+                    <h5 class="mb-0"><i class="fas fa-snake me-2"></i>African Python</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Python sebae</p>
+                    <p>One of Africa's largest snakes, non-venomous but powerful constrictor.</p>
+                    <a href="{{ url_for('python') }}" class="btn btn-nature">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-light-green text-white">
+                    <h5 class="mb-0"><i class="fas fa-eye me-2"></i>Chameleon</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Various species</p>
+                    <p>Color-changing lizards with unique eyes and projectile tongues.</p>
+                    <a href="{{ url_for('chameleon') }}" class="btn btn-nature">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-nature-beige p-4 rounded">
+        <h3 class="text-nature-green mb-3">Reptile Diversity in Zimbabwe</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Snakes</h6>
+                <ul class="small">
+                    <li>Over 80 species recorded</li>
+                    <li>Includes venomous and non-venomous species</li>
+                    <li>Important for rodent control</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Lizards & Others</h6>
+                <ul class="small">
+                    <li>Geckos, skinks, and monitors</li>
+                    <li>Tortoises and terrapins</li>
+                    <li>Adapted to various habitats</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

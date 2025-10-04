@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Acacia Tree - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('trees') }}">Trees</a></li>
+            <li class="breadcrumb-item active">Acacia Tree</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Acacia Tree</h1>
+    <p class="lead"><em>Acacia species</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>Acacia trees are among the most recognizable trees in Zimbabwe's landscape. With their distinctive umbrella-shaped canopies and thorny branches, they are perfectly adapted to the African savanna and provide crucial resources for wildlife and humans alike.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Characteristics</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Shape:</strong> Distinctive flat-topped, umbrella-like canopy</li>
+                        <li><strong>Thorns:</strong> Sharp spines for protection from browsers</li>
+                        <li><strong>Leaves:</strong> Small, compound leaves that reduce water loss</li>
+                        <li><strong>Flowers:</strong> Yellow, ball-shaped flower clusters</li>
+                        <li><strong>Pods:</strong> Long, flat seed pods</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Acacia species</p>
+                    <p><strong>Family:</strong> Fabaceae</p>
+                    <p><strong>Common Species:</strong> Umbrella Thorn, Sweet Thorn</p>
+                    <p><strong>Uses:</strong> Shade, gum arabic, traditional medicine</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('trees') }}" class="btn btn-nature-outline">← Back to Trees</a>
+    </div>
+</div>
+{% endblock %}

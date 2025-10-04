@@ -1,0 +1,439 @@
+{% extends "base.html" %}
+
+{% block title %}Stopwatch - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('tools_home') }}">Tools</a></li>
+            <li class="breadcrumb-item active">Stopwatch</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="text-center mb-4">
+                <h1 class="text-nature-green mb-3">⏱️ Stopwatch</h1>
+                <p class="lead">Precise timing for your activities and experiments</p>
+            </div>
+
+            <div class="nature-card">
+                <div class="card-body text-center">
+                    <!-- Time Display -->
+                    <div class="time-display mb-4">
+                        <div id="timeDisplay" class="display-1 text-nature-green font-monospace">
+                            00:00:00
+                        </div>
+                        <div id="millisecondsDisplay" class="h4 text-muted">
+                            .000
+                        </div>
+                    </div>
+
+                    <!-- Control Buttons -->
+                    <div class="controls mb-4">
+                        <button id="startBtn" class="btn btn-success btn-lg me-3">
+                            <i class="fas fa-play me-2"></i>Start
+                        </button>
+                        <button id="stopBtn" class="btn btn-danger btn-lg me-3" disabled>
+                            <i class="fas fa-stop me-2"></i>Stop
+                        </button>
+                        <button id="resetBtn" class="btn btn-secondary btn-lg me-3">
+                            <i class="fas fa-undo me-2"></i>Reset
+                        </button>
+                        <button id="lapBtn" class="btn btn-nature btn-lg" disabled>
+                            <i class="fas fa-flag me-2"></i>Lap
+                        </button>
+                    </div>
+
+                    <!-- Status -->
+                    <div id="status" class="mb-3">
+                        <span class="badge bg-secondary">Ready</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lap Times -->
+            <div id="lapTimesCard" class="nature-card mt-4" style="display: none;">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">🏁 Lap Times</h5>
+                    <button id="clearLapsBtn" class="btn btn-outline-secondary btn-sm">
+                        <i class="fas fa-trash me-1"></i>Clear
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div id="lapTimesList" class="lap-times-list">
+                        <!-- Lap times will be added here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div id="statsCard" class="nature-card mt-4" style="display: none;">
+                <div class="card-header">
+                    <h5 class="mb-0">📊 Statistics</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <div class="h5 text-nature-green" id="fastestLap">--</div>
+                            <small class="text-muted">Fastest Lap</small>
+                        </div>
+                        <div class="col-4">
+                            <div class="h5 text-nature-green" id="slowestLap">--</div>
+                            <small class="text-muted">Slowest Lap</small>
+                        </div>
+                        <div class="col-4">
+                            <div class="h5 text-nature-green" id="averageLap">--</div>
+                            <small class="text-muted">Average Lap</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Usage Tips -->
+            <div class="nature-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">💡 Usage Tips</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-nature-brown">Controls</h6>
+                            <ul class="small">
+                                <li><strong>Space:</strong> Start/Stop</li>
+                                <li><strong>L:</strong> Record Lap</li>
+                                <li><strong>R:</strong> Reset</li>
+                                <li><strong>C:</strong> Clear Laps</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-nature-brown">Uses</h6>
+                            <ul class="small">
+                                <li>Sports timing</li>
+                                <li>Cooking and baking</li>
+                                <li>Exercise routines</li>
+                                <li>Study sessions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="text-center mt-4">
+                <a href="{{ url_for('tools_home') }}" class="btn btn-nature-outline">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Tools
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.time-display {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 15px;
+    padding: 30px;
+    border: 3px solid var(--nature-green);
+}
+
+#timeDisplay {
+    font-size: 4rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+#millisecondsDisplay {
+    margin-top: -10px;
+    font-family: monospace;
+}
+
+.controls button {
+    min-width: 100px;
+}
+
+.lap-times-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.lap-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s ease;
+}
+
+.lap-item:hover {
+    background-color: var(--nature-beige);
+}
+
+.lap-item:last-child {
+    border-bottom: none;
+}
+
+.lap-number {
+    font-weight: bold;
+    color: var(--nature-green);
+}
+
+.lap-time {
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.lap-split {
+    font-family: monospace;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.fastest {
+    background-color: rgba(40, 167, 69, 0.1);
+    border-left: 4px solid #28a745;
+}
+
+.slowest {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-left: 4px solid #dc3545;
+}
+
+@media (max-width: 768px) {
+    #timeDisplay {
+        font-size: 2.5rem;
+    }
+    
+    .controls button {
+        min-width: 80px;
+        margin-bottom: 10px;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const timeDisplay = document.getElementById('timeDisplay');
+    const millisecondsDisplay = document.getElementById('millisecondsDisplay');
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const lapBtn = document.getElementById('lapBtn');
+    const status = document.getElementById('status');
+    const lapTimesCard = document.getElementById('lapTimesCard');
+    const lapTimesList = document.getElementById('lapTimesList');
+    const clearLapsBtn = document.getElementById('clearLapsBtn');
+    const statsCard = document.getElementById('statsCard');
+    const fastestLap = document.getElementById('fastestLap');
+    const slowestLap = document.getElementById('slowestLap');
+    const averageLap = document.getElementById('averageLap');
+    
+    let startTime = 0;
+    let elapsedTime = 0;
+    let timerInterval = null;
+    let isRunning = false;
+    let lapTimes = [];
+    let lapCounter = 0;
+    
+    function formatTime(milliseconds) {
+        const totalSeconds = Math.floor(milliseconds / 1000);
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        const ms = milliseconds % 1000;
+        
+        return {
+            display: `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}:${Math.floor(ms / 10).toString().padStart(2, '0')}`,
+            milliseconds: `.${ms.toString().padStart(3, '0')}`
+        };
+    }
+    
+    function updateDisplay() {
+        const currentTime = isRunning ? Date.now() - startTime + elapsedTime : elapsedTime;
+        const formatted = formatTime(currentTime);
+        
+        timeDisplay.textContent = formatted.display;
+        millisecondsDisplay.textContent = formatted.milliseconds;
+    }
+    
+    function startStopwatch() {
+        if (!isRunning) {
+            startTime = Date.now();
+            isRunning = true;
+            
+            timerInterval = setInterval(updateDisplay, 10);
+            
+            startBtn.innerHTML = '<i class="fas fa-pause me-2"></i>Pause';
+            startBtn.className = 'btn btn-warning btn-lg me-3';
+            stopBtn.disabled = false;
+            lapBtn.disabled = false;
+            resetBtn.disabled = true;
+            
+            status.innerHTML = '<span class="badge bg-success">Running</span>';
+        } else {
+            pauseStopwatch();
+        }
+    }
+    
+    function pauseStopwatch() {
+        if (isRunning) {
+            elapsedTime += Date.now() - startTime;
+            isRunning = false;
+            clearInterval(timerInterval);
+            
+            startBtn.innerHTML = '<i class="fas fa-play me-2"></i>Resume';
+            startBtn.className = 'btn btn-success btn-lg me-3';
+            resetBtn.disabled = false;
+            
+            status.innerHTML = '<span class="badge bg-warning">Paused</span>';
+        }
+    }
+    
+    function stopStopwatch() {
+        if (isRunning) {
+            elapsedTime += Date.now() - startTime;
+            isRunning = false;
+            clearInterval(timerInterval);
+        }
+        
+        startBtn.innerHTML = '<i class="fas fa-play me-2"></i>Start';
+        startBtn.className = 'btn btn-success btn-lg me-3';
+        stopBtn.disabled = true;
+        lapBtn.disabled = true;
+        resetBtn.disabled = false;
+        
+        status.innerHTML = '<span class="badge bg-danger">Stopped</span>';
+    }
+    
+    function resetStopwatch() {
+        isRunning = false;
+        elapsedTime = 0;
+        clearInterval(timerInterval);
+        
+        updateDisplay();
+        
+        startBtn.innerHTML = '<i class="fas fa-play me-2"></i>Start';
+        startBtn.className = 'btn btn-success btn-lg me-3';
+        stopBtn.disabled = true;
+        lapBtn.disabled = true;
+        resetBtn.disabled = true;
+        
+        status.innerHTML = '<span class="badge bg-secondary">Ready</span>';
+    }
+    
+    function recordLap() {
+        if (!isRunning && elapsedTime === 0) return;
+        
+        const currentTime = isRunning ? Date.now() - startTime + elapsedTime : elapsedTime;
+        const previousTime = lapTimes.length > 0 ? lapTimes[lapTimes.length - 1].totalTime : 0;
+        const splitTime = currentTime - previousTime;
+        
+        lapCounter++;
+        lapTimes.push({
+            number: lapCounter,
+            totalTime: currentTime,
+            splitTime: splitTime
+        });
+        
+        updateLapDisplay();
+        updateStatistics();
+    }
+    
+    function updateLapDisplay() {
+        if (lapTimes.length === 0) {
+            lapTimesCard.style.display = 'none';
+            return;
+        }
+        
+        lapTimesCard.style.display = 'block';
+        lapTimesList.innerHTML = '';
+        
+        // Find fastest and slowest laps
+        const splitTimes = lapTimes.map(lap => lap.splitTime);
+        const fastestTime = Math.min(...splitTimes);
+        const slowestTime = Math.max(...splitTimes);
+        
+        lapTimes.slice().reverse().forEach(lap => {
+            const lapItem = document.createElement('div');
+            lapItem.className = 'lap-item';
+            
+            // Add fastest/slowest classes
+            if (lap.splitTime === fastestTime && lapTimes.length > 1) {
+                lapItem.classList.add('fastest');
+            } else if (lap.splitTime === slowestTime && lapTimes.length > 1) {
+                lapItem.classList.add('slowest');
+            }
+            
+            const totalFormatted = formatTime(lap.totalTime);
+            const splitFormatted = formatTime(lap.splitTime);
+            
+            lapItem.innerHTML = `
+                <div class="lap-number">Lap ${lap.number}</div>
+                <div class="text-end">
+                    <div class="lap-time">${splitFormatted.display}${splitFormatted.milliseconds}</div>
+                    <div class="lap-split">Total: ${totalFormatted.display}${totalFormatted.milliseconds}</div>
+                </div>
+            `;
+            
+            lapTimesList.appendChild(lapItem);
+        });
+    }
+    
+    function updateStatistics() {
+        if (lapTimes.length === 0) {
+            statsCard.style.display = 'none';
+            return;
+        }
+        
+        statsCard.style.display = 'block';
+        
+        const splitTimes = lapTimes.map(lap => lap.splitTime);
+        const fastest = Math.min(...splitTimes);
+        const slowest = Math.max(...splitTimes);
+        const average = splitTimes.reduce((a, b) => a + b, 0) / splitTimes.length;
+        
+        fastestLap.textContent = formatTime(fastest).display;
+        slowestLap.textContent = formatTime(slowest).display;
+        averageLap.textContent = formatTime(average).display;
+    }
+    
+    function clearLaps() {
+        lapTimes = [];
+        lapCounter = 0;
+        updateLapDisplay();
+        updateStatistics();
+    }
+    
+    // Event listeners
+    startBtn.addEventListener('click', startStopwatch);
+    stopBtn.addEventListener('click', stopStopwatch);
+    resetBtn.addEventListener('click', resetStopwatch);
+    lapBtn.addEventListener('click', recordLap);
+    clearLapsBtn.addEventListener('click', clearLaps);
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        switch(e.key.toLowerCase()) {
+            case ' ':
+                e.preventDefault();
+                startStopwatch();
+                break;
+            case 'l':
+                if (!stopBtn.disabled) recordLap();
+                break;
+            case 'r':
+                if (!resetBtn.disabled) resetStopwatch();
+                break;
+            case 'c':
+                if (lapTimes.length > 0) clearLaps();
+                break;
+        }
+    });
+    
+    // Initialize display
+    updateDisplay();
+});
+</script>
+{% endblock %}

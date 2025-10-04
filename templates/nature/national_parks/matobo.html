@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Matobo Hills National Park - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('national_parks') }}">National Parks</a></li>
+            <li class="breadcrumb-item active">Matobo Hills National Park</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Matobo Hills National Park</h1>
+    <p class="lead">Ancient granite formations and cultural heritage site</p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>The Matobo Hills National Park is famous for its spectacular granite rock formations, ancient San rock art, and cultural significance. This UNESCO World Heritage Site combines natural beauty with rich human history spanning thousands of years.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Highlights</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Rock formations:</strong> Spectacular granite balancing rocks</li>
+                        <li><strong>Rock art:</strong> Ancient San paintings, some over 2,000 years old</li>
+                        <li><strong>Wildlife:</strong> Black and white rhinos, leopards, eagles</li>
+                        <li><strong>Cultural sites:</strong> Cecil Rhodes' grave, sacred sites</li>
+                        <li><strong>Birdlife:</strong> Highest concentration of black eagles in the world</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Established:</strong> 1926</p>
+                    <p><strong>Size:</strong> 424 km²</p>
+                    <p><strong>UNESCO Status:</strong> World Heritage Site (2003)</p>
+                    <p><strong>Rock art sites:</strong> Over 3,000 sites</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('national_parks') }}" class="btn btn-nature-outline">← Back to National Parks</a>
+    </div>
+</div>
+{% endblock %}

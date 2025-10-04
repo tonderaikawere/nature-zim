@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Wild Orchid - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('flowers') }}">Flowers</a></li>
+            <li class="breadcrumb-item active">Wild Orchid</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Wild Orchid</h1>
+    <p class="lead"><em>Various species</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>Zimbabwe is home to numerous wild orchid species, these delicate and exotic flowers can be found in forests, grasslands, and rocky outcrops. They are prized for their intricate beauty and unique adaptations.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Characteristics</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Flowers:</strong> Complex, often colorful and fragrant</li>
+                        <li><strong>Habitat:</strong> Forests, grasslands, rocky areas</li>
+                        <li><strong>Growth:</strong> Terrestrial or epiphytic</li>
+                        <li><strong>Pollination:</strong> Specialized relationships with insects</li>
+                        <li><strong>Conservation:</strong> Many species are rare and protected</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Family:</strong> Orchidaceae</p>
+                    <p><strong>Species:</strong> Over 400 in Zimbabwe</p>
+                    <p><strong>Flowering:</strong> Mainly rainy season</p>
+                    <p><strong>Status:</strong> Many species endangered</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('flowers') }}" class="btn btn-nature-outline">← Back to Flowers</a>
+    </div>
+</div>
+{% endblock %}

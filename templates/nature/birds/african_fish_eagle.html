@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}African Fish Eagle - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('birds') }}">Birds</a></li>
+            <li class="breadcrumb-item active">African Fish Eagle</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">African Fish Eagle</h1>
+    <p class="lead"><em>Haliaeetus vocifer</em> - Zimbabwe's National Bird</p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>The African Fish Eagle is Zimbabwe's national bird, symbolizing pride and the natural heritage of the country. This magnificent raptor is found near rivers, lakes, and dams throughout Zimbabwe, where its distinctive call echoes across the water.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Physical Features</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Wingspan:</strong> 2-2.4 meters</li>
+                        <li><strong>Weight:</strong> 2-3.6 kg</li>
+                        <li><strong>Length:</strong> 63-75 cm</li>
+                        <li><strong>Plumage:</strong> White head, tail, and chest; black wings and body</li>
+                        <li><strong>Call:</strong> Distinctive high-pitched cry</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Habitat & Behavior</h4>
+                </div>
+                <div class="card-body">
+                    <p>African Fish Eagles are found near water bodies where they hunt for fish, their primary food source. They are skilled fishers, swooping down to snatch fish from the water's surface with their powerful talons.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>National Symbol</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Status:</strong> National Bird</p>
+                    <p><strong>Symbolism:</strong> Pride, strength, freedom</p>
+                    <p><strong>Flag:</strong> Featured on Zimbabwe's flag</p>
+                    <p><strong>Conservation:</strong> Stable population</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('birds') }}" class="btn btn-nature-outline">← Back to Birds</a>
+    </div>
+</div>
+{% endblock %}

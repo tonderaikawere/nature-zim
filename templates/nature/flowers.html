@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Flowers of Zimbabwe - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active">Flowers</li>
+        </ol>
+    </nav>
+
+    <div class="text-center mb-5">
+        <h1 class="text-nature-green mb-4">Flowers of Zimbabwe</h1>
+        <p class="lead">Discover Zimbabwe's beautiful flowering plants, from the national flower to exotic orchids.</p>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-gold text-white">
+                    <h5 class="mb-0"><i class="fas fa-fire me-2"></i>Flame Lily</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Gloriosa superba</p>
+                    <p>Zimbabwe's national flower, known for its striking red and yellow petals that curve backward like flames.</p>
+                    <a href="{{ url_for('flame_lily') }}" class="btn btn-nature">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-light-green text-white">
+                    <h5 class="mb-0"><i class="fas fa-spa me-2"></i>Wild Orchid</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Various species</p>
+                    <p>Delicate and exotic flowers found in Zimbabwe's forests and grasslands, prized for their beauty.</p>
+                    <a href="{{ url_for('orchid') }}" class="btn btn-nature">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-brown text-white">
+                    <h5 class="mb-0"><i class="fas fa-sun me-2"></i>Sunflower</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Helianthus annuus</p>
+                    <p>Large, bright yellow flowers that follow the sun, cultivated throughout Zimbabwe for seeds and oil.</p>
+                    <a href="{{ url_for('sunflower') }}" class="btn btn-nature">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-nature-beige p-4 rounded">
+        <h3 class="text-nature-green mb-3">Flowering Seasons in Zimbabwe</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Wet Season (Nov-Mar)</h6>
+                <ul class="small">
+                    <li>Peak flowering period for most species</li>
+                    <li>Flame lilies bloom after first rains</li>
+                    <li>Abundant wildflower displays</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Dry Season (Apr-Oct)</h6>
+                <ul class="small">
+                    <li>Some drought-adapted species flower</li>
+                    <li>Seed collection time</li>
+                    <li>Preparation for next growing season</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

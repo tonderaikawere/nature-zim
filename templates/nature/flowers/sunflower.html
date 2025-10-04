@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Sunflower - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('flowers') }}">Flowers</a></li>
+            <li class="breadcrumb-item active">Sunflower</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Sunflower</h1>
+    <p class="lead"><em>Helianthus annuus</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>Sunflowers are cultivated throughout Zimbabwe for their seeds and oil. These bright, cheerful flowers are known for their ability to track the sun across the sky and are an important agricultural crop.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Features</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Height:</strong> 1-3 meters tall</li>
+                        <li><strong>Flower head:</strong> Large, yellow petals with dark center</li>
+                        <li><strong>Heliotropism:</strong> Young flowers follow the sun</li>
+                        <li><strong>Seeds:</strong> Rich in oil and nutrients</li>
+                        <li><strong>Growing season:</strong> Summer crop in Zimbabwe</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Helianthus annuus</p>
+                    <p><strong>Family:</strong> Asteraceae</p>
+                    <p><strong>Uses:</strong> Oil production, food, ornamental</p>
+                    <p><strong>Economic Value:</strong> Important cash crop</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('flowers') }}" class="btn btn-nature-outline">← Back to Flowers</a>
+    </div>
+</div>
+{% endblock %}

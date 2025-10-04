@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block title %}Educational Wildlife Games - Learn About Zimbabwe Nature | Tonde's Nature Zimbabwe{% endblock %}
+
+{% block meta_title %} Educational Wildlife Games - Learn About Zimbabwe Nature | Tonde's Nature Zimbabwe{% endblock %}
+
+{% block description %}Play fun educational games created by Tonde to learn about Zimbabwe's wildlife! Animal sounds quiz, nature trivia, memory games, and more. Perfect for students, teachers, and nature enthusiasts.{% endblock %}
+
+{% block keywords %}Zimbabwe educational games, wildlife games, animal sounds quiz, nature trivia, educational games Africa, Zimbabwe animals game, conservation games, environmental education games, Tonde games{% endblock %}
+
+{% block og_title %} Educational Wildlife Games - Learn About Zimbabwe Nature{% endblock %}
+
+{% block og_description %}Play fun educational games created by Tonde to learn about Zimbabwe's wildlife! Animal sounds quiz, nature trivia, memory games, and more.{% endblock %}
+
+{% block twitter_title %} Educational Wildlife Games - Learn About Zimbabwe Nature{% endblock %}
+
+{% block twitter_description %}Play fun educational games created by Tonde to learn about Zimbabwe's wildlife! Animal sounds quiz, nature trivia, memory games, and more.{% endblock %}
+
+{% block schema_type %}WebPage{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <h1 class="text-nature-green mb-4">Educational Wildlife Games</h1>
+        <p class="lead">Learn about Zimbabwe's wildlife through fun and interactive games created by Tonde!</p>
+    </div>
+
+    <!-- Featured Games -->
+    <div class="row mb-5">
+        <div class="col-lg-4 mb-4">
+            <div class="game-card">
+                <div class="game-icon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <h4 class="text-nature-green">Nature Quiz</h4>
+                <p>Test your knowledge about Zimbabwe's flora and fauna with our comprehensive quiz game.</p>
+                <a href="{{ url_for('quiz_game') }}" class="btn btn-nature">Play Quiz</a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="game-card">
+                <div class="game-icon">
+                    <i class="fas fa-puzzle-piece"></i>
+                </div>
+                <h4 class="text-nature-green">Sliding Puzzle</h4>
+                <p>Solve beautiful nature-themed sliding puzzles featuring Zimbabwe's landscapes.</p>
+                <a href="{{ url_for('puzzle') }}" class="btn btn-nature">Play Puzzle</a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="game-card">
+                <div class="game-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h4 class="text-nature-green">Memory Match</h4>
+                <p>Match pairs of animals, plants, and landmarks in this memory-challenging game.</p>
+                <a href="{{ url_for('memory_match') }}" class="btn btn-nature">Play Memory</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- All Games Grid -->
+    <h2 class="text-center section-title mb-4">All Games</h2>
+    <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="game-card h-100">
+                <div class="game-icon">
+                    <i class="fas fa-dice"></i>
+                </div>
+                <h5>Dice Roller</h5>
+                <p class="small">Roll virtual dice for games and activities.</p>
+                <a href="{{ url_for('dice_roller') }}" class="btn btn-nature-outline btn-sm">Play</a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="game-card h-100">
+                <div class="game-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h5>Word Search</h5>
+                <p class="small">Find nature-related words hidden in the grid.</p>
+                <a href="{{ url_for('word_search') }}" class="btn btn-nature-outline btn-sm">Play</a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="game-card h-100">
+                <div class="game-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h5>Nature Trivia</h5>
+                <p class="small">Answer trivia questions about Zimbabwe's nature.</p>
+                <a href="{{ url_for('nature_trivia') }}" class="btn btn-nature-outline btn-sm">Play</a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="game-card h-100">
+                <div class="game-icon">
+                    <i class="fas fa-volume-up"></i>
+                </div>
+                <h5>Animal Sounds</h5>
+                <p class="small">Match animal sounds to their pictures.</p>
+                <a href="{{ url_for('animal_sounds') }}" class="btn btn-nature-outline btn-sm">Play</a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="game-card h-100">
+                <div class="game-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <h5>Grass ID Challenge</h5>
+                <p class="small">Identify different grass species found in Zimbabwe.</p>
+                <a href="{{ url_for('grass_id_challenge') }}" class="btn btn-nature-outline btn-sm">Play</a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="game-card h-100">
+                <div class="game-icon">
+                    <i class="fas fa-cards-blank"></i>
+                </div>
+                <h5>Wildlife Flashcards</h5>
+                <p class="small">Study wildlife with interactive flashcards.</p>
+                <a href="{{ url_for('wildlife_flashcards') }}" class="btn btn-nature-outline btn-sm">Study</a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="game-card h-100">
+                <div class="game-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h5>Scoreboard</h5>
+                <p class="small">View high scores and achievements.</p>
+                <a href="{{ url_for('scoreboard') }}" class="btn btn-nature-outline btn-sm">View</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Tips -->
+    <div class="bg-nature-beige p-4 rounded mt-5">
+        <h3 class="text-nature-green mb-3">Game Tips</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-lightbulb text-nature-gold me-2"></i>Start with easier games to learn about Zimbabwe's nature</li>
+                    <li><i class="fas fa-clock text-nature-gold me-2"></i>Take your time to read the information provided</li>
+                    <li><i class="fas fa-repeat text-nature-gold me-2"></i>Replay games to improve your scores</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-users text-nature-gold me-2"></i>Challenge friends and family to play</li>
+                    <li><i class="fas fa-book text-nature-gold me-2"></i>Use games to supplement your nature learning</li>
+                    <li><i class="fas fa-star text-nature-gold me-2"></i>Earn points and track your progress</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

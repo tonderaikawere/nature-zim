@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Birds of Zimbabwe - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active">Birds</li>
+        </ol>
+    </nav>
+
+    <div class="text-center mb-5">
+        <h1 class="text-nature-green mb-4">Birds of Zimbabwe</h1>
+        <p class="lead">Zimbabwe is home to over 670 bird species, from the majestic African Fish Eagle to colorful bee-eaters.</p>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-green text-white">
+                    <h5 class="mb-0"><i class="fas fa-dove me-2"></i>African Fish Eagle</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Haliaeetus vocifer</p>
+                    <p>Zimbabwe's national bird, known for its distinctive call and impressive fishing skills along rivers and lakes.</p>
+                    <a href="{{ url_for('african_fish_eagle') }}" class="btn btn-nature">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-light-green text-white">
+                    <h5 class="mb-0"><i class="fas fa-dove me-2"></i>Hornbill</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Tockus species</p>
+                    <p>Large birds with distinctive curved bills, important seed dispersers in Zimbabwe's woodlands.</p>
+                    <a href="{{ url_for('hornbill') }}" class="btn btn-nature">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-brown text-white">
+                    <h5 class="mb-0"><i class="fas fa-dove me-2"></i>Weaver Bird</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Ploceus species</p>
+                    <p>Master architects known for their intricate woven nests, often seen in colonies near water sources.</p>
+                    <a href="{{ url_for('weaver_bird') }}" class="btn btn-nature">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-nature-beige p-4 rounded">
+        <h3 class="text-nature-green mb-3">Bird Watching in Zimbabwe</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Best Locations</h6>
+                <ul class="small">
+                    <li>Hwange National Park</li>
+                    <li>Mana Pools National Park</li>
+                    <li>Eastern Highlands</li>
+                    <li>Lake Kariba</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Best Times</h6>
+                <ul class="small">
+                    <li>Early morning (5-9 AM)</li>
+                    <li>Late afternoon (4-6 PM)</li>
+                    <li>Wet season (Nov-Mar) for migrants</li>
+                    <li>Dry season for water birds</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

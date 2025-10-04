@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Hornbill - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('birds') }}">Birds</a></li>
+            <li class="breadcrumb-item active">Hornbill</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Hornbill</h1>
+    <p class="lead"><em>Tockus species</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>Hornbills are distinctive birds with large, curved bills and unique nesting behaviors. Several species are found in Zimbabwe, playing important roles as seed dispersers in forest ecosystems.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Characteristics</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Bill:</strong> Large, curved, often with casque on top</li>
+                        <li><strong>Size:</strong> Varies by species, 30-60 cm</li>
+                        <li><strong>Nesting:</strong> Unique sealed nest behavior</li>
+                        <li><strong>Diet:</strong> Fruits, insects, small animals</li>
+                        <li><strong>Habitat:</strong> Woodlands and forests</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Tockus species</p>
+                    <p><strong>Family:</strong> Bucerotidae</p>
+                    <p><strong>Common Species:</strong> Red-billed, Yellow-billed</p>
+                    <p><strong>Role:</strong> Important seed dispersers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('birds') }}" class="btn btn-nature-outline">← Back to Birds</a>
+    </div>
+</div>
+{% endblock %}

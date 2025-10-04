@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+
+{% block title %}Sitemap - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="text-center text-nature-green mb-5">Site Map</h1>
+            <p class="text-center text-muted mb-5">Navigate through all pages of Nature Zimbabwe</p>
+            
+            <!-- Main Pages -->
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4 class="mb-0"><i class="fas fa-home me-2"></i>Main Pages</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><a href="{{ url_for('home') }}" class="text-decoration-none">🏠 Home</a></li>
+                                <li><a href="{{ url_for('about') }}" class="text-decoration-none">ℹ️ About</a></li>
+                                <li><a href="{{ url_for('contact') }}" class="text-decoration-none">📧 Contact</a></li>
+                                <li><a href="{{ url_for('faq') }}" class="text-decoration-none">❓ FAQ</a></li>
+                                <li><a href="{{ url_for('gallery') }}" class="text-decoration-none">🖼️ Gallery</a></li>
+                                <li><a href="{{ url_for('news') }}" class="text-decoration-none">📰 News</a></li>
+                                <li><a href="{{ url_for('events') }}" class="text-decoration-none">📅 Events</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><a href="{{ url_for('blog') }}" class="text-decoration-none">📝 Blog</a></li>
+                                <li><a href="{{ url_for('resources') }}" class="text-decoration-none">📚 Resources</a></li>
+                                <li><a href="{{ url_for('partners') }}" class="text-decoration-none">🤝 Partners</a></li>
+                                <li><a href="{{ url_for('support') }}" class="text-decoration-none">🆘 Support</a></li>
+                                <li><a href="{{ url_for('privacy') }}" class="text-decoration-none">🔒 Privacy Policy</a></li>
+                                <li><a href="{{ url_for('terms') }}" class="text-decoration-none">📋 Terms & Conditions</a></li>
+                                <li><a href="{{ url_for('sitemap') }}" class="text-decoration-none">🗺️ Sitemap</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nature & Learning Pages -->
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4 class="mb-0"><i class="fas fa-leaf me-2"></i>Nature & Learning</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-nature-green">🌱 Grasses</h6>
+                            <ul class="list-unstyled ms-3 mb-3">
+                                <li><a href="{{ url_for('grasses') }}" class="text-decoration-none">Grasses Overview</a></li>
+                                <li><a href="{{ url_for('red_grass') }}" class="text-decoration-none">Red Grass</a></li>
+                                <li><a href="{{ url_for('spear_grass') }}" class="text-decoration-none">Spear Grass</a></li>
+                                <li><a href="{{ url_for('elephant_grass') }}" class="text-decoration-none">Elephant Grass</a></li>
+                                <li><a href="{{ url_for('buffalo_grass') }}" class="text-decoration-none">Buffalo Grass</a></li>
+                                <li><a href="{{ url_for('star_grass') }}" class="text-decoration-none">Star Grass</a></li>
+                            </ul>
+
+                            <h6 class="text-nature-green">🌳 Trees</h6>
+                            <ul class="list-unstyled ms-3 mb-3">
+                                <li><a href="{{ url_for('trees') }}" class="text-decoration-none">Trees Overview</a></li>
+                                <li><a href="{{ url_for('baobab') }}" class="text-decoration-none">Baobab</a></li>
+                                <li><a href="{{ url_for('msasa') }}" class="text-decoration-none">Msasa</a></li>
+                                <li><a href="{{ url_for('mopane') }}" class="text-decoration-none">Mopane</a></li>
+                                <li><a href="{{ url_for('acacia') }}" class="text-decoration-none">Acacia</a></li>
+                                <li><a href="{{ url_for('mahogany') }}" class="text-decoration-none">Mahogany</a></li>
+                            </ul>
+
+                            <h6 class="text-nature-green">🌸 Flowers</h6>
+                            <ul class="list-unstyled ms-3 mb-3">
+                                <li><a href="{{ url_for('flowers') }}" class="text-decoration-none">Flowers Overview</a></li>
+                                <li><a href="{{ url_for('flame_lily') }}" class="text-decoration-none">Flame Lily</a></li>
+                                <li><a href="{{ url_for('orchid') }}" class="text-decoration-none">Orchid</a></li>
+                                <li><a href="{{ url_for('sunflower') }}" class="text-decoration-none">Sunflower</a></li>
+                            </ul>
+
+                            <h6 class="text-nature-green">🦅 Birds</h6>
+                            <ul class="list-unstyled ms-3 mb-3">
+                                <li><a href="{{ url_for('birds') }}" class="text-decoration-none">Birds Overview</a></li>
+                                <li><a href="{{ url_for('african_fish_eagle') }}" class="text-decoration-none">African Fish Eagle</a></li>
+                                <li><a href="{{ url_for('hornbill') }}" class="text-decoration-none">Hornbill</a></li>
+                                <li><a href="{{ url_for('weaver_bird') }}" class="text-decoration-none">Weaver Bird</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-nature-green">🦁 Mammals</h6>
+                            <ul class="list-unstyled ms-3 mb-3">
+                                <li><a href="{{ url_for('mammals') }}" class="text-decoration-none">Mammals Overview</a></li>
+                                <li><a href="{{ url_for('elephant') }}" class="text-decoration-none">Elephant</a></li>
+                                <li><a href="{{ url_for('lion') }}" class="text-decoration-none">Lion</a></li>
+                                <li><a href="{{ url_for('zebra') }}" class="text-decoration-none">Zebra</a></li>
+                            </ul>
+
+                            <h6 class="text-nature-green">🦎 Reptiles</h6>
+                            <ul class="list-unstyled ms-3 mb-3">
+                                <li><a href="{{ url_for('reptiles') }}" class="text-decoration-none">Reptiles Overview</a></li>
+                                <li><a href="{{ url_for('crocodile') }}" class="text-decoration-none">Crocodile</a></li>
+                                <li><a href="{{ url_for('python') }}" class="text-decoration-none">Python</a></li>
+                                <li><a href="{{ url_for('chameleon') }}" class="text-decoration-none">Chameleon</a></li>
+                            </ul>
+
+                            <h6 class="text-nature-green">🦋 Insects</h6>
+                            <ul class="list-unstyled ms-3 mb-3">
+                                <li><a href="{{ url_for('insects') }}" class="text-decoration-none">Insects Overview</a></li>
+                                <li><a href="{{ url_for('butterfly') }}" class="text-decoration-none">Butterfly</a></li>
+                                <li><a href="{{ url_for('bee') }}" class="text-decoration-none">Bee</a></li>
+                                <li><a href="{{ url_for('ant') }}" class="text-decoration-none">Ant</a></li>
+                            </ul>
+
+                            <h6 class="text-nature-green">🐟 Fish</h6>
+                            <ul class="list-unstyled ms-3 mb-3">
+                                <li><a href="{{ url_for('fish') }}" class="text-decoration-none">Fish Overview</a></li>
+                                <li><a href="{{ url_for('tilapia') }}" class="text-decoration-none">Tilapia</a></li>
+                                <li><a href="{{ url_for('catfish') }}" class="text-decoration-none">Catfish</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <h6 class="text-nature-green">🏞️ Rivers & Lakes</h6>
+                            <ul class="list-unstyled ms-3 mb-3">
+                                <li><a href="{{ url_for('rivers_lakes') }}" class="text-decoration-none">Rivers & Lakes Overview</a></li>
+                                <li><a href="{{ url_for('zambezi') }}" class="text-decoration-none">Zambezi River</a></li>
+                                <li><a href="{{ url_for('lake_kariba') }}" class="text-decoration-none">Lake Kariba</a></li>
+                            </ul>
+
+                            <h6 class="text-nature-green">🏛️ National Parks</h6>
+                            <ul class="list-unstyled ms-3 mb-3">
+                                <li><a href="{{ url_for('national_parks') }}" class="text-decoration-none">National Parks Overview</a></li>
+                                <li><a href="{{ url_for('hwange') }}" class="text-decoration-none">Hwange National Park</a></li>
+                                <li><a href="{{ url_for('mana_pools') }}" class="text-decoration-none">Mana Pools National Park</a></li>
+                                <li><a href="{{ url_for('matobo') }}" class="text-decoration-none">Matobo National Park</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-nature-green">🌍 Environment</h6>
+                            <ul class="list-unstyled ms-3 mb-3">
+                                <li><a href="{{ url_for('climate_seasons') }}" class="text-decoration-none">Climate & Seasons</a></li>
+                                <li><a href="{{ url_for('soils_agriculture') }}" class="text-decoration-none">Soils & Agriculture</a></li>
+                                <li><a href="{{ url_for('habitats_ecosystems') }}" class="text-decoration-none">Habitats & Ecosystems</a></li>
+                                <li><a href="{{ url_for('conservation') }}" class="text-decoration-none">Conservation & Sustainability</a></li>
+                                <li><a href="{{ url_for('culture_nature') }}" class="text-decoration-none">Culture & Nature</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Games Section -->
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4 class="mb-0"><i class="fas fa-gamepad me-2"></i>Games</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><a href="{{ url_for('games_home') }}" class="text-decoration-none">🎮 Games Home</a></li>
+                                <li><a href="{{ url_for('dice_roller') }}" class="text-decoration-none">🎲 Dice Roller</a></li>
+                                <li><a href="{{ url_for('quiz_game') }}" class="text-decoration-none">❓ Quiz Game</a></li>
+                                <li><a href="{{ url_for('puzzle') }}" class="text-decoration-none">🧩 Puzzle (3×3 sliding)</a></li>
+                                <li><a href="{{ url_for('word_search') }}" class="text-decoration-none">🔍 Word Search</a></li>
+                                <li><a href="{{ url_for('memory_match') }}" class="text-decoration-none">🧠 Memory Match</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><a href="{{ url_for('nature_trivia') }}" class="text-decoration-none">🌿 Nature Trivia</a></li>
+                                <li><a href="{{ url_for('animal_sounds') }}" class="text-decoration-none">🔊 Animal Sounds Match</a></li>
+                                <li><a href="{{ url_for('grass_id_challenge') }}" class="text-decoration-none">🌱 Grass ID Challenge</a></li>
+                                <li><a href="{{ url_for('wildlife_flashcards') }}" class="text-decoration-none">📚 Wildlife Flashcards</a></li>
+                                <li><a href="{{ url_for('scoreboard') }}" class="text-decoration-none">🏆 Scoreboard</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tools Section -->
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4 class="mb-0"><i class="fas fa-tools me-2"></i>Tools</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><a href="{{ url_for('tools_home') }}" class="text-decoration-none">🛠️ Tools Home</a></li>
+                                <li><a href="{{ url_for('calculator') }}" class="text-decoration-none">🧮 Calculator</a></li>
+                                <li><a href="{{ url_for('age_calculator') }}" class="text-decoration-none">📅 Age Calculator</a></li>
+                                <li><a href="{{ url_for('calendar_viewer') }}" class="text-decoration-none">📆 Calendar Viewer</a></li>
+                                <li><a href="{{ url_for('temperature_converter') }}" class="text-decoration-none">🌡️ Temperature Converter</a></li>
+                                <li><a href="{{ url_for('length_converter') }}" class="text-decoration-none">📏 Length Converter</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><a href="{{ url_for('weight_converter') }}" class="text-decoration-none">⚖️ Weight Converter</a></li>
+                                <li><a href="{{ url_for('bmi_calculator') }}" class="text-decoration-none">💪 BMI Calculator</a></li>
+                                <li><a href="{{ url_for('currency_converter') }}" class="text-decoration-none">💱 Currency Converter</a></li>
+                                <li><a href="{{ url_for('todo_list') }}" class="text-decoration-none">📝 To-Do List</a></li>
+                                <li><a href="{{ url_for('notes_app') }}" class="text-decoration-none">📋 Notes App</a></li>
+                                <li><a href="{{ url_for('stopwatch') }}" class="text-decoration-none">⏱️ Stopwatch/Timer</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <p class="text-muted">Total: <strong>40+ Interactive Pages</strong></p>
+                <a href="{{ url_for('home') }}" class="btn btn-nature">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

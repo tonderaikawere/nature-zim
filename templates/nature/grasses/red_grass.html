@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Red Grass - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('grasses') }}">Grasses</a></li>
+            <li class="breadcrumb-item active">Red Grass</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Red Grass</h1>
+    <p class="lead"><em>Themeda triandra</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>Red grass is one of Zimbabwe's most important and widespread grass species, dominating the highveld grasslands. Known for its distinctive reddish-brown color when mature, this perennial grass is highly valued for livestock grazing and plays a crucial role in the ecosystem.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Characteristics</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Height:</strong> 30-120 cm</li>
+                        <li><strong>Color:</strong> Green when young, reddish-brown when mature</li>
+                        <li><strong>Growth:</strong> Perennial tufted grass</li>
+                        <li><strong>Habitat:</strong> Well-drained soils, highveld areas</li>
+                        <li><strong>Palatability:</strong> Highly palatable to livestock</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Themeda triandra</p>
+                    <p><strong>Family:</strong> Poaceae</p>
+                    <p><strong>Distribution:</strong> Throughout Zimbabwe</p>
+                    <p><strong>Uses:</strong> Grazing, thatching, erosion control</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('grasses') }}" class="btn btn-nature-outline">← Back to Grasses</a>
+    </div>
+</div>
+{% endblock %}

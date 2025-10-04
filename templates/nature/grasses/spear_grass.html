@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Spear Grass - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('grasses') }}">Grasses</a></li>
+            <li class="breadcrumb-item active">Spear Grass</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Spear Grass</h1>
+    <p class="lead"><em>Heteropogon contortus</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>Spear grass is easily recognizable by its distinctive twisted awns that give it its name. This hardy perennial grass is well-adapted to poor soils and dry conditions, making it an important species in Zimbabwe's drier regions.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Distinctive Features</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Awns:</strong> Long, twisted, spear-like structures</li>
+                        <li><strong>Height:</strong> 30-90 cm</li>
+                        <li><strong>Adaptation:</strong> Drought-tolerant</li>
+                        <li><strong>Soil preference:</strong> Poor, rocky soils</li>
+                        <li><strong>Grazing value:</strong> Moderate palatability</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Heteropogon contortus</p>
+                    <p><strong>Family:</strong> Poaceae</p>
+                    <p><strong>Common Names:</strong> Spear grass, Tangled spear grass</p>
+                    <p><strong>Distribution:</strong> Widespread in Zimbabwe</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('grasses') }}" class="btn btn-nature-outline">← Back to Grasses</a>
+    </div>
+</div>
+{% endblock %}

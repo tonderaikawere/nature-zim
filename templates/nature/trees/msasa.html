@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Msasa Tree - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('trees') }}">Trees</a></li>
+            <li class="breadcrumb-item active">Msasa</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Msasa Tree</h1>
+    <p class="lead"><em>Brachystegia spiciformis</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>The Msasa tree is a dominant species in Zimbabwe's miombo woodlands, covering vast areas of the country. This valuable hardwood tree is crucial for both ecological balance and economic purposes, providing timber, fuel, and habitat for numerous species.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Characteristics & Uses</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Height:</strong> Up to 20 meters</li>
+                        <li><strong>Habitat:</strong> Miombo woodlands, well-drained soils</li>
+                        <li><strong>Timber:</strong> High-quality hardwood for construction</li>
+                        <li><strong>Ecology:</strong> Supports diverse wildlife communities</li>
+                        <li><strong>Traditional uses:</strong> Medicine, tools, building materials</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Brachystegia spiciformis</p>
+                    <p><strong>Family:</strong> Fabaceae</p>
+                    <p><strong>Distribution:</strong> Miombo woodlands</p>
+                    <p><strong>Conservation:</strong> Sustainable harvesting needed</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('trees') }}" class="btn btn-nature-outline">← Back to Trees</a>
+    </div>
+</div>
+{% endblock %}

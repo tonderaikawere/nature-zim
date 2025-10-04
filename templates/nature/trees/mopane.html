@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Mopane Tree - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('trees') }}">Trees</a></li>
+            <li class="breadcrumb-item active">Mopane Tree</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Mopane Tree</h1>
+    <p class="lead"><em>Colophospermum mopane</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>The Mopane tree is one of Zimbabwe's most distinctive trees, easily recognized by its butterfly-shaped leaves. It forms extensive woodlands in the drier regions and is crucial for both wildlife and local communities.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Distinctive Features</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Leaves:</strong> Butterfly-shaped, folding during hot weather</li>
+                        <li><strong>Height:</strong> 4-18 meters</li>
+                        <li><strong>Bark:</strong> Grey to reddish-brown, deeply fissured</li>
+                        <li><strong>Habitat:</strong> Hot, dry areas with clay soils</li>
+                        <li><strong>Distribution:</strong> Northern and western Zimbabwe</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Colophospermum mopane</p>
+                    <p><strong>Family:</strong> Fabaceae</p>
+                    <p><strong>Uses:</strong> Construction, fuel, traditional medicine</p>
+                    <p><strong>Wildlife Value:</strong> Food for elephants and other herbivores</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('trees') }}" class="btn btn-nature-outline">← Back to Trees</a>
+    </div>
+</div>
+{% endblock %}

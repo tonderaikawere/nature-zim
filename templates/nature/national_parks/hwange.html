@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Hwange National Park - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('national_parks') }}">National Parks</a></li>
+            <li class="breadcrumb-item active">Hwange National Park</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Hwange National Park</h1>
+    <p class="lead">Zimbabwe's largest national park and elephant sanctuary</p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>Hwange National Park is Zimbabwe's largest national park, covering 14,651 square kilometers. Famous for its massive elephant herds and diverse wildlife, it's one of Africa's premier safari destinations and a crucial conservation area.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Wildlife Highlights</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Elephants:</strong> Over 40,000 elephants, largest population in Zimbabwe</li>
+                        <li><strong>Big Five:</strong> Lion, leopard, elephant, buffalo, rhino</li>
+                        <li><strong>Predators:</strong> Wild dogs, cheetahs, hyenas</li>
+                        <li><strong>Herbivores:</strong> Zebra, giraffe, kudu, sable antelope</li>
+                        <li><strong>Birds:</strong> Over 400 species recorded</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Established:</strong> 1928</p>
+                    <p><strong>Size:</strong> 14,651 km²</p>
+                    <p><strong>Location:</strong> Northwestern Zimbabwe</p>
+                    <p><strong>Best time to visit:</strong> May to October</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('national_parks') }}" class="btn btn-nature-outline">← Back to National Parks</a>
+    </div>
+</div>
+{% endblock %}

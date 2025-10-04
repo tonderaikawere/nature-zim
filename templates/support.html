@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+
+{% block title %}Support - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="text-nature-green mb-4">Support Center</h1>
+        <p class="lead">Get help with using Nature Zimbabwe and find answers to your questions</p>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Getting Started -->
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4 class="mb-0"><i class="fas fa-rocket me-2"></i>Getting Started</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="border rounded p-3">
+                                <h6 class="text-nature-green"><i class="fas fa-play-circle me-2"></i>New User Guide</h6>
+                                <p class="small">Learn how to navigate the website and access educational content.</p>
+                                <button class="btn btn-nature-outline btn-sm">View Guide</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="border rounded p-3">
+                                <h6 class="text-nature-green"><i class="fas fa-gamepad me-2"></i>Using Games & Tools</h6>
+                                <p class="small">Discover how to use our interactive games and educational tools.</p>
+                                <button class="btn btn-nature-outline btn-sm">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Common Issues -->
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4 class="mb-0"><i class="fas fa-tools me-2"></i>Common Issues & Solutions</h4>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="supportAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#issue1">
+                                    Games not loading properly
+                                </button>
+                            </h2>
+                            <div id="issue1" class="accordion-collapse collapse show" data-bs-parent="#supportAccordion">
+                                <div class="accordion-body">
+                                    <p><strong>Solution:</strong></p>
+                                    <ol>
+                                        <li>Clear your browser cache and cookies</li>
+                                        <li>Ensure JavaScript is enabled in your browser</li>
+                                        <li>Try using a different browser (Chrome, Firefox, Safari)</li>
+                                        <li>Check your internet connection</li>
+                                    </ol>
+                                    <p>If the issue persists, please contact our support team.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#issue2">
+                                    Images not displaying correctly
+                                </button>
+                            </h2>
+                            <div id="issue2" class="accordion-collapse collapse" data-bs-parent="#supportAccordion">
+                                <div class="accordion-body">
+                                    <p><strong>Solution:</strong></p>
+                                    <ol>
+                                        <li>Refresh the page (Ctrl+F5 or Cmd+R)</li>
+                                        <li>Check if images are blocked by ad blockers</li>
+                                        <li>Ensure you have a stable internet connection</li>
+                                        <li>Try accessing the page in incognito/private mode</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#issue3">
+                                    Mobile compatibility issues
+                                </button>
+                            </h2>
+                            <div id="issue3" class="accordion-collapse collapse" data-bs-parent="#supportAccordion">
+                                <div class="accordion-body">
+                                    <p><strong>Solution:</strong></p>
+                                    <ol>
+                                        <li>Update your mobile browser to the latest version</li>
+                                        <li>Clear browser data and cache</li>
+                                        <li>Ensure you have sufficient storage space</li>
+                                        <li>Try rotating your device for better layout</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#issue4">
+                                    Calculator tools not working
+                                </button>
+                            </h2>
+                            <div id="issue4" class="accordion-collapse collapse" data-bs-parent="#supportAccordion">
+                                <div class="accordion-body">
+                                    <p><strong>Solution:</strong></p>
+                                    <ol>
+                                        <li>Ensure you're entering valid numbers</li>
+                                        <li>Check that JavaScript is enabled</li>
+                                        <li>Refresh the page and try again</li>
+                                        <li>Use the keyboard for number input if touch isn't working</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Browser Requirements -->
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4 class="mb-0"><i class="fas fa-globe me-2"></i>System Requirements</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-nature-green">Supported Browsers</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="fab fa-chrome text-primary me-2"></i>Chrome 90+</li>
+                                <li><i class="fab fa-firefox text-warning me-2"></i>Firefox 88+</li>
+                                <li><i class="fab fa-safari text-info me-2"></i>Safari 14+</li>
+                                <li><i class="fab fa-edge text-success me-2"></i>Edge 90+</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-nature-green">Device Requirements</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-desktop text-nature-green me-2"></i>Desktop/Laptop</li>
+                                <li><i class="fas fa-tablet text-nature-green me-2"></i>Tablet (iOS/Android)</li>
+                                <li><i class="fas fa-mobile text-nature-green me-2"></i>Smartphone</li>
+                                <li><i class="fas fa-wifi text-nature-green me-2"></i>Internet connection required</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Support -->
+            <div class="nature-card">
+                <div class="card-header">
+                    <h4 class="mb-0"><i class="fas fa-headset me-2"></i>Contact Support</h4>
+                </div>
+                <div class="card-body">
+                    <p>Can't find the answer you're looking for? Our support team is here to help!</p>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="bg-light p-3 rounded">
+                                <h6 class="text-nature-green">Email Support</h6>
+                                <p class="small mb-2">support@naturezimbabwe.org</p>
+                                <p class="small text-muted">Response time: 24-48 hours</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="bg-light p-3 rounded">
+                                <h6 class="text-nature-green">General Contact</h6>
+                                <p class="small mb-2">Use our contact form</p>
+                                <a href="{{ url_for('contact') }}" class="btn btn-nature-outline btn-sm">Contact Form</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Quick Help -->
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Quick Help</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li><a href="{{ url_for('faq') }}" class="text-decoration-none d-block py-2">
+                            <i class="fas fa-question-circle text-nature-green me-2"></i>Frequently Asked Questions
+                        </a></li>
+                        <li><a href="{{ url_for('sitemap') }}" class="text-decoration-none d-block py-2">
+                            <i class="fas fa-sitemap text-nature-green me-2"></i>Site Map
+                        </a></li>
+                        <li><a href="{{ url_for('about') }}" class="text-decoration-none d-block py-2">
+                            <i class="fas fa-info-circle text-nature-green me-2"></i>About Nature Zimbabwe
+                        </a></li>
+                        <li><a href="{{ url_for('resources') }}" class="text-decoration-none d-block py-2">
+                            <i class="fas fa-book text-nature-green me-2"></i>Educational Resources
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Video Tutorials -->
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Video Tutorials</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="bg-nature-beige p-3 rounded text-center mb-2">
+                            <i class="fas fa-play-circle text-nature-green fa-2x"></i>
+                        </div>
+                        <h6 class="small">Getting Started with Nature Zimbabwe</h6>
+                        <small class="text-muted">3:45 minutes</small>
+                    </div>
+                    <div class="mb-3">
+                        <div class="bg-nature-beige p-3 rounded text-center mb-2">
+                            <i class="fas fa-play-circle text-nature-green fa-2x"></i>
+                        </div>
+                        <h6 class="small">Using Educational Games</h6>
+                        <small class="text-muted">2:30 minutes</small>
+                    </div>
+                    <div class="mb-3">
+                        <div class="bg-nature-beige p-3 rounded text-center mb-2">
+                            <i class="fas fa-play-circle text-nature-green fa-2x"></i>
+                        </div>
+                        <h6 class="small">Accessing Learning Resources</h6>
+                        <small class="text-muted">4:15 minutes</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Updates -->
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">System Status</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="small">Website</span>
+                        <span class="badge bg-success">Operational</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="small">Games</span>
+                        <span class="badge bg-success">Operational</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="small">Tools</span>
+                        <span class="badge bg-success">Operational</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="small">Resources</span>
+                        <span class="badge bg-success">Operational</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feedback -->
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5 class="mb-0">Feedback</h5>
+                </div>
+                <div class="card-body">
+                    <p class="small">Help us improve Nature Zimbabwe by sharing your feedback.</p>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-nature btn-sm">Rate Your Experience</button>
+                        <button class="btn btn-nature-outline btn-sm">Suggest Improvements</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

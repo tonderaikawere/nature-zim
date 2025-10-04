@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}African Python - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('reptiles') }}">Reptiles</a></li>
+            <li class="breadcrumb-item active">African Python</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">African Python</h1>
+    <p class="lead"><em>Python sebae</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>The African Python is one of the largest snakes in Africa and Zimbabwe's most impressive serpent. These non-venomous constrictors play an important role in controlling rodent populations and are revered in traditional culture.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Characteristics</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Length:</strong> Up to 6 meters (average 3-4 meters)</li>
+                        <li><strong>Weight:</strong> Can exceed 50 kg</li>
+                        <li><strong>Hunting method:</strong> Constriction</li>
+                        <li><strong>Diet:</strong> Birds, mammals, occasionally reptiles</li>
+                        <li><strong>Habitat:</strong> Woodlands, grasslands, rocky areas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Python sebae</p>
+                    <p><strong>Family:</strong> Pythonidae</p>
+                    <p><strong>Status:</strong> Near Threatened</p>
+                    <p><strong>Reproduction:</strong> Lays 20-100 eggs</p>
+                    <p><strong>Cultural significance:</strong> Sacred in many traditions</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('reptiles') }}" class="btn btn-nature-outline">← Back to Reptiles</a>
+    </div>
+</div>
+{% endblock %}

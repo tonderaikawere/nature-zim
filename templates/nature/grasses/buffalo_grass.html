@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Buffalo Grass - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('grasses') }}">Grasses</a></li>
+            <li class="breadcrumb-item active">Buffalo Grass</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Buffalo Grass</h1>
+    <p class="lead"><em>Panicum maximum</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>Buffalo grass is a robust, tufted perennial grass that forms an important component of Zimbabwe's natural grasslands. It's highly valued for its palatability and nutritional value for livestock.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Characteristics</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Height:</strong> 1-2 meters</li>
+                        <li><strong>Growth form:</strong> Robust tufted perennial</li>
+                        <li><strong>Palatability:</strong> Highly palatable to livestock</li>
+                        <li><strong>Nutritional value:</strong> High protein content</li>
+                        <li><strong>Habitat:</strong> Various soil types</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Panicum maximum</p>
+                    <p><strong>Family:</strong> Poaceae</p>
+                    <p><strong>Origin:</strong> Tropical Africa</p>
+                    <p><strong>Uses:</strong> Grazing, hay production</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('grasses') }}" class="btn btn-nature-outline">← Back to Grasses</a>
+    </div>
+</div>
+{% endblock %}

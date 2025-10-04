@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}African Elephant - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('mammals') }}">Mammals</a></li>
+            <li class="breadcrumb-item active">Elephant</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">African Elephant</h1>
+    <p class="lead"><em>Loxodonta africana</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>The African elephant is the largest land mammal on Earth. Zimbabwe has one of Africa's largest elephant populations, with over 80,000 elephants roaming the country's national parks and conservancies.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Physical Characteristics</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Weight:</strong> 4,000-7,000 kg</li>
+                        <li><strong>Height:</strong> 3-4 meters at shoulder</li>
+                        <li><strong>Lifespan:</strong> 60-70 years</li>
+                        <li><strong>Diet:</strong> Herbivore (300kg vegetation daily)</li>
+                        <li><strong>Gestation:</strong> 22 months</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Behavior & Ecology</h4>
+                </div>
+                <div class="card-body">
+                    <p>Elephants are highly intelligent and social animals living in matriarchal herds. They play a crucial role as ecosystem engineers, creating water holes and dispersing seeds across vast distances.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Conservation Status</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Status:</strong> Endangered</p>
+                    <p><strong>Population:</strong> ~80,000 in Zimbabwe</p>
+                    <p><strong>Threats:</strong> Poaching, habitat loss</p>
+                    <p><strong>Protection:</strong> CITES Appendix I</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('mammals') }}" class="btn btn-nature-outline">← Back to Mammals</a>
+    </div>
+</div>
+{% endblock %}

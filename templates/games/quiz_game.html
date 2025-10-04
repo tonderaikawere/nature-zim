@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+
+{% block title %}Nature Quiz - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('games_home') }}">Games</a></li>
+            <li class="breadcrumb-item active">Quiz Game</li>
+        </ol>
+    </nav>
+
+    <div class="text-center mb-5">
+        <h1 class="text-nature-green mb-4">🧠 Nature Quiz</h1>
+        <p class="lead">Test your knowledge about Zimbabwe's flora and fauna!</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div id="quizContainer" class="nature-card">
+                <div class="card-body">
+                    <!-- Quiz Start Screen -->
+                    <div id="startScreen" class="text-center">
+                        <h3 class="text-nature-green mb-4">Ready to Test Your Knowledge?</h3>
+                        <p>Answer questions about Zimbabwe's trees, animals, and natural heritage.</p>
+                        <button id="startQuiz" class="btn btn-nature btn-lg">Start Quiz</button>
+                    </div>
+
+                    <!-- Quiz Question Screen -->
+                    <div id="questionScreen" style="display: none;">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <span class="badge bg-nature-green">Question <span id="currentQ">1</span> of <span id="totalQ">10</span></span>
+                            <span class="text-muted">Score: <span id="score">0</span></span>
+                        </div>
+                        
+                        <div id="question" class="h4 text-nature-green mb-4"></div>
+                        
+                        <div id="answers" class="d-grid gap-2">
+                            <!-- Answer buttons will be inserted here -->
+                        </div>
+                        
+                        <div id="feedback" class="mt-3" style="display: none;"></div>
+                        
+                        <button id="nextQuestion" class="btn btn-nature mt-3" style="display: none;">Next Question</button>
+                    </div>
+
+                    <!-- Quiz Results Screen -->
+                    <div id="resultsScreen" style="display: none;" class="text-center">
+                        <h3 class="text-nature-green mb-4">Quiz Complete!</h3>
+                        <div id="finalScore" class="display-4 text-nature-brown mb-3"></div>
+                        <div id="scoreMessage" class="mb-4"></div>
+                        <div class="d-flex justify-content-center gap-3">
+                            <button id="restartQuiz" class="btn btn-nature">Play Again</button>
+                            <a href="{{ url_for('games_home') }}" class="btn btn-nature-outline">More Games</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const questions = [
+        {
+            question: "What is Zimbabwe's national bird?",
+            answers: ["African Fish Eagle", "Hornbill", "Weaver Bird", "Secretary Bird"],
+            correct: 0
+        },
+        {
+            question: "Which tree is known as the 'Tree of Life'?",
+            answers: ["Msasa", "Mopane", "Baobab", "Acacia"],
+            correct: 2
+        },
+        {
+            question: "What is the scientific name for Red Grass?",
+            answers: ["Themeda triandra", "Heteropogon contortus", "Pennisetum purpureum", "Cynodon dactylon"],
+            correct: 0
+        },
+        {
+            question: "Which is Zimbabwe's largest national park?",
+            answers: ["Mana Pools", "Hwange", "Matobo", "Gonarezhou"],
+            correct: 1
+        },
+        {
+            question: "How long can a Baobab tree live?",
+            answers: ["100-200 years", "500-800 years", "1000-2000+ years", "50-100 years"],
+            correct: 2
+        },
+        {
+            question: "What type of woodlands cover 60% of Zimbabwe?",
+            answers: ["Mopane woodlands", "Miombo woodlands", "Acacia woodlands", "Teak forests"],
+            correct: 1
+        },
+        {
+            question: "Which grass is known for its twisted awns?",
+            answers: ["Red Grass", "Star Grass", "Spear Grass", "Buffalo Grass"],
+            correct: 2
+        },
+        {
+            question: "What is the largest land mammal in Zimbabwe?",
+            answers: ["Rhinoceros", "Hippopotamus", "Buffalo", "Elephant"],
+            correct: 3
+        },
+        {
+            question: "Which river forms Zimbabwe's northern border?",
+            answers: ["Limpopo", "Zambezi", "Save", "Mazowe"],
+            correct: 1
+        },
+        {
+            question: "What makes Mana Pools National Park special?",
+            answers: ["Highest mountain", "Desert landscape", "UNESCO World Heritage Site", "Largest lake"],
+            correct: 2
+        }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let selectedAnswer = null;
+
+    const startScreen = document.getElementById('startScreen');
+    const questionScreen = document.getElementById('questionScreen');
+    const resultsScreen = document.getElementById('resultsScreen');
+    const startBtn = document.getElementById('startQuiz');
+    const nextBtn = document.getElementById('nextQuestion');
+    const restartBtn = document.getElementById('restartQuiz');
+
+    startBtn.addEventListener('click', startQuiz);
+    nextBtn.addEventListener('click', nextQuestion);
+    restartBtn.addEventListener('click', restartQuiz);
+
+    function startQuiz() {
+        currentQuestion = 0;
+        score = 0;
+        startScreen.style.display = 'none';
+        questionScreen.style.display = 'block';
+        showQuestion();
+    }
+
+    function showQuestion() {
+        const q = questions[currentQuestion];
+        document.getElementById('currentQ').textContent = currentQuestion + 1;
+        document.getElementById('totalQ').textContent = questions.length;
+        document.getElementById('score').textContent = score;
+        document.getElementById('question').textContent = q.question;
+        
+        const answersDiv = document.getElementById('answers');
+        answersDiv.innerHTML = '';
+        
+        q.answers.forEach((answer, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'btn btn-outline-secondary answer-btn';
+            btn.textContent = answer;
+            btn.addEventListener('click', () => selectAnswer(index));
+            answersDiv.appendChild(btn);
+        });
+        
+        document.getElementById('feedback').style.display = 'none';
+        nextBtn.style.display = 'none';
+        selectedAnswer = null;
+    }
+
+    function selectAnswer(answerIndex) {
+        if (selectedAnswer !== null) return;
+        
+        selectedAnswer = answerIndex;
+        const q = questions[currentQuestion];
+        const buttons = document.querySelectorAll('.answer-btn');
+        const feedback = document.getElementById('feedback');
+        
+        buttons.forEach((btn, index) => {
+            btn.disabled = true;
+            if (index === q.correct) {
+                btn.classList.remove('btn-outline-secondary');
+                btn.classList.add('btn-success');
+            } else if (index === answerIndex && index !== q.correct) {
+                btn.classList.remove('btn-outline-secondary');
+                btn.classList.add('btn-danger');
+            }
+        });
+        
+        if (answerIndex === q.correct) {
+            score++;
+            feedback.innerHTML = '<div class="alert alert-success">Correct! 🎉</div>';
+        } else {
+            feedback.innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is: ${q.answers[q.correct]}</div>`;
+        }
+        
+        feedback.style.display = 'block';
+        nextBtn.style.display = 'block';
+    }
+
+    function nextQuestion() {
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+            showQuestion();
+        } else {
+            showResults();
+        }
+    }
+
+    function showResults() {
+        questionScreen.style.display = 'none';
+        resultsScreen.style.display = 'block';
+        
+        const percentage = Math.round((score / questions.length) * 100);
+        document.getElementById('finalScore').textContent = `${score}/${questions.length} (${percentage}%)`;
+        
+        let message = '';
+        if (percentage >= 90) {
+            message = '🏆 Excellent! You\'re a Zimbabwe nature expert!';
+        } else if (percentage >= 70) {
+            message = '🌟 Great job! You know Zimbabwe\'s nature well!';
+        } else if (percentage >= 50) {
+            message = '👍 Good effort! Keep learning about Zimbabwe\'s wildlife!';
+        } else {
+            message = '📚 Keep exploring to learn more about Zimbabwe\'s amazing nature!';
+        }
+        
+        document.getElementById('scoreMessage').textContent = message;
+        
+        // Save score
+        GameUtils.saveScore('nature_quiz', score);
+    }
+
+    function restartQuiz() {
+        resultsScreen.style.display = 'none';
+        startScreen.style.display = 'block';
+    }
+});
+</script>
+{% endblock %}

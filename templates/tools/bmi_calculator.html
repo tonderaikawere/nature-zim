@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+
+{% block title %}BMI Calculator - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('tools_home') }}">Tools</a></li>
+            <li class="breadcrumb-item active">BMI Calculator</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="text-center mb-4">
+                <h1 class="text-nature-green mb-3">💪 BMI Calculator</h1>
+                <p class="lead">Calculate your Body Mass Index and health status</p>
+            </div>
+
+            <div class="nature-card">
+                <div class="card-body">
+                    <form id="bmiForm">
+                        <div class="row mb-3">
+                            <div class="col-md-8">
+                                <label for="weight" class="form-label">Weight:</label>
+                                <input type="number" class="form-control" id="weight" placeholder="Enter your weight" step="0.1" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="weightUnit" class="form-label">Unit:</label>
+                                <select class="form-select" id="weightUnit">
+                                    <option value="kg">Kilograms</option>
+                                    <option value="lbs">Pounds</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-8">
+                                <label for="height" class="form-label">Height:</label>
+                                <input type="number" class="form-control" id="height" placeholder="Enter your height" step="0.1" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="heightUnit" class="form-label">Unit:</label>
+                                <select class="form-select" id="heightUnit">
+                                    <option value="cm">Centimeters</option>
+                                    <option value="m">Meters</option>
+                                    <option value="ft">Feet</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-nature btn-lg w-100 mb-4">Calculate BMI</button>
+                    </form>
+
+                    <div id="results" style="display: none;">
+                        <div class="bg-nature-beige p-4 rounded">
+                            <div class="text-center mb-3">
+                                <h4 class="text-nature-green">Your BMI Result</h4>
+                                <div class="display-4 text-nature-brown" id="bmiValue">0</div>
+                                <div class="h5" id="bmiCategory">Normal</div>
+                            </div>
+                            
+                            <div id="bmiMeter" class="mb-3">
+                                <div class="d-flex justify-content-between small text-muted mb-1">
+                                    <span>Underweight</span>
+                                    <span>Normal</span>
+                                    <span>Overweight</span>
+                                    <span>Obese</span>
+                                </div>
+                                <div class="progress" style="height: 20px;">
+                                    <div class="progress-bar bg-info" style="width: 25%">18.5</div>
+                                    <div class="progress-bar bg-success" style="width: 25%">25</div>
+                                    <div class="progress-bar bg-warning" style="width: 25%">30</div>
+                                    <div class="progress-bar bg-danger" style="width: 25%">35+</div>
+                                </div>
+                                <div class="position-relative">
+                                    <div id="bmiIndicator" class="position-absolute" style="top: -30px; transform: translateX(-50%);">
+                                        <i class="fas fa-caret-down text-dark fa-2x"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="healthTips" class="mt-3">
+                                <h6 class="text-nature-green">Health Tips:</h6>
+                                <ul id="tipsList" class="small">
+                                    <!-- Tips will be populated by JavaScript -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nature-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">BMI Categories</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-3">
+                            <div class="text-info">
+                                <i class="fas fa-arrow-down fa-2x mb-2"></i>
+                                <h6>Underweight</h6>
+                                <small>Below 18.5</small>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="text-success">
+                                <i class="fas fa-check-circle fa-2x mb-2"></i>
+                                <h6>Normal</h6>
+                                <small>18.5 - 24.9</small>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="text-warning">
+                                <i class="fas fa-exclamation-triangle fa-2x mb-2"></i>
+                                <h6>Overweight</h6>
+                                <small>25.0 - 29.9</small>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="text-danger">
+                                <i class="fas fa-arrow-up fa-2x mb-2"></i>
+                                <h6>Obese</h6>
+                                <small>30.0 and above</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="{{ url_for('tools_home') }}" class="btn btn-nature-outline">← Back to Tools</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const bmiForm = document.getElementById('bmiForm');
+    const results = document.getElementById('results');
+
+    bmiForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        calculateBMI();
+    });
+
+    function calculateBMI() {
+        const weight = parseFloat(document.getElementById('weight').value);
+        const height = parseFloat(document.getElementById('height').value);
+        const weightUnit = document.getElementById('weightUnit').value;
+        const heightUnit = document.getElementById('heightUnit').value;
+
+        if (!weight || !height || weight <= 0 || height <= 0) {
+            NatureUtils.showNotification('Please enter valid weight and height values.', 'warning');
+            return;
+        }
+
+        const bmiResult = ToolUtils.calculateBMI(weight, height, weightUnit, heightUnit);
+        
+        // Display results
+        document.getElementById('bmiValue').textContent = bmiResult.bmi;
+        document.getElementById('bmiCategory').textContent = bmiResult.category;
+        
+        // Set category color
+        const categoryElement = document.getElementById('bmiCategory');
+        categoryElement.className = 'h5 ';
+        if (bmiResult.category === 'Underweight') {
+            categoryElement.classList.add('text-info');
+        } else if (bmiResult.category === 'Normal weight') {
+            categoryElement.classList.add('text-success');
+        } else if (bmiResult.category === 'Overweight') {
+            categoryElement.classList.add('text-warning');
+        } else {
+            categoryElement.classList.add('text-danger');
+        }
+
+        // Position BMI indicator
+        const indicator = document.getElementById('bmiIndicator');
+        let position = 0;
+        if (bmiResult.bmi < 18.5) {
+            position = (bmiResult.bmi / 18.5) * 25;
+        } else if (bmiResult.bmi < 25) {
+            position = 25 + ((bmiResult.bmi - 18.5) / (25 - 18.5)) * 25;
+        } else if (bmiResult.bmi < 30) {
+            position = 50 + ((bmiResult.bmi - 25) / (30 - 25)) * 25;
+        } else {
+            position = 75 + Math.min(((bmiResult.bmi - 30) / 10) * 25, 25);
+        }
+        indicator.style.left = Math.min(position, 95) + '%';
+
+        // Health tips
+        const tips = getHealthTips(bmiResult.category);
+        const tipsList = document.getElementById('tipsList');
+        tipsList.innerHTML = tips.map(tip => `<li>${tip}</li>`).join('');
+
+        results.style.display = 'block';
+    }
+
+    function getHealthTips(category) {
+        switch (category) {
+            case 'Underweight':
+                return [
+                    'Consult a healthcare provider for personalized advice',
+                    'Focus on nutrient-dense foods',
+                    'Consider strength training exercises',
+                    'Eat regular, balanced meals'
+                ];
+            case 'Normal weight':
+                return [
+                    'Maintain your current healthy lifestyle',
+                    'Continue regular physical activity',
+                    'Eat a balanced diet with plenty of fruits and vegetables',
+                    'Stay hydrated and get adequate sleep'
+                ];
+            case 'Overweight':
+                return [
+                    'Aim for gradual, sustainable weight loss',
+                    'Increase physical activity to 150+ minutes per week',
+                    'Focus on portion control and healthy food choices',
+                    'Consider consulting a nutritionist'
+                ];
+            case 'Obese':
+                return [
+                    'Consult healthcare providers for a comprehensive plan',
+                    'Start with small, achievable lifestyle changes',
+                    'Focus on both diet and exercise modifications',
+                    'Consider professional support and monitoring'
+                ];
+            default:
+                return ['Maintain a healthy lifestyle with balanced diet and regular exercise'];
+        }
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Rivers & Lakes - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active">Rivers & Lakes</li>
+        </ol>
+    </nav>
+
+    <div class="text-center mb-5">
+        <h1 class="text-nature-green mb-4">Rivers & Lakes of Zimbabwe</h1>
+        <p class="lead">Explore Zimbabwe's magnificent water bodies that sustain life and provide natural beauty.</p>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-6 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-green text-white">
+                    <h5 class="mb-0"><i class="fas fa-water me-2"></i>Zambezi River</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Length:</strong> 2,574 km (Africa's 4th longest river)</p>
+                    <p>The mighty Zambezi forms Zimbabwe's northern border and is home to Victoria Falls, one of the world's largest waterfalls.</p>
+                    <a href="{{ url_for('zambezi') }}" class="btn btn-nature">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-brown text-white">
+                    <h5 class="mb-0"><i class="fas fa-lake me-2"></i>Lake Kariba</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Area:</strong> 5,580 km² (world's largest artificial lake by volume)</p>
+                    <p>Created by the Kariba Dam, this massive lake supports fishing, tourism, and hydroelectric power generation.</p>
+                    <a href="{{ url_for('lake_kariba') }}" class="btn btn-nature">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-nature-beige p-4 rounded">
+        <h3 class="text-nature-green mb-3">Water Resources</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Major River Systems</h6>
+                <ul class="small">
+                    <li>Zambezi River (northern border)</li>
+                    <li>Limpopo River (southern regions)</li>
+                    <li>Save River (eastern regions)</li>
+                    <li>Numerous tributaries and seasonal rivers</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Importance</h6>
+                <ul class="small">
+                    <li>Water supply for communities</li>
+                    <li>Irrigation for agriculture</li>
+                    <li>Hydroelectric power generation</li>
+                    <li>Tourism and recreation</li>
+                    <li>Wildlife habitat</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

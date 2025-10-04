@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+
+{% block title %}Gallery - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="text-nature-green mb-4">Nature Gallery</h1>
+        <p class="lead">Explore the beauty of Zimbabwe's natural heritage through our visual collection</p>
+    </div>
+
+    <!-- Featured Images -->
+    <div class="row mb-5">
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card">
+                <div class="card-body text-center">
+                    <div class="bg-nature-beige p-5 rounded mb-3">
+                        <svg width="200" height="150" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Baobab Tree -->
+                            <g fill="#8B4513">
+                                <ellipse cx="100" cy="120" rx="40" ry="25"/>
+                                <rect x="60" y="95" width="80" height="50" rx="15"/>
+                                <circle cx="50" cy="70" r="8"/>
+                                <circle cx="100" cy="60" r="10"/>
+                                <circle cx="150" cy="70" r="8"/>
+                            </g>
+                            <g fill="#228B22" opacity="0.8">
+                                <circle cx="50" cy="65" r="6"/>
+                                <circle cx="100" cy="55" r="8"/>
+                                <circle cx="150" cy="65" r="6"/>
+                            </g>
+                            <rect x="0" y="140" width="200" height="10" fill="#8B7355"/>
+                        </svg>
+                    </div>
+                    <h5 class="text-nature-green">Iconic Baobab Trees</h5>
+                    <p class="small text-muted">Ancient giants of the African landscape</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card">
+                <div class="card-body text-center">
+                    <div class="bg-nature-beige p-5 rounded mb-3">
+                        <svg width="200" height="150" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Wildlife Scene -->
+                            <rect x="0" y="120" width="200" height="30" fill="#8B7355"/>
+                            <ellipse cx="50" cy="110" rx="15" ry="8" fill="#696969"/>
+                            <ellipse cx="150" cy="105" rx="20" ry="12" fill="#A0522D"/>
+                            <circle cx="100" cy="40" r="15" fill="#87CEEB"/>
+                            <path d="M30 80 Q35 75 40 80 Q35 85 30 80" fill="#4169E1"/>
+                            <path d="M160 85 Q165 80 170 85 Q165 90 160 85" fill="#4169E1"/>
+                        </svg>
+                    </div>
+                    <h5 class="text-nature-green">Wildlife Scenes</h5>
+                    <p class="small text-muted">Animals in their natural habitat</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card">
+                <div class="card-body text-center">
+                    <div class="bg-nature-beige p-5 rounded mb-3">
+                        <svg width="200" height="150" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Landscape -->
+                            <rect x="0" y="100" width="200" height="50" fill="#228B22"/>
+                            <path d="M0 100 Q50 80 100 90 Q150 100 200 85 L200 150 L0 150 Z" fill="#32CD32"/>
+                            <circle cx="180" cy="30" r="20" fill="#FFD700"/>
+                            <rect x="20" y="80" width="3" height="20" fill="#8B4513"/>
+                            <rect x="180" y="75" width="4" height="25" fill="#8B4513"/>
+                        </svg>
+                    </div>
+                    <h5 class="text-nature-green">Landscapes</h5>
+                    <p class="small text-muted">Zimbabwe's diverse ecosystems</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Categories -->
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h4 class="mb-0"><i class="fas fa-tree me-2"></i>Flora Collection</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <div class="bg-light p-3 rounded text-center">
+                                <i class="fas fa-tree text-nature-green fa-2x mb-2"></i>
+                                <h6>Trees</h6>
+                                <small class="text-muted">Baobab, Msasa, Mopane</small>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="bg-light p-3 rounded text-center">
+                                <i class="fas fa-seedling text-nature-green fa-2x mb-2"></i>
+                                <h6>Grasses</h6>
+                                <small class="text-muted">Red, Spear, Elephant</small>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="bg-light p-3 rounded text-center">
+                                <i class="fas fa-flower text-nature-gold fa-2x mb-2"></i>
+                                <h6>Flowers</h6>
+                                <small class="text-muted">Flame Lily, Orchids</small>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="bg-light p-3 rounded text-center">
+                                <i class="fas fa-leaf text-nature-green fa-2x mb-2"></i>
+                                <h6>Plants</h6>
+                                <small class="text-muted">Indigenous species</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h4 class="mb-0"><i class="fas fa-paw me-2"></i>Fauna Collection</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <div class="bg-light p-3 rounded text-center">
+                                <i class="fas fa-paw text-nature-brown fa-2x mb-2"></i>
+                                <h6>Mammals</h6>
+                                <small class="text-muted">Big Five & more</small>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="bg-light p-3 rounded text-center">
+                                <i class="fas fa-dove text-nature-green fa-2x mb-2"></i>
+                                <h6>Birds</h6>
+                                <small class="text-muted">670+ species</small>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="bg-light p-3 rounded text-center">
+                                <i class="fas fa-fish text-nature-water fa-2x mb-2"></i>
+                                <h6>Fish</h6>
+                                <small class="text-muted">Freshwater species</small>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="bg-light p-3 rounded text-center">
+                                <i class="fas fa-bug text-nature-green fa-2x mb-2"></i>
+                                <h6>Insects</h6>
+                                <small class="text-muted">Butterflies & more</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Landscape Gallery -->
+    <div class="nature-card mb-4">
+        <div class="card-header">
+            <h4 class="mb-0"><i class="fas fa-mountain me-2"></i>Landscapes & Habitats</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="bg-nature-beige p-4 rounded text-center">
+                        <i class="fas fa-mountain text-nature-brown fa-3x mb-3"></i>
+                        <h6>National Parks</h6>
+                        <p class="small text-muted">Hwange, Mana Pools, Matobo Hills</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="bg-nature-beige p-4 rounded text-center">
+                        <i class="fas fa-water text-nature-water fa-3x mb-3"></i>
+                        <h6>Water Bodies</h6>
+                        <p class="small text-muted">Zambezi River, Lake Kariba</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="bg-nature-beige p-4 rounded text-center">
+                        <i class="fas fa-tree text-nature-green fa-3x mb-3"></i>
+                        <h6>Woodlands</h6>
+                        <p class="small text-muted">Miombo, Mopane forests</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="bg-nature-beige p-4 rounded text-center">
+                        <i class="fas fa-seedling text-nature-green fa-3x mb-3"></i>
+                        <h6>Grasslands</h6>
+                        <p class="small text-muted">Highveld, Lowveld savannas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Credits -->
+    <div class="bg-nature-beige p-4 rounded">
+        <h5 class="text-nature-green mb-3">About Our Gallery</h5>
+        <p>Our gallery showcases the incredible diversity of Zimbabwe's natural heritage. While these are artistic representations, they capture the essence of our country's flora, fauna, and landscapes.</p>
+        <p class="small text-muted mb-0">For high-resolution photographs and detailed imagery, we recommend visiting our partner conservation organizations and national parks.</p>
+    </div>
+</div>
+{% endblock %}

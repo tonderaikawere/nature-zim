@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Zebra - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('mammals') }}">Mammals</a></li>
+            <li class="breadcrumb-item active">Zebra</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Plains Zebra</h1>
+    <p class="lead"><em>Equus quagga</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>The Plains Zebra is one of Zimbabwe's most recognizable animals with its distinctive black and white stripes. These social herbivores form large herds and are an important part of the savanna ecosystem.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Characteristics</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Stripes:</strong> Unique pattern for each individual</li>
+                        <li><strong>Size:</strong> 200-300 kg, 1.2-1.4 m at shoulder</li>
+                        <li><strong>Social behavior:</strong> Live in family groups and herds</li>
+                        <li><strong>Diet:</strong> Primarily grasses</li>
+                        <li><strong>Migration:</strong> Seasonal movements following rains</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Equus quagga</p>
+                    <p><strong>Family:</strong> Equidae</p>
+                    <p><strong>Status:</strong> Near Threatened</p>
+                    <p><strong>Lifespan:</strong> 20-25 years</p>
+                    <p><strong>Predators:</strong> Lions, hyenas, wild dogs</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('mammals') }}" class="btn btn-nature-outline">← Back to Mammals</a>
+    </div>
+</div>
+{% endblock %}

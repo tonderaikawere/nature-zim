@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}National Parks - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active">National Parks</li>
+        </ol>
+    </nav>
+
+    <div class="text-center mb-5">
+        <h1 class="text-nature-green mb-4">Zimbabwe's National Parks</h1>
+        <p class="lead">Discover Zimbabwe's protected areas that preserve our natural heritage for future generations.</p>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-green text-white">
+                    <h5 class="mb-0"><i class="fas fa-mountain me-2"></i>Hwange National Park</h5>
+                </div>
+                <div class="card-body">
+                    <p>Zimbabwe's largest national park, famous for its massive elephant herds and diverse wildlife.</p>
+                    <a href="{{ url_for('hwange') }}" class="btn btn-nature">Explore</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-water text-white">
+                    <h5 class="mb-0"><i class="fas fa-water me-2"></i>Mana Pools</h5>
+                </div>
+                <div class="card-body">
+                    <p>A UNESCO World Heritage Site along the Zambezi River, known for its pristine wilderness.</p>
+                    <a href="{{ url_for('mana_pools') }}" class="btn btn-nature">Explore</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-brown text-white">
+                    <h5 class="mb-0"><i class="fas fa-mountain me-2"></i>Matobo Hills</h5>
+                </div>
+                <div class="card-body">
+                    <p>Ancient granite formations and spiritual significance, home to black and white rhinos.</p>
+                    <a href="{{ url_for('matobo') }}" class="btn btn-nature">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

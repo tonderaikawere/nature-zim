@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}Climate & Seasons - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active">Climate & Seasons</li>
+        </ol>
+    </nav>
+
+    <div class="text-center mb-5">
+        <h1 class="text-nature-green mb-4">Climate & Seasons of Zimbabwe</h1>
+        <p class="lead">Understanding Zimbabwe's climate patterns and seasonal changes</p>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-green text-white">
+                    <h5 class="mb-0"><i class="fas fa-cloud-rain me-2"></i>Wet Season</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Period:</strong> November to March</p>
+                    <p>Hot and humid with afternoon thunderstorms. This is the growing season when most plants flower and animals give birth.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-gold text-white">
+                    <h5 class="mb-0"><i class="fas fa-sun me-2"></i>Cool Dry Season</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Period:</strong> April to August</p>
+                    <p>Pleasant temperatures with clear skies. Best time for wildlife viewing as animals congregate around water sources.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-brown text-white">
+                    <h5 class="mb-0"><i class="fas fa-thermometer-half me-2"></i>Hot Dry Season</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Period:</strong> September to October</p>
+                    <p>Hot and dry conditions before the rains. Wildlife concentrates around permanent water sources.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nature-card mb-4">
+        <div class="card-header">
+            <h4>Climate Zones</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6 class="text-nature-brown">Highveld (above 1,200m)</h6>
+                    <ul class="small">
+                        <li>Cooler temperatures year-round</li>
+                        <li>Higher rainfall (750-1,000mm annually)</li>
+                        <li>Includes Harare and surrounding areas</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-nature-brown">Lowveld (below 900m)</h6>
+                    <ul class="small">
+                        <li>Hotter temperatures</li>
+                        <li>Lower rainfall (400-650mm annually)</li>
+                        <li>Includes Zambezi and Limpopo valleys</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-nature-beige p-4 rounded">
+        <h4 class="text-nature-green mb-3">Climate Change Impacts</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Observed Changes</h6>
+                <ul class="small">
+                    <li>Increasing temperatures</li>
+                    <li>More erratic rainfall patterns</li>
+                    <li>More frequent droughts</li>
+                    <li>Shifting growing seasons</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Adaptation Strategies</h6>
+                <ul class="small">
+                    <li>Drought-resistant crop varieties</li>
+                    <li>Water conservation techniques</li>
+                    <li>Early warning systems</li>
+                    <li>Ecosystem-based adaptation</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

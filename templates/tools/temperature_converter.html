@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}Temperature Converter - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('tools_home') }}">Tools</a></li>
+            <li class="breadcrumb-item active">Temperature Converter</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="text-center mb-4">
+                <h1 class="text-nature-green mb-3">🌡️ Temperature Converter</h1>
+                <p class="lead">Convert between Celsius, Fahrenheit, and Kelvin</p>
+            </div>
+
+            <div class="nature-card">
+                <div class="card-body">
+                    <div class="mb-4">
+                        <label for="tempInput" class="form-label">Enter Temperature:</label>
+                        <input type="number" class="form-control form-control-lg" id="tempInput" placeholder="Enter temperature value" step="0.01">
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="fromUnit" class="form-label">From:</label>
+                            <select class="form-select" id="fromUnit">
+                                <option value="celsius">Celsius (°C)</option>
+                                <option value="fahrenheit">Fahrenheit (°F)</option>
+                                <option value="kelvin">Kelvin (K)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="toUnit" class="form-label">To:</label>
+                            <select class="form-select" id="toUnit">
+                                <option value="fahrenheit">Fahrenheit (°F)</option>
+                                <option value="celsius">Celsius (°C)</option>
+                                <option value="kelvin">Kelvin (K)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button id="convertBtn" class="btn btn-nature btn-lg w-100 mb-4">Convert</button>
+
+                    <div id="result" class="text-center" style="display: none;">
+                        <div class="bg-nature-beige p-4 rounded">
+                            <h4 class="text-nature-green mb-2">Result:</h4>
+                            <div id="resultValue" class="display-5 text-nature-brown"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nature-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Temperature Reference</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <h6 class="text-nature-green">Water Freezes</h6>
+                            <small>0°C | 32°F | 273K</small>
+                        </div>
+                        <div class="col-4">
+                            <h6 class="text-nature-green">Room Temperature</h6>
+                            <small>20°C | 68°F | 293K</small>
+                        </div>
+                        <div class="col-4">
+                            <h6 class="text-nature-green">Water Boils</h6>
+                            <small>100°C | 212°F | 373K</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="{{ url_for('tools_home') }}" class="btn btn-nature-outline">← Back to Tools</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tempInput = document.getElementById('tempInput');
+    const fromUnit = document.getElementById('fromUnit');
+    const toUnit = document.getElementById('toUnit');
+    const convertBtn = document.getElementById('convertBtn');
+    const result = document.getElementById('result');
+    const resultValue = document.getElementById('resultValue');
+
+    convertBtn.addEventListener('click', convertTemperature);
+    tempInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            convertTemperature();
+        }
+    });
+
+    function convertTemperature() {
+        const temp = parseFloat(tempInput.value);
+        
+        if (isNaN(temp)) {
+            NatureUtils.showNotification('Please enter a valid temperature value.', 'warning');
+            return;
+        }
+
+        const from = fromUnit.value;
+        const to = toUnit.value;
+        
+        if (from === to) {
+            resultValue.textContent = `${temp}° ${getUnitSymbol(to)}`;
+            result.style.display = 'block';
+            return;
+        }
+
+        const converted = ToolUtils.convertTemperature(temp, from, to);
+        resultValue.textContent = `${converted}° ${getUnitSymbol(to)}`;
+        result.style.display = 'block';
+    }
+
+    function getUnitSymbol(unit) {
+        switch (unit) {
+            case 'celsius': return 'C';
+            case 'fahrenheit': return 'F';
+            case 'kelvin': return 'K';
+            default: return '';
+        }
+    }
+});
+</script>
+{% endblock %}

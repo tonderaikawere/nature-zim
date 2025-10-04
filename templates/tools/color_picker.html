@@ -1,0 +1,399 @@
+{% extends "base.html" %}
+
+{% block title %}Color Picker - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('tools_home') }}">Tools</a></li>
+            <li class="breadcrumb-item active">Color Picker</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-4">
+                <h1 class="text-nature-green mb-3">🎨 Color Picker</h1>
+                <p class="lead">Explore and pick colors with various format outputs</p>
+            </div>
+
+            <div class="nature-card">
+                <div class="card-body">
+                    <!-- Color Picker -->
+                    <div class="text-center mb-4">
+                        <input type="color" id="colorPicker" class="form-control form-control-color mx-auto" value="#2E8B57" style="width: 100px; height: 100px;">
+                    </div>
+
+                    <!-- Color Display -->
+                    <div id="colorDisplay" class="color-display mb-4">
+                        <div class="color-preview"></div>
+                    </div>
+
+                    <!-- Color Values -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="color-value-card">
+                                <label class="form-label">HEX:</label>
+                                <div class="input-group">
+                                    <input type="text" id="hexValue" class="form-control" readonly>
+                                    <button class="btn btn-outline-secondary copy-btn" data-target="hexValue">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="color-value-card">
+                                <label class="form-label">RGB:</label>
+                                <div class="input-group">
+                                    <input type="text" id="rgbValue" class="form-control" readonly>
+                                    <button class="btn btn-outline-secondary copy-btn" data-target="rgbValue">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="color-value-card">
+                                <label class="form-label">HSL:</label>
+                                <div class="input-group">
+                                    <input type="text" id="hslValue" class="form-control" readonly>
+                                    <button class="btn btn-outline-secondary copy-btn" data-target="hslValue">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="color-value-card">
+                                <label class="form-label">HSV:</label>
+                                <div class="input-group">
+                                    <input type="text" id="hsvValue" class="form-control" readonly>
+                                    <button class="btn btn-outline-secondary copy-btn" data-target="hsvValue">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nature Color Palette -->
+                    <div class="mb-4">
+                        <h6 class="text-nature-brown mb-3">Zimbabwe Nature Colors:</h6>
+                        <div class="color-palette">
+                            <div class="palette-color" data-color="#2E8B57" data-name="Forest Green" title="Forest Green"></div>
+                            <div class="palette-color" data-color="#8FBC8F" data-name="Light Green" title="Light Green"></div>
+                            <div class="palette-color" data-color="#F5DEB3" data-name="Nature Beige" title="Nature Beige"></div>
+                            <div class="palette-color" data-color="#DAA520" data-name="Golden Rod" title="Golden Rod"></div>
+                            <div class="palette-color" data-color="#8B4513" data-name="Saddle Brown" title="Saddle Brown"></div>
+                            <div class="palette-color" data-color="#4682B4" data-name="Steel Blue" title="Steel Blue"></div>
+                            <div class="palette-color" data-color="#DC143C" data-name="Crimson" title="Crimson"></div>
+                            <div class="palette-color" data-color="#FF8C00" data-name="Dark Orange" title="Dark Orange"></div>
+                            <div class="palette-color" data-color="#9370DB" data-name="Medium Purple" title="Medium Purple"></div>
+                            <div class="palette-color" data-color="#20B2AA" data-name="Light Sea Green" title="Light Sea Green"></div>
+                        </div>
+                    </div>
+
+                    <!-- Random Color Button -->
+                    <div class="text-center">
+                        <button id="randomColorBtn" class="btn btn-nature">
+                            <i class="fas fa-random me-2"></i>Random Color
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color Information -->
+            <div class="nature-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">🌈 Color Formats</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-nature-brown">Format Types</h6>
+                            <ul class="small">
+                                <li><strong>HEX:</strong> Hexadecimal color code (#RRGGBB)</li>
+                                <li><strong>RGB:</strong> Red, Green, Blue values (0-255)</li>
+                                <li><strong>HSL:</strong> Hue, Saturation, Lightness</li>
+                                <li><strong>HSV:</strong> Hue, Saturation, Value</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-nature-brown">Usage</h6>
+                            <ul class="small">
+                                <li>Web design and CSS styling</li>
+                                <li>Graphic design projects</li>
+                                <li>Digital art and illustrations</li>
+                                <li>Brand color matching</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="text-center mt-4">
+                <a href="{{ url_for('tools_home') }}" class="btn btn-nature-outline">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Tools
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.color-display {
+    height: 150px;
+    border: 3px solid var(--nature-green);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.color-preview {
+    width: 100%;
+    height: 100%;
+    background-color: #2E8B57;
+    transition: background-color 0.3s ease;
+}
+
+.color-value-card {
+    margin-bottom: 15px;
+}
+
+.color-palette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.palette-color {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid #ddd;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.palette-color:hover {
+    transform: scale(1.1);
+    border-color: var(--nature-green);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.palette-color.selected {
+    border-color: var(--nature-green);
+    border-width: 3px;
+}
+
+.copy-btn {
+    transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+    background-color: var(--nature-green);
+    color: white;
+    border-color: var(--nature-green);
+}
+
+.copy-btn.copied {
+    background-color: var(--nature-light-green);
+    color: white;
+    border-color: var(--nature-light-green);
+}
+
+@media (max-width: 768px) {
+    .palette-color {
+        width: 40px;
+        height: 40px;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const colorPicker = document.getElementById('colorPicker');
+    const colorPreview = document.querySelector('.color-preview');
+    const hexValue = document.getElementById('hexValue');
+    const rgbValue = document.getElementById('rgbValue');
+    const hslValue = document.getElementById('hslValue');
+    const hsvValue = document.getElementById('hsvValue');
+    const randomColorBtn = document.getElementById('randomColorBtn');
+    const copyBtns = document.querySelectorAll('.copy-btn');
+    const paletteColors = document.querySelectorAll('.palette-color');
+    
+    function updateColorValues(color) {
+        const rgb = hexToRgb(color);
+        const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+        const hsv = rgbToHsv(rgb.r, rgb.g, rgb.b);
+        
+        // Update display
+        colorPreview.style.backgroundColor = color;
+        hexValue.value = color.toUpperCase();
+        rgbValue.value = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+        hslValue.value = `hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%)`;
+        hsvValue.value = `hsv(${Math.round(hsv.h)}, ${Math.round(hsv.s)}%, ${Math.round(hsv.v)}%)`;
+        
+        // Update palette selection
+        updatePaletteSelection(color);
+    }
+    
+    function hexToRgb(hex) {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    }
+    
+    function rgbToHsl(r, g, b) {
+        r /= 255;
+        g /= 255;
+        b /= 255;
+        
+        const max = Math.max(r, g, b);
+        const min = Math.min(r, g, b);
+        let h, s, l = (max + min) / 2;
+        
+        if (max === min) {
+            h = s = 0;
+        } else {
+            const d = max - min;
+            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+            
+            switch (max) {
+                case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                case g: h = (b - r) / d + 2; break;
+                case b: h = (r - g) / d + 4; break;
+            }
+            h /= 6;
+        }
+        
+        return {
+            h: h * 360,
+            s: s * 100,
+            l: l * 100
+        };
+    }
+    
+    function rgbToHsv(r, g, b) {
+        r /= 255;
+        g /= 255;
+        b /= 255;
+        
+        const max = Math.max(r, g, b);
+        const min = Math.min(r, g, b);
+        let h, s, v = max;
+        
+        const d = max - min;
+        s = max === 0 ? 0 : d / max;
+        
+        if (max === min) {
+            h = 0;
+        } else {
+            switch (max) {
+                case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                case g: h = (b - r) / d + 2; break;
+                case b: h = (r - g) / d + 4; break;
+            }
+            h /= 6;
+        }
+        
+        return {
+            h: h * 360,
+            s: s * 100,
+            v: v * 100
+        };
+    }
+    
+    function generateRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+    
+    function updatePaletteSelection(selectedColor) {
+        paletteColors.forEach(color => {
+            color.classList.remove('selected');
+            if (color.dataset.color.toUpperCase() === selectedColor.toUpperCase()) {
+                color.classList.add('selected');
+            }
+        });
+    }
+    
+    function copyToClipboard(text, button) {
+        navigator.clipboard.writeText(text).then(() => {
+            const originalIcon = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i>';
+            button.classList.add('copied');
+            
+            setTimeout(() => {
+                button.innerHTML = originalIcon;
+                button.classList.remove('copied');
+            }, 1500);
+        }).catch(() => {
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            
+            const originalIcon = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i>';
+            button.classList.add('copied');
+            
+            setTimeout(() => {
+                button.innerHTML = originalIcon;
+                button.classList.remove('copied');
+            }, 1500);
+        });
+    }
+    
+    // Event listeners
+    colorPicker.addEventListener('change', (e) => {
+        updateColorValues(e.target.value);
+    });
+    
+    randomColorBtn.addEventListener('click', () => {
+        const randomColor = generateRandomColor();
+        colorPicker.value = randomColor;
+        updateColorValues(randomColor);
+    });
+    
+    copyBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetId = btn.dataset.target;
+            const targetInput = document.getElementById(targetId);
+            copyToClipboard(targetInput.value, btn);
+        });
+    });
+    
+    paletteColors.forEach(color => {
+        const colorValue = color.dataset.color;
+        color.style.backgroundColor = colorValue;
+        
+        color.addEventListener('click', () => {
+            colorPicker.value = colorValue;
+            updateColorValues(colorValue);
+        });
+    });
+    
+    // Initialize with default color
+    updateColorValues(colorPicker.value);
+});
+</script>
+{% endblock %}

@@ -1,0 +1,96 @@
+{
+    "name": "Nature Zimbabwe - Tonde's Educational Platform",
+    "short_name": "Nature Zimbabwe",
+    "description": "Educational platform about Zimbabwe's natural heritage, wildlife, and biodiversity created by Tonde Kawere",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#2D5016",
+    "theme_color": "#2D5016",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "en",
+    "categories": ["education", "nature", "wildlife", "conservation"],
+    "icons": [
+        {
+            "src": "/static/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/static/favicon.ico",
+            "sizes": "16x16 32x32 48x48",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "/static/favicon.svg",
+            "sizes": "180x180",
+            "type": "image/svg+xml",
+            "purpose": "apple touch icon"
+        },
+        {
+            "src": "/static/favicon.svg",
+            "sizes": "192x192",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/static/favicon.svg",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/static/images/screenshot-desktop.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "form_factor": "wide"
+        },
+        {
+            "src": "/static/images/screenshot-mobile.png",
+            "sizes": "375x667",
+            "type": "image/png",
+            "form_factor": "narrow"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Wildlife Games",
+            "short_name": "Games",
+            "description": "Play educational games about Zimbabwe's wildlife",
+            "url": "/games",
+            "icons": [
+                {
+                    "src": "/static/images/games-icon.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Animal Sounds Quiz",
+            "short_name": "Animal Sounds",
+            "description": "Test your knowledge of animal sounds",
+            "url": "/games/animal-sounds",
+            "icons": [
+                {
+                    "src": "/static/images/animal-sounds-icon.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "National Parks",
+            "short_name": "Parks",
+            "description": "Explore Zimbabwe's national parks",
+            "url": "/national-parks",
+            "icons": [
+                {
+                    "src": "/static/images/parks-icon.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ]
+}

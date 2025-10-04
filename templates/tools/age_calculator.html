@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+{% block title %}Age Calculator - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('tools_home') }}">Tools</a></li>
+            <li class="breadcrumb-item active">Age Calculator</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="text-center mb-4">
+                <h1 class="text-nature-green mb-3">🎂 Age Calculator</h1>
+                <p class="lead">Calculate your exact age in years, months, days, and more</p>
+            </div>
+
+            <div class="nature-card">
+                <div class="card-body">
+                    <form id="ageForm">
+                        <div class="mb-4">
+                            <label for="birthDate" class="form-label">Enter your birth date:</label>
+                            <input type="date" class="form-control form-control-lg" id="birthDate" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-nature btn-lg w-100 mb-4">Calculate Age</button>
+                    </form>
+
+                    <div id="results" style="display: none;">
+                        <div class="bg-nature-beige p-4 rounded">
+                            <h4 class="text-nature-green mb-3 text-center">Your Age</h4>
+                            
+                            <div class="row text-center mb-3">
+                                <div class="col-3">
+                                    <div class="h3 text-nature-brown" id="years">0</div>
+                                    <small class="text-muted">Years</small>
+                                </div>
+                                <div class="col-3">
+                                    <div class="h3 text-nature-brown" id="months">0</div>
+                                    <small class="text-muted">Months</small>
+                                </div>
+                                <div class="col-3">
+                                    <div class="h3 text-nature-brown" id="days">0</div>
+                                    <small class="text-muted">Days</small>
+                                </div>
+                                <div class="col-3">
+                                    <div class="h3 text-nature-brown" id="hours">0</div>
+                                    <small class="text-muted">Hours</small>
+                                </div>
+                            </div>
+
+                            <div class="row text-center">
+                                <div class="col-6">
+                                    <div class="border-top pt-2">
+                                        <div class="h5 text-nature-green" id="totalDays">0</div>
+                                        <small class="text-muted">Total Days Lived</small>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="border-top pt-2">
+                                        <div class="h5 text-nature-green" id="totalHours">0</div>
+                                        <small class="text-muted">Total Hours Lived</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 text-center">
+                                <div id="nextBirthday" class="text-muted"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nature-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Fun Age Facts</h5>
+                </div>
+                <div class="card-body">
+                    <div id="ageFacts" style="display: none;">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-heartbeat text-nature-green me-2"></i>Your heart has beaten approximately <span id="heartbeats" class="fw-bold">0</span> times</li>
+                            <li class="mb-2"><i class="fas fa-lungs text-nature-green me-2"></i>You've taken about <span id="breaths" class="fw-bold">0</span> breaths</li>
+                            <li class="mb-2"><i class="fas fa-moon text-nature-green me-2"></i>You've experienced <span id="moonCycles" class="fw-bold">0</span> moon cycles</li>
+                            <li class="mb-2"><i class="fas fa-sun text-nature-green me-2"></i>You've seen <span id="sunrises" class="fw-bold">0</span> sunrises</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="{{ url_for('tools_home') }}" class="btn btn-nature-outline">← Back to Tools</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ageForm = document.getElementById('ageForm');
+    const results = document.getElementById('results');
+    const ageFacts = document.getElementById('ageFacts');
+
+    ageForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        calculateAge();
+    });
+
+    function calculateAge() {
+        const birthDate = new Date(document.getElementById('birthDate').value);
+        const today = new Date();
+
+        if (birthDate > today) {
+            NatureUtils.showNotification('Birth date cannot be in the future!', 'warning');
+            return;
+        }
+
+        // Calculate age components
+        let years = today.getFullYear() - birthDate.getFullYear();
+        let months = today.getMonth() - birthDate.getMonth();
+        let days = today.getDate() - birthDate.getDate();
+
+        if (days < 0) {
+            months--;
+            const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+            days += lastMonth.getDate();
+        }
+
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+
+        // Calculate total values
+        const totalDays = Math.floor((today - birthDate) / (1000 * 60 * 60 * 24));
+        const totalHours = totalDays * 24;
+        const hours = today.getHours() - birthDate.getHours();
+
+        // Calculate next birthday
+        let nextBirthday = new Date(today.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+        if (nextBirthday < today) {
+            nextBirthday.setFullYear(today.getFullYear() + 1);
+        }
+        const daysToNextBirthday = Math.ceil((nextBirthday - today) / (1000 * 60 * 60 * 24));
+
+        // Update display
+        document.getElementById('years').textContent = years;
+        document.getElementById('months').textContent = months;
+        document.getElementById('days').textContent = days;
+        document.getElementById('hours').textContent = Math.abs(hours);
+        document.getElementById('totalDays').textContent = totalDays.toLocaleString();
+        document.getElementById('totalHours').textContent = totalHours.toLocaleString();
+        
+        document.getElementById('nextBirthday').textContent = 
+            `Next birthday in ${daysToNextBirthday} days`;
+
+        // Fun facts
+        const heartbeats = Math.floor(totalDays * 24 * 60 * 70); // ~70 bpm average
+        const breaths = Math.floor(totalDays * 24 * 60 * 15); // ~15 breaths per minute
+        const moonCycles = Math.floor(totalDays / 29.5); // ~29.5 days per cycle
+        const sunrises = totalDays;
+
+        document.getElementById('heartbeats').textContent = heartbeats.toLocaleString();
+        document.getElementById('breaths').textContent = breaths.toLocaleString();
+        document.getElementById('moonCycles').textContent = moonCycles.toLocaleString();
+        document.getElementById('sunrises').textContent = sunrises.toLocaleString();
+
+        // Show results
+        results.style.display = 'block';
+        ageFacts.style.display = 'block';
+    }
+
+    // Set max date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('birthDate').setAttribute('max', today);
+});
+</script>
+{% endblock %}

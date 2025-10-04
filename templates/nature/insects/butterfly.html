@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Butterfly - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('insects') }}">Insects</a></li>
+            <li class="breadcrumb-item active">Butterfly</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Butterflies</h1>
+    <p class="lead"><em>Various species</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>Zimbabwe is home to over 400 butterfly species, making it one of Africa's most diverse butterfly regions. These beautiful insects are important pollinators and indicators of ecosystem health.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Characteristics</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Wings:</strong> Colorful scales create patterns and colors</li>
+                        <li><strong>Life cycle:</strong> Complete metamorphosis (egg, larva, pupa, adult)</li>
+                        <li><strong>Diet:</strong> Adults feed on nectar, larvae eat specific plants</li>
+                        <li><strong>Flight:</strong> Diurnal (active during day)</li>
+                        <li><strong>Habitat:</strong> Gardens, forests, grasslands</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Order:</strong> Lepidoptera</p>
+                    <p><strong>Species in Zimbabwe:</strong> 400+</p>
+                    <p><strong>Role:</strong> Pollinators</p>
+                    <p><strong>Threats:</strong> Habitat loss, climate change</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('insects') }}" class="btn btn-nature-outline">← Back to Insects</a>
+    </div>
+</div>
+{% endblock %}

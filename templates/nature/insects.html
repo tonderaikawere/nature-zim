@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Insects of Zimbabwe - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active">Insects</li>
+        </ol>
+    </nav>
+
+    <div class="text-center mb-5">
+        <h1 class="text-nature-green mb-4">Insects of Zimbabwe</h1>
+        <p class="lead">Explore Zimbabwe's incredible insect diversity, from beautiful butterflies to industrious ants.</p>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-gold text-white">
+                    <h5 class="mb-0"><i class="fas fa-butterfly me-2"></i>Butterfly</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Various species</p>
+                    <p>Colorful pollinators that play crucial roles in ecosystem health and plant reproduction.</p>
+                    <a href="{{ url_for('butterfly') }}" class="btn btn-nature">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-light-green text-white">
+                    <h5 class="mb-0"><i class="fas fa-bee me-2"></i>Bee</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Various species</p>
+                    <p>Essential pollinators that support both wild plants and agricultural crops.</p>
+                    <a href="{{ url_for('bee') }}" class="btn btn-nature">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="nature-card h-100">
+                <div class="card-header bg-nature-brown text-white">
+                    <h5 class="mb-0"><i class="fas fa-bug me-2"></i>Ant</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Various species</p>
+                    <p>Social insects that form complex colonies and play important ecological roles.</p>
+                    <a href="{{ url_for('ant') }}" class="btn btn-nature">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-nature-beige p-4 rounded">
+        <h3 class="text-nature-green mb-3">Insect Importance</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Ecological Roles</h6>
+                <ul class="small">
+                    <li>Pollination of plants</li>
+                    <li>Decomposition and nutrient cycling</li>
+                    <li>Food source for other animals</li>
+                    <li>Pest control</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h6 class="text-nature-brown">Economic Value</h6>
+                <ul class="small">
+                    <li>Crop pollination services</li>
+                    <li>Honey and bee products</li>
+                    <li>Biological pest control</li>
+                    <li>Soil improvement</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

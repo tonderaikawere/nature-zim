@@ -1,0 +1,266 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="text-center mb-5">
+                <h1 class="text-nature-green mb-4">Contact Us</h1>
+                <p class="lead">Get in touch with the Nature Zimbabwe team. We'd love to hear from you!</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="nature-card">
+                        <div class="card-header">
+                            <h4 class="mb-0"><i class="fas fa-envelope me-2"></i>Send us a Message</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="contactForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName" class="form-label">First Name *</label>
+                                        <input type="text" class="form-control" id="firstName" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="lastName" class="form-label">Last Name *</label>
+                                        <input type="text" class="form-control" id="lastName" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email Address *</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Subject *</label>
+                                    <select class="form-select" id="subject" required>
+                                        <option value="">Choose a subject...</option>
+                                        <option value="general">General Inquiry</option>
+                                        <option value="education">Educational Content</option>
+                                        <option value="technical">Technical Support</option>
+                                        <option value="partnership">Partnership Opportunity</option>
+                                        <option value="feedback">Feedback & Suggestions</option>
+                                        <option value="conservation">Conservation Initiative</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Message *</label>
+                                    <textarea class="form-control" id="message" rows="6" placeholder="Tell us about your inquiry, feedback, or how we can help you..." required></textarea>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="newsletter">
+                                        <label class="form-check-label" for="newsletter">
+                                            Subscribe to our newsletter for updates on Zimbabwe's nature
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-nature btn-lg">
+                                    <i class="fas fa-paper-plane me-2"></i>Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="nature-card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Get in Touch</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="contact-info">
+                                <div class="mb-3">
+                                    <i class="fas fa-envelope text-nature-green me-2"></i>
+                                    <strong>Email:</strong><br>
+                                    <a href="mailto:tondekawere@gmail.com" class="text-decoration-none">tondekawere@gmail.com</a>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <i class="fas fa-phone text-nature-green me-2"></i>
+                                    <strong>Phone:</strong><br>
+                                    <a href="tel:+263782528050" class="text-decoration-none">+263 78 252 8050</a>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <i class="fab fa-whatsapp text-nature-green me-2"></i>
+                                    <strong>WhatsApp:</strong><br>
+                                    <a href="https://wa.me/263782528050" target="_blank" class="text-decoration-none">Chat with Tonde</a>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <i class="fas fa-clock text-nature-green me-2"></i>
+                                    <strong>Response Time:</strong><br>
+                                    <small class="text-muted">Within 24-48 hours</small>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <i class="fas fa-language text-nature-green me-2"></i>
+                                    <strong>Languages:</strong><br>
+                                    <small class="text-muted">English, Shona, Ndebele</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="nature-card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0"><i class="fas fa-users me-2"></i>Connect With Us</h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <p class="small text-muted mb-3">Follow our conservation efforts and educational initiatives</p>
+                            <div class="social-links">
+                                <a href="#" class="btn btn-outline-primary btn-sm me-2 mb-2">
+                                    <i class="fab fa-facebook-f me-1"></i>Facebook
+                                </a>
+                                <a href="#" class="btn btn-outline-info btn-sm me-2 mb-2">
+                                    <i class="fab fa-twitter me-1"></i>Twitter
+                                </a>
+                                <a href="#" class="btn btn-outline-danger btn-sm me-2 mb-2">
+                                    <i class="fab fa-instagram me-1"></i>Instagram
+                                </a>
+                                <a href="#" class="btn btn-outline-dark btn-sm mb-2">
+                                    <i class="fab fa-youtube me-1"></i>YouTube
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="nature-card">
+                        <div class="card-header">
+                            <h5 class="mb-0"><i class="fas fa-question-circle me-2"></i>Quick Help</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li><a href="{{ url_for('faq') }}" class="text-decoration-none">
+                                    <i class="fas fa-chevron-right text-nature-green me-2"></i>FAQ
+                                </a></li>
+                                <li><a href="{{ url_for('support') }}" class="text-decoration-none">
+                                    <i class="fas fa-chevron-right text-nature-green me-2"></i>Support Center
+                                </a></li>
+                                <li><a href="{{ url_for('sitemap') }}" class="text-decoration-none">
+                                    <i class="fas fa-chevron-right text-nature-green me-2"></i>Site Map
+                                </a></li>
+                                <li><a href="{{ url_for('about') }}" class="text-decoration-none">
+                                    <i class="fas fa-chevron-right text-nature-green me-2"></i>About Us
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Reasons -->
+            <div class="nature-card mt-5">
+                <div class="card-header">
+                    <h4 class="mb-0">Why Contact Us?</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-nature-green">Educational Inquiries</h6>
+                            <ul class="small">
+                                <li>Request additional information about species</li>
+                                <li>Suggest new content or corrections</li>
+                                <li>Educational partnership opportunities</li>
+                                <li>Curriculum integration support</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-nature-green">Conservation & Research</h6>
+                            <ul class="small">
+                                <li>Share conservation initiatives</li>
+                                <li>Collaborate on research projects</li>
+                                <li>Report wildlife sightings</li>
+                                <li>Environmental awareness campaigns</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <h6 class="text-nature-green">Technical Support</h6>
+                            <ul class="small">
+                                <li>Report bugs or technical issues</li>
+                                <li>Suggest new features</li>
+                                <li>Accessibility improvements</li>
+                                <li>Mobile app feedback</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-nature-green">General</h6>
+                            <ul class="small">
+                                <li>Media inquiries</li>
+                                <li>Speaking engagements</li>
+                                <li>Volunteer opportunities</li>
+                                <li>General feedback</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
+    
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+        const newsletter = document.getElementById('newsletter').checked;
+        
+        // Simple validation
+        if (!firstName || !lastName || !email || !subject || !message) {
+            NatureUtils.showNotification('Please fill in all required fields.', 'warning');
+            return;
+        }
+        
+        // Simulate form submission
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+        submitBtn.disabled = true;
+        
+        setTimeout(() => {
+            // Reset form
+            contactForm.reset();
+            
+            // Show success message
+            NatureUtils.showNotification('Thank you for your message! We will get back to you within 24-48 hours.', 'success');
+            
+            // Reset button
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            
+            // Log the submission (in a real app, this would be sent to a server)
+            console.log('Contact form submission:', {
+                firstName,
+                lastName,
+                email,
+                subject,
+                message,
+                newsletter,
+                timestamp: new Date().toISOString()
+            });
+        }, 2000);
+    });
+});
+</script>
+{% endblock %}

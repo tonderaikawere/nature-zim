@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Catfish - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('fish') }}">Fish</a></li>
+            <li class="breadcrumb-item active">Catfish</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">African Catfish</h1>
+    <p class="lead"><em>Clarias gariepinus</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>The African Catfish is a hardy and adaptable freshwater fish found throughout Zimbabwe's water bodies. Known for their distinctive barbels (whiskers) and ability to survive in challenging conditions, they are important both ecologically and as a food source.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Adaptations</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Barbels:</strong> Sensory organs for finding food in murky water</li>
+                        <li><strong>Air breathing:</strong> Can survive in low-oxygen conditions</li>
+                        <li><strong>Size:</strong> Can grow up to 1.5 meters and 60 kg</li>
+                        <li><strong>Diet:</strong> Opportunistic omnivore</li>
+                        <li><strong>Habitat:</strong> Rivers, dams, seasonal pools</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Clarias gariepinus</p>
+                    <p><strong>Family:</strong> Clariidae</p>
+                    <p><strong>Lifespan:</strong> 8-20 years</p>
+                    <p><strong>Aquaculture:</strong> Increasingly farmed</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('fish') }}" class="btn btn-nature-outline">← Back to Fish</a>
+    </div>
+</div>
+{% endblock %}

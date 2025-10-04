@@ -1,0 +1,46 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://naturezimbabwe.com/static/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Allow all educational content
+Allow: /games/
+Allow: /tools/
+Allow: /nature/
+Allow: /mammals/
+Allow: /birds/
+Allow: /trees/
+Allow: /flowers/
+Allow: /national-parks/
+
+# Block admin areas (if any in future)
+Disallow: /admin/
+Disallow: /private/
+
+# Block temporary files
+Disallow: /*.tmp$
+Disallow: /*.log$
+
+# Allow social media crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Educational and research bots welcome
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /

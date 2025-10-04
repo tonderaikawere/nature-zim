@@ -1,0 +1,392 @@
+{% extends "base.html" %}
+
+{% block title %}Todo List - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('tools_home') }}">Tools</a></li>
+            <li class="breadcrumb-item active">Todo List</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-4">
+                <h1 class="text-nature-green mb-3">📝 Todo List</h1>
+                <p class="lead">Organize your tasks and stay productive</p>
+            </div>
+
+            <div class="nature-card">
+                <div class="card-body">
+                    <!-- Add New Task -->
+                    <div class="mb-4">
+                        <div class="input-group">
+                            <input type="text" id="newTaskInput" class="form-control" placeholder="Add a new task..." maxlength="200">
+                            <select id="taskPriority" class="form-select" style="max-width: 120px;">
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                            <button id="addTaskBtn" class="btn btn-nature">
+                                <i class="fas fa-plus me-2"></i>Add
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Filter and Stats -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="btn-group" role="group">
+                                <input type="radio" class="btn-check" name="filter" id="filterAll" checked>
+                                <label class="btn btn-outline-secondary btn-sm" for="filterAll">All</label>
+                                
+                                <input type="radio" class="btn-check" name="filter" id="filterActive">
+                                <label class="btn btn-outline-secondary btn-sm" for="filterActive">Active</label>
+                                
+                                <input type="radio" class="btn-check" name="filter" id="filterCompleted">
+                                <label class="btn btn-outline-secondary btn-sm" for="filterCompleted">Completed</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <small class="text-muted">
+                                <span id="taskStats">0 tasks</span>
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Todo List -->
+                    <div id="todoList" class="todo-list">
+                        <!-- Tasks will be added here -->
+                    </div>
+
+                    <!-- Empty State -->
+                    <div id="emptyState" class="text-center py-5">
+                        <i class="fas fa-clipboard-list fa-3x text-muted mb-3"></i>
+                        <h5 class="text-muted">No tasks yet</h5>
+                        <p class="text-muted">Add your first task above to get started!</p>
+                    </div>
+
+                    <!-- Bulk Actions -->
+                    <div id="bulkActions" class="mt-4 text-center" style="display: none;">
+                        <button id="clearCompletedBtn" class="btn btn-outline-danger btn-sm me-2">
+                            <i class="fas fa-trash me-2"></i>Clear Completed
+                        </button>
+                        <button id="markAllCompleteBtn" class="btn btn-outline-success btn-sm">
+                            <i class="fas fa-check-double me-2"></i>Mark All Complete
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tips -->
+            <div class="nature-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">💡 Productivity Tips</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="small">
+                                <li>Break large tasks into smaller ones</li>
+                                <li>Set priorities: High, Medium, Low</li>
+                                <li>Review and update your list daily</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="small">
+                                <li>Focus on one task at a time</li>
+                                <li>Celebrate completed tasks</li>
+                                <li>Use clear, actionable language</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="text-center mt-4">
+                <a href="{{ url_for('tools_home') }}" class="btn btn-nature-outline">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Tools
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.todo-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.todo-item:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.todo-item.completed {
+    opacity: 0.7;
+    background-color: #f8f9fa;
+}
+
+.todo-item.completed .task-text {
+    text-decoration: line-through;
+    color: #6c757d;
+}
+
+.task-text {
+    flex-grow: 1;
+    margin: 0 15px;
+    word-break: break-word;
+}
+
+.priority-badge {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.priority-high {
+    background-color: #dc3545;
+    color: white;
+}
+
+.priority-medium {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.priority-low {
+    background-color: #28a745;
+    color: white;
+}
+
+.task-actions {
+    display: flex;
+    gap: 5px;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const newTaskInput = document.getElementById('newTaskInput');
+    const taskPriority = document.getElementById('taskPriority');
+    const addTaskBtn = document.getElementById('addTaskBtn');
+    const todoList = document.getElementById('todoList');
+    const emptyState = document.getElementById('emptyState');
+    const bulkActions = document.getElementById('bulkActions');
+    const taskStats = document.getElementById('taskStats');
+    const clearCompletedBtn = document.getElementById('clearCompletedBtn');
+    const markAllCompleteBtn = document.getElementById('markAllCompleteBtn');
+    const filterBtns = document.querySelectorAll('input[name="filter"]');
+    
+    let tasks = [];
+    let currentFilter = 'all';
+    
+    // Load tasks from localStorage
+    function loadTasks() {
+        const savedTasks = localStorage.getItem('todoTasks');
+        if (savedTasks) {
+            tasks = JSON.parse(savedTasks);
+        }
+        renderTasks();
+    }
+    
+    // Save tasks to localStorage
+    function saveTasks() {
+        localStorage.setItem('todoTasks', JSON.stringify(tasks));
+    }
+    
+    // Add new task
+    function addTask() {
+        const text = newTaskInput.value.trim();
+        if (!text) return;
+        
+        const task = {
+            id: Date.now(),
+            text: text,
+            completed: false,
+            priority: taskPriority.value,
+            createdAt: new Date().toISOString()
+        };
+        
+        tasks.unshift(task);
+        newTaskInput.value = '';
+        saveTasks();
+        renderTasks();
+    }
+    
+    // Toggle task completion
+    function toggleTask(id) {
+        const task = tasks.find(t => t.id === id);
+        if (task) {
+            task.completed = !task.completed;
+            saveTasks();
+            renderTasks();
+        }
+    }
+    
+    // Delete task
+    function deleteTask(id) {
+        tasks = tasks.filter(t => t.id !== id);
+        saveTasks();
+        renderTasks();
+    }
+    
+    // Edit task
+    function editTask(id, newText) {
+        const task = tasks.find(t => t.id === id);
+        if (task && newText.trim()) {
+            task.text = newText.trim();
+            saveTasks();
+            renderTasks();
+        }
+    }
+    
+    // Filter tasks
+    function filterTasks() {
+        switch (currentFilter) {
+            case 'active':
+                return tasks.filter(t => !t.completed);
+            case 'completed':
+                return tasks.filter(t => t.completed);
+            default:
+                return tasks;
+        }
+    }
+    
+    // Render tasks
+    function renderTasks() {
+        const filteredTasks = filterTasks();
+        
+        if (filteredTasks.length === 0) {
+            todoList.style.display = 'none';
+            emptyState.style.display = 'block';
+            bulkActions.style.display = 'none';
+        } else {
+            todoList.style.display = 'block';
+            emptyState.style.display = 'none';
+            bulkActions.style.display = tasks.length > 0 ? 'block' : 'none';
+        }
+        
+        todoList.innerHTML = '';
+        
+        filteredTasks.forEach(task => {
+            const taskElement = document.createElement('div');
+            taskElement.className = `todo-item d-flex align-items-center ${task.completed ? 'completed' : ''}`;
+            
+            taskElement.innerHTML = `
+                <input type="checkbox" class="form-check-input me-3" ${task.completed ? 'checked' : ''} 
+                       onchange="toggleTask(${task.id})">
+                <span class="priority-badge priority-${task.priority} me-2">${task.priority.toUpperCase()}</span>
+                <div class="task-text" ondblclick="startEdit(${task.id}, this)">${task.text}</div>
+                <div class="task-actions">
+                    <button class="btn btn-outline-primary btn-sm" onclick="startEdit(${task.id})">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm" onclick="deleteTask(${task.id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            
+            todoList.appendChild(taskElement);
+        });
+        
+        updateStats();
+    }
+    
+    // Update statistics
+    function updateStats() {
+        const total = tasks.length;
+        const completed = tasks.filter(t => t.completed).length;
+        const active = total - completed;
+        
+        taskStats.textContent = `${total} total, ${active} active, ${completed} completed`;
+    }
+    
+    // Start editing task
+    function startEdit(id, element) {
+        const task = tasks.find(t => t.id === id);
+        if (!task) return;
+        
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'form-control';
+        input.value = task.text;
+        
+        const taskTextElement = element || document.querySelector(`[onclick="startEdit(${id})"]`).parentElement.previousElementSibling;
+        const originalText = taskTextElement.textContent;
+        
+        taskTextElement.innerHTML = '';
+        taskTextElement.appendChild(input);
+        input.focus();
+        input.select();
+        
+        function finishEdit() {
+            const newText = input.value.trim();
+            if (newText && newText !== originalText) {
+                editTask(id, newText);
+            } else {
+                renderTasks();
+            }
+        }
+        
+        input.addEventListener('blur', finishEdit);
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                finishEdit();
+            } else if (e.key === 'Escape') {
+                renderTasks();
+            }
+        });
+    }
+    
+    // Clear completed tasks
+    function clearCompleted() {
+        tasks = tasks.filter(t => !t.completed);
+        saveTasks();
+        renderTasks();
+    }
+    
+    // Mark all tasks as complete
+    function markAllComplete() {
+        tasks.forEach(t => t.completed = true);
+        saveTasks();
+        renderTasks();
+    }
+    
+    // Make functions globally available
+    window.toggleTask = toggleTask;
+    window.deleteTask = deleteTask;
+    window.startEdit = startEdit;
+    
+    // Event listeners
+    addTaskBtn.addEventListener('click', addTask);
+    newTaskInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            addTask();
+        }
+    });
+    
+    clearCompletedBtn.addEventListener('click', clearCompleted);
+    markAllCompleteBtn.addEventListener('click', markAllComplete);
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('change', function() {
+            currentFilter = this.id.replace('filter', '').toLowerCase();
+            renderTasks();
+        });
+    });
+    
+    // Initialize
+    loadTasks();
+});
+</script>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Flame Lily - Zimbabwe's National Flower - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('flowers') }}">Flowers</a></li>
+            <li class="breadcrumb-item active">Flame Lily</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Flame Lily - Zimbabwe's National Flower</h1>
+    <p class="lead"><em>Gloriosa superba</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>The Flame Lily is Zimbabwe's national flower, chosen for its striking beauty and symbolic significance. Its distinctive red and yellow petals curve backward like flames, giving it its common name. This climbing plant is found throughout Zimbabwe and holds special cultural importance.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Characteristics</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Petals:</strong> Bright red and yellow, curved backward</li>
+                        <li><strong>Growth habit:</strong> Climbing vine up to 4 meters</li>
+                        <li><strong>Flowering time:</strong> October to March (rainy season)</li>
+                        <li><strong>Habitat:</strong> Woodland margins, grasslands</li>
+                        <li><strong>Propagation:</strong> Underground tubers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Cultural Significance</h4>
+                </div>
+                <div class="card-body">
+                    <p>The Flame Lily was chosen as Zimbabwe's national flower because it represents the country's beauty, resilience, and vibrant spirit. It appears on Zimbabwe's coat of arms and is featured in various cultural celebrations and ceremonies.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Gloriosa superba</p>
+                    <p><strong>Family:</strong> Colchicaceae</p>
+                    <p><strong>Status:</strong> National Flower</p>
+                    <p><strong>Conservation:</strong> Protected species</p>
+                    <p><strong>Uses:</strong> Ornamental, cultural ceremonies</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('flowers') }}" class="btn btn-nature-outline">← Back to Flowers</a>
+    </div>
+</div>
+{% endblock %}

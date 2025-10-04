@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Tilapia - Nature Zimbabwe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('fish') }}">Fish</a></li>
+            <li class="breadcrumb-item active">Tilapia</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-nature-green mb-4">Tilapia</h1>
+    <p class="lead"><em>Oreochromis species</em></p>
+
+    <div class="nature-card mb-4">
+        <div class="card-body">
+            <p>Tilapia are among Zimbabwe's most important freshwater fish, both ecologically and economically. These hardy cichlids are widely farmed and form the backbone of the country's aquaculture industry.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="nature-card mb-4">
+                <div class="card-header">
+                    <h4>Characteristics</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Size:</strong> 15-35 cm, depending on species</li>
+                        <li><strong>Habitat:</strong> Shallow waters, dams, rivers</li>
+                        <li><strong>Diet:</strong> Omnivorous - algae, plants, small animals</li>
+                        <li><strong>Breeding:</strong> Mouth-brooding behavior</li>
+                        <li><strong>Adaptability:</strong> Tolerates various water conditions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="nature-card">
+                <div class="card-header">
+                    <h5>Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Scientific Name:</strong> Oreochromis species</p>
+                    <p><strong>Family:</strong> Cichlidae</p>
+                    <p><strong>Economic importance:</strong> Major aquaculture species</p>
+                    <p><strong>Nutrition:</strong> High protein, low fat</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('fish') }}" class="btn btn-nature-outline">← Back to Fish</a>
+    </div>
+</div>
+{% endblock %}
